@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特质激发理论(TAT)学习平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        neutral: '#1F2937',
+                        light: '#F3F4F6',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .section-padding {
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.5s ease-in-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        }
+    </style>
+</head>
+<body class="bg-light font-sans text-neutral antialiased">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full bg-white shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fa fa-lightbulb-o text-primary text-2xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">特质激发理论(TAT)学习平台</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#introduction" class="text-neutral hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">理论介绍</a>
+                    <a href="#conceptual-model" class="text-neutral hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">概念框架</a>
+                    <a href="#research-hypotheses" class="text-neutral hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">研究假设</a>
+                    <a href="#paper-reproduction" class="text-neutral hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">论文复现</a>
+                    <a href="#case-study" class="text-neutral hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">案例研究</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-neutral hover:text-primary focus:outline-none">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg animate-fade-in">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#introduction" class="block px-3 py-2 rounded-md text-base font-medium text-neutral hover:text-primary hover:bg-gray-50">理论介绍</a>
+                <a href="#conceptual-model" class="block px-3 py-2 rounded-md text-base font-medium text-neutral hover:text-primary hover:bg-gray-50">概念框架</a>
+                <a href="#research-hypotheses" class="block px-3 py-2 rounded-md text-base font-medium text-neutral hover:text-primary hover:bg-gray-50">研究假设</a>
+                <a href="#paper-reproduction" class="block px-3 py-2 rounded-md text-base font-medium text-neutral hover:text-primary hover:bg-gray-50">论文复现</a>
+                <a href="#case-study" class="block px-3 py-2 rounded-md text-base font-medium text-neutral hover:text-primary hover:bg-gray-50">案例研究</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-primary/10 to-accent/10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-10">
+                <div class="md:w-1/2 animate-fade-in">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-neutral leading-tight mb-6 text-shadow">
+                        特质激发理论<br/>
+                        <span class="text-primary">数字化时代的新视角</span>
+                    </h1>
+                    <p class="text-lg text-neutral/80 mb-8">
+                        探索特质激活理论(TAT)如何在数字时代重塑企业合伙人激励机制，优化服务质量，提升组织绩效。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#conceptual-model" class="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-3 rounded-lg shadow-lg transition-all flex items-center">
+                            <i class="fa fa-sitemap mr-2"></i> 探索概念模型
+                        </a>
+                        <a href="#paper-reproduction" class="bg-white hover:bg-gray-50 text-primary border border-primary font-medium px-6 py-3 rounded-lg shadow-md transition-all flex items-center">
+                            <i class="fa fa-file-text-o mr-2"></i> 查看论文复现
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 animate-fade-in" style="animation-delay: 0.2s">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-primary/20 rounded-full blur-3xl opacity-70"></div>
+                        <div class="relative bg-white rounded-2xl shadow-2xl p-6 overflow-hidden">
+                            <div class="mermaid" id="hero-mermaid">
+                                graph TD
+                                    A[人格特质] --> B[情境线索]
+                                    B --> C[特质激活]
+                                    C --> D[行为表现]
+                                    D --> E[绩效结果]
+                                    style A fill:#3B82F6,stroke:#1D4ED8,stroke-width:2px,color:white
+                                    style B fill:#8B5CF6,stroke:#5B21B6,stroke-width:2px,color:white
+                                    style C fill:#10B981,stroke:#047857,stroke-width:2px,color:white
+                                    style D fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:white
+                                    style E fill:#EF4444,stroke:#B91C1C,stroke-width:2px,color:white
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 理论介绍部分 -->
+    <section id="introduction" class="section-padding bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full mb-4">理论基础</span>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral mb-4">特质激发理论(TAT)简介</h2>
+                <p class="max-w-3xl mx-auto text-lg text-neutral/70">特质激活理论解释了人格特质如何在特定情境中被激活，从而影响个体行为和绩效。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-light rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.1s">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-history text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-neutral">理论起源与发展</h3>
+                    <p class="text-neutral/70 mb-4">特质激活理论由Tett和Burnett于2003年提出，源于人格心理学和组织行为学的交叉研究。</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>2003年：理论正式提出</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>2010年后：广泛应用于组织管理</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>2020年至今：数字化情境下的拓展</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.2s">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-cogs text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-neutral">核心概念</h3>
+                    <p class="text-neutral/70 mb-4">TAT理论认为，人格特质与情境线索的交互作用决定了个体的行为表现。</p>
+                    <div class="space-y-2">
+                        <div class="flex items-start text-sm">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span><strong>人格特质</strong>：个体稳定的心理特征</span>
+                        </div>
+                        <div class="flex items-start text-sm">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span><strong>情境线索</strong>：环境中激活特质的刺激因素</span>
+                        </div>
+                        <div class="flex items-start text-sm">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span><strong>特质激活</strong>：特质被情境线索触发的过程</span>
+                        </div>
+                        <div class="flex items-start text-sm">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span><strong>行为表现</strong>：激活后产生的外显行为</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.3s">
+                    <div class="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-line-chart text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-neutral">理论模型</h3>
+                    <p class="text-neutral/70 mb-4">TAT理论提出了一个中介模型，解释了人格特质如何通过情境线索的激活影响行为和绩效。</p>
+                    <div class="mermaid h-40" id="model-mermaid-1">
+                        graph TD
+                            A[人格特质] --> B[特质激活]
+                            C[情境线索] --> B
+                            B --> D[行为表现]
+                            D --> E[绩效结果]
+                            style A fill:#3B82F6,stroke-width:2px
+                            style B fill:#8B5CF6,stroke-width:2px
+                            style C fill:#10B981,stroke-width:2px
+                            style D fill:#F59E0B,stroke-width:2px
+                            style E fill:#EF4444,stroke-width:2px
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-primary/5 rounded-xl p-8 shadow-md animate-fade-in">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl font-bold mb-4 text-neutral">TAT理论的三个发展阶段</h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-white font-bold">1</div>
+                                <div>
+                                    <h4 class="font-semibold text-lg text-neutral">基础阶段 (2003-2010)</h4>
+                                    <p class="text-neutral/70">提出基本理论框架，关注特质与情境的交互作用</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-white font-bold">2</div>
+                                <div>
+                                    <h4 class="font-semibold text-lg text-neutral">拓展阶段 (2011-2019)</h4>
+                                    <p class="text-neutral/70">应用于不同组织情境，验证理论普适性</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-white font-bold">3</div>
+                                <div>
+                                    <h4 class="font-semibold text-lg text-neutral">数字化阶段 (2020-至今)</h4>
+                                    <p class="text-neutral/70">关注数字技术对特质激活的影响，拓展理论边界</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="bg-white rounded-lg shadow-lg p-6 h-full">
+                            <h4 class="text-lg font-semibold mb-4 text-center">TAT理论在组织管理中的应用领域</h4>
+                            <canvas id="application-chart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 概念框架模型部分 -->
+    <section id="conceptual-model" class="section-padding bg-gradient-to-br from-neutral/5 to-primary/5">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block px-3 py-1 text-sm font-medium bg-accent/10 text-accent rounded-full mb-4">研究框架</span>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral mb-4">数字时代激励企业合伙人的概念框架模型</h2>
+                <p class="max-w-3xl mx-auto text-lg text-neutral/70">基于特质激发理论，构建数字化情境下企业合伙人激励机制的概念模型。</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-16 animate-fade-in">
+                <div class="mermaid h-[500px]" id="conceptual-mermaid">
+                    graph TD
+                        subgraph 外生变量
+                            A[数字化领导力] --> B[数字技术使用]
+                            C[人格特质组合] --> D[特质激活]
+                            E[组织文化] --> D
+                        end
+                        subgraph 中介变量
+                            B --> D
+                            D --> F[工作动机]
+                            D --> G[知识共享行为]
+                            D --> H[创新行为]
+                        end
+                        subgraph 调节变量
+                            I[数字能力] -->|调节| D
+                            J[激励机制设计] -->|调节| D
+                        end
+                        subgraph 结果变量
+                            F --> K[绩效表现]
+                            G --> K
+                            H --> K
+                            K --> L[组织竞争力]
+                        end
+                        style A fill:#3B82F6,stroke-width:2px,color:white
+                        style B fill:#60A5FA,stroke-width:2px,color:white
+                        style C fill:#8B5CF6,stroke-width:2px,color:white
+                        style D fill:#A78BFA,stroke-width:2px,color:white
+                        style E fill:#10B981,stroke-width:2px,color:white
+                        style F fill:#34D399,stroke-width:2px,color:black
+                        style G fill:#6EE7B7,stroke-width:2px,color:black
+                        style H fill:#A7F3D0,stroke-width:2px,color:black
+                        style I fill:#F59E0B,stroke-width:2px,color:black
+                        style J fill:#FBBF24,stroke-width:2px,color:black
+                        style K fill:#EF4444,stroke-width:2px,color:white
+                        style L fill:#F87171,stroke-width:2px,color:black
+                        style 外生变量 fill:#E0F2FE,stroke-width:2px,rx:10,ry:10
+                        style 中介变量 fill:#ECFDF5,stroke-width:2px,rx:10,ry:10
+                        style 调节变量 fill:#FEF3C7,stroke-width:2px,rx:10,ry:10
+                        style 结果变量 fill:#FEE2E2,stroke-width:2px,rx:10,ry:10
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.1s">
+                    <h3 class="text-xl font-semibold mb-4 text-neutral flex items-center">
+                        <i class="fa fa-variable text-primary mr-3"></i>主要变量定义
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-primary pl-4 py-1">
+                            <h4 class="font-medium text-neutral">数字化领导力</h4>
+                            <p class="text-sm text-neutral/70">领导者在数字化转型过程中引导、激励和支持团队的能力</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-1">
+                            <h4 class="font-medium text-neutral">数字技术使用</h4>
+                            <p class="text-sm text-neutral/70">企业合伙人在工作中使用数字技术的频率和深度</p>
+                        </div>
+                        <div class="border-l-4 border-accent pl-4 py-1">
+                            <h4 class="font-medium text-neutral">人格特质组合</h4>
+                            <p class="text-sm text-neutral/70">企业合伙人的核心人格特质，如外向性、尽责性、开放性等</p>
+                        </div>
+                        <div class="border-l-4 border-accent pl-4 py-1">
+                            <h4 class="font-medium text-neutral">特质激活</h4>
+                            <p class="text-sm text-neutral/70">人格特质被数字化情境线索激活的过程和程度</p>
+                        </div>
+                        <div class="border-l-4 border-secondary pl-4 py-1">
+                            <h4 class="font-medium text-neutral">数字能力</h4>
+                            <p class="text-sm text-neutral/70">企业合伙人使用和适应数字技术的能力</p>
+                        </div>
+                        <div class="border-l-4 border-secondary pl-4 py-1">
+                            <h4 class="font-medium text-neutral">激励机制设计</h4>
+                            <p class="text-sm text-neutral/70">基于数字技术的激励制度和措施</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.2s">
+                    <h3 class="text-xl font-semibold mb-4 text-neutral flex items-center">
+                        <i class="fa fa-sitemap text-accent mr-3"></i>模型解释
+                    </h3>
+                    <p class="text-neutral/70 mb-4">本概念框架模型基于特质激发理论，探讨了数字时代企业合伙人激励的关键因素和作用机制。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                            <p class="text-sm text-neutral/70">数字化领导力和数字技术使用作为情境线索，激活企业合伙人的人格特质</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                            <p class="text-sm text-neutral/70">特质激活进一步影响工作动机、知识共享行为和创新行为</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                            <p class="text-sm text-neutral/70">这些行为最终提升绩效表现和组织竞争力</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                            <p class="text-sm text-neutral/70">数字能力和激励机制设计在特质激活过程中起到调节作用</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-primary/5 p-4 rounded-lg">
+                        <h4 class="font-medium text-neutral mb-2">理论创新点</h4>
+                        <ul class="text-sm text-neutral/70 space-y-1 list-disc pl-5">
+                            <li>整合数字化因素与特质激活理论</li>
+                            <li>关注企业合伙人这一特殊群体</li>
+                            <li>探讨多维度行为结果的影响机制</li>
+                            <li>识别数字能力和激励设计的调节作用</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 研究假设部分 -->
+    <section id="research-hypotheses" class="section-padding bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block px-3 py-1 text-sm font-medium bg-secondary/10 text-secondary rounded-full mb-4">研究假设</span>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral mb-4">数字时代企业合伙人激励的研究假设</h2>
+                <p class="max-w-3xl mx-auto text-lg text-neutral/70">基于概念框架模型，提出以下研究假设，共计7个假设。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+                <div class="bg-light rounded-xl p-6 shadow-md border-t-4 border-primary card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-neutral">假设 H1</h3>
+                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full">主效应</span>
+                    </div>
+                    <p class="text-neutral/70">数字化领导力正向影响企业合伙人的特质激活水平。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-neutral/60">理论依据：变革型领导理论指出，领导者的行为会影响下属的动机和行为。</p>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl p-6 shadow-md border-t-4 border-primary card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-neutral">假设 H2</h3>
+                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full">主效应</span>
+                    </div>
+                    <p class="text-neutral/70">数字技术使用正向影响企业合伙人的特质激活水平。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-neutral/60">理论依据：技术接受模型表明，技术使用会影响用户的态度和行为。</p>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl p-6 shadow-md border-t-4 border-accent card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-neutral">假设 H3</h3>
+                        <span class="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full">中介效应</span>
+                    </div>
+                    <p class="text-neutral/70">特质激活正向影响企业合伙人的工作动机。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-neutral/60">理论依据：自我决定理论指出，满足自主、胜任和归属需求会提升动机水平。</p>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl p-6 shadow-md border-t-4 border-accent card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-neutral">假设 H4</h3>
+                        <span class="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full">中介效应</span>
+                    </div>
+                    <p class="text-neutral/70">特质激活正向影响企业合伙人的知识共享行为。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-neutral/60">理论依据：社会交换理论认为，个体在感受到支持后会更愿意分享资源。</p>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl p-6 shadow-md border-t-4 border-accent card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-neutral">假设 H5</h3>
+                        <span class="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full">中介效应</span>
+                    </div>
+                    <p class="text-neutral/70">特质激活正向影响企业合伙人的创新行为。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-neutral/60">理论依据：创造力成分理论指出，个体特质是创新行为的重要前因。</p>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl p-6 shadow-md border-t-4 border-secondary card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-neutral">假设 H6</h3>
+                        <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full">调节效应</span>
+                    </div>
+                    <p class="text-neutral/70">数字能力正向调节数字化领导力与特质激活之间的关系。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-neutral/60">理论依据：能力-动机-机会模型指出，能力会影响动机转化为行为的效果。</p>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl p-6 shadow-md border-t-4 border-secondary card-hover md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-neutral">假设 H7</h3>
+                        <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full">调节效应</span>
+                    </div>
+                    <p class="text-neutral/70">激励机制设计正向调节数字技术使用与特质激活之间的关系。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-neutral/60">理论依据：期望理论指出，适当的激励机制会增强个体的行为动机。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-neutral rounded-2xl p-8 text-white animate-fade-in">
+                <h3 class="text-2xl font-bold mb-6 text-center">假设检验设计</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="p-6 bg-white/10 rounded-xl backdrop-blur-sm">
+                        <i class="fa fa-users text-3xl mb-4 text-primary"></i>
+                        <h4 class="text-lg font-semibold mb-2">样本选择</h4>
+                        <p class="text-sm text-white/70">选取200家科技型企业的合伙人作为研究样本，涵盖不同行业和规模。</p>
+                    </div>
+                    <div class="p-6 bg-white/10 rounded-xl backdrop-blur-sm">
+                        <i class="fa fa-list-alt text-3xl mb-4 text-accent"></i>
+                        <h4 class="text-lg font-semibold mb-2">测量工具</h4>
+                        <p class="text-sm text-white/70">采用成熟量表测量各变量，包括数字化领导力量表、特质激活量表、工作动机量表等。</p>
+                    </div>
+                    <div class="p-6 bg-white/10 rounded-xl backdrop-blur-sm">
+                        <i class="fa fa-calculator text-3xl mb-4 text-secondary"></i>
+                        <h4 class="text-lg font-semibold mb-2">数据分析</h4>
+                        <p class="text-sm text-white/70">使用SPSS和AMOS进行数据处理，采用结构方程模型检验假设关系。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 论文复现部分 -->
+    <section id="paper-reproduction" class="section-padding bg-gradient-to-br from-accent/5 to-primary/5">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full mb-4">论文复现</span>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral mb-4">内外向性对服务质量维度的影响研究</h2>
+                <p class="max-w-3xl mx-auto text-lg text-neutral/70">基于特质激活理论，复现《The Influence of Introversion–Extroversion on Service Quality Dimensions》论文的核心发现。</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-16 animate-fade-in">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-neutral">论文概述</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <i class="fa fa-book text-primary mt-1"></i>
+                                <div>
+                                    <h4 class="font-medium text-neutral">研究背景</h4>
+                                    <p class="text-sm text-neutral/70">探讨旅游业背景下顾客人格特质（内外向性）对服务质量维度评价的影响</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa fa-lightbulb-o text-primary mt-1"></i>
+                                <div>
+                                    <h4 class="font-medium text-neutral">理论基础</h4>
+                                    <p class="text-sm text-neutral/70">基于特质激活理论(TAT)和SERVQUAL服务质量模型</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa fa-users text-primary mt-1"></i>
+                                <div>
+                                    <h4 class="font-medium text-neutral">样本选择</h4>
+                                    <p class="text-sm text-neutral/70">土耳其五星级酒店游客，共收集485份有效问卷</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa fa-bar-chart text-primary mt-1"></i>
+                                <div>
+                                    <h4 class="font-medium text-neutral">研究方法</h4>
+                                    <p class="text-sm text-neutral/70">采用PLS-SEM方法分析数据，检验研究假设</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold mt-8 mb-4 text-neutral">SERVQUAL模型的五个维度</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center p-3 bg-light rounded-lg">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <i class="fa fa-building text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-neutral">有形性</h4>
+                                    <p class="text-xs text-neutral/60">酒店的物理设施、设备和人员的外观</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-light rounded-lg">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <i class="fa fa-check-square text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-neutral">可靠性</h4>
+                                    <p class="text-xs text-neutral/60">可靠、准确地执行承诺服务的能力</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-light rounded-lg">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <i class="fa fa-clock-o text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-neutral">响应性</h4>
+                                    <p class="text-xs text-neutral/60">帮助顾客并提供及时服务的意愿</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-light rounded-lg">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <i class="fa fa-shield text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-neutral">保证性</h4>
+                                    <p class="text-xs text-neutral/60">员工的知识、礼貌和传达信任与信心的能力</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-light rounded-lg">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <i class="fa fa-heart text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-neutral">移情性</h4>
+                                    <p class="text-xs text-neutral/60">关心并为顾客提供个性化服务的能力</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 bg-light">
+                        <h3 class="text-2xl font-bold mb-6 text-neutral">研究发现</h3>
+
+                        <div class="mb-8">
+                            <h4 class="font-medium text-neutral mb-3">假设检验结果</h4>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-sm font-medium">假设</th>
+                                            <th class="px-4 py-2 text-left text-sm font-medium">关系</th>
+                                            <th class="px-4 py-2 text-left text-sm font-medium">β值</th>
+                                            <th class="px-4 py-2 text-left text-sm font-medium">p值</th>
+                                            <th class="px-4 py-2 text-left text-sm font-medium">结果</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-4 py-3 text-sm text-neutral">H1</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">外向性→有形性</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">-0.215</td>
+                                            <td class="px-4 py-3 text-sm text-neutral"><0.01</td>
+                                            <td class="px-4 py-3 text-sm text-green-600 font-medium">支持</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 text-sm text-neutral">H2</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">外向性→可靠性</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">-0.018</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">0.743</td>
+                                            <td class="px-4 py-3 text-sm text-red-600 font-medium">不支持</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 text-sm text-neutral">H3</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">外向性→响应性</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">0.086</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">0.076</td>
+                                            <td class="px-4 py-3 text-sm text-yellow-600 font-medium">边际支持</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 text-sm text-neutral">H4</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">外向性→保证性</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">0.099</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">0.052</td>
+                                            <td class="px-4 py-3 text-sm text-yellow-600 font-medium">边际支持</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 text-sm text-neutral">H5</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">外向性→移情性</td>
+                                            <td class="px-4 py-3 text-sm text-neutral">0.109</td>
+                                            <td class="px-4 py-3 text-sm text-neutral"><0.05</td>
+                                            <td class="px-4 py-3 text-sm text-green-600 font-medium">支持</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-medium text-neutral mb-3">主要发现</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                                    <p class="text-sm text-neutral/70"><strong>内向型顾客</strong>更重视服务质量的<strong>有形性</strong>维度</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                                    <p class="text-sm text-neutral/70"><strong>外向型顾客</strong>更重视服务质量的<strong>移情性</strong>维度</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                                    <p class="text-sm text-neutral/70">无论内外向，顾客都同样重视服务的<strong>可靠性</strong>维度</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                                    <p class="text-sm text-neutral/70">研究验证了<strong>特质激活理论</strong>在酒店服务质量评价中的适用性</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-neutral mb-2">实践启示</h4>
+                            <p class="text-sm text-neutral/70">酒店企业应根据顾客的内外向人格特质进行市场细分，针对不同细分市场设计差异化的服务策略，如为内向型顾客提供安静、舒适的环境，为外向型顾客提供社交化的服务体验。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8 animate-fade-in">
+                <h3 class="text-2xl font-bold mb-6 text-center text-neutral">内外向性对服务质量维度影响的可视化分析</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-medium mb-4 text-center text-neutral">路径系数图</h4>
+                        <div class="mermaid h-[300px]" id="path-coefficient-mermaid">
+                            graph TD
+                                A[外向性] -- -0.215*** --> B[有形性]
+                                A -- -0.018 --> C[可靠性]
+                                A -- 0.086+ --> D[响应性]
+                                A -- 0.099+ --> E[保证性]
+                                A -- 0.109** --> F[移情性]
+                                style A fill:#3B82F6,stroke-width:2px,color:white
+                                style B fill:#F9FAFB,stroke-width:2px,color:black
+                                style C fill:#F9FAFB,stroke-width:2px,color:black
+                                style D fill:#F9FAFB,stroke-width:2px,color:black
+                                style E fill:#F9FAFB,stroke-width:2px,color:black
+                                style F fill:#F9FAFB,stroke-width:2px,color:black
+                                style "-0.215***" fill:none,stroke:red,stroke-width:2px,color:red
+                                style "-0.018" fill:none,stroke:gray,stroke-width:2px,color:gray
+                                style "0.086+" fill:none,stroke:orange,stroke-width:2px,color:orange
+                                style "0.099+" fill:none,stroke:orange,stroke-width:2px,color:orange
+                                style "0.109**" fill:none,stroke:green,stroke-width:2px,color:green
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-medium mb-4 text-center text-neutral">内外向顾客对服务质量维度的重视程度</h4>
+                        <canvas id="service-quality-chart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 案例研究部分 -->
+    <section id="case-study" class="section-padding bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block px-3 py-1 text-sm font-medium bg-accent/10 text-accent rounded-full mb-4">案例研究</span>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral mb-4">基于TAT理论的企业合伙人激励案例</h2>
+                <p class="max-w-3xl mx-auto text-lg text-neutral/70">探索如何应用特质激活理论设计有效的企业合伙人激励机制。</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-8 shadow-lg mb-16 animate-fade-in">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/3 flex justify-center">
+                        <div class="w-48 h-48 rounded-full bg-white shadow-lg flex items-center justify-center">
+                            <i class="fa fa-lightbulb-o text-6xl text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-2xl font-bold mb-4 text-neutral">案例背景：科技创业公司合伙人激励</h3>
+                        <p class="text-neutral/70 mb-6">某科技创业公司成立3年，拥有5名合伙人，主要开发人工智能应用。随着公司规模扩大，合伙人之间出现动力不足、协作不畅等问题。公司决定基于特质激活理论设计新的激励机制。</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-sm">
+                                <h4 class="font-medium text-neutral mb-2 flex items-center">
+                                    <i class="fa fa-user-circle text-primary mr-2"></i> 合伙人特点
+                                </h4>
+                                <p class="text-sm text-neutral/70">团队成员具有不同的人格特质，包括高外向性、高尽责性和高开放性等。</p>
+                            </div>
+                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-sm">
+                                <h4 class="font-medium text-neutral mb-2 flex items-center">
+                                    <i class="fa fa-line-chart text-primary mr-2"></i> 面临挑战
+                                </h4>
+                                <p class="text-sm text-neutral/70">如何根据不同特质设计激励机制，提升团队协作和创新能力。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in">
+                <div class="bg-light rounded-xl p-6 shadow-md card-hover">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-search text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-neutral">特质评估阶段</h3>
+                    <p class="text-neutral/70 mb-4">使用大五人格量表对合伙人进行特质评估，识别每个人的核心特质。</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>实施人格特质测评</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>识别关键特质组合</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>分析特质与岗位匹配度</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl p-6 shadow-md card-hover">
+                    <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-cogs text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-neutral">情境设计阶段</h3>
+                    <p class="text-neutral/70 mb-4">基于特质评估结果，设计能够激活不同特质的工作情境和激励措施。</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>设计数字化工作环境</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>制定个性化激励方案</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>创建特质激活线索</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-xl p-6 shadow-md card-hover">
+                    <div class="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-bar-chart text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-neutral">效果评估阶段</h3>
+                    <p class="text-neutral/70 mb-4">实施新的激励机制后，评估其对合伙人行为和绩效的影响。</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>追踪行为变化指标</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>评估绩效改进情况</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa fa-check-circle text-secondary mr-2"></i>
+                            <span>优化激励机制设计</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in">
+                <div class="p-8 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-neutral mb-2">实施效果与启示</h3>
+                    <p class="text-neutral/70">新的激励机制实施6个月后，公司取得了显著变化。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="p-8 border-b md:border-b-0 md:border-r border-gray-200">
+                        <h4 class="text-lg font-semibold mb-4 text-neutral flex items-center">
+                            <i class="fa fa-line-chart text-primary mr-2"></i> 关键成效指标
+                        </h4>
+                        <canvas id="effectiveness-chart" height="250"></canvas>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-lg font-semibold mb-4 text-neutral flex items-center">
+                            <i class="fa fa-lightbulb-o text-accent mr-2"></i> 主要启示
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                                <p class="text-sm text-neutral/70"><strong>个性化激励</strong>比通用激励更有效，应根据合伙人的人格特质设计激励措施</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                                <p class="text-sm text-neutral/70"><strong>数字化环境</strong>可以作为有效的特质激活线索，提升合伙人的工作动机</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                                <p class="text-sm text-neutral/70"><strong>定期评估与调整</strong>是确保激励机制持续有效的关键</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fa fa-arrow-right text-primary mt-1 mr-2"></i>
+                                <p class="text-sm text-neutral/70"><strong>特质激活理论</strong>为设计有效的激励机制提供了科学框架</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-neutral text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-lightbulb-o text-primary text-2xl mr-3"></i>
+                        <span class="text-xl font-bold">特质激发理论(TAT)学习平台</span>
+                    </div>
+                    <p class="text-white/70 mb-4">探索特质激活理论在数字时代的应用，提升组织管理和服务质量。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" class="text-white/70 hover:text-primary transition-colors"><i class="fa fa-github"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#introduction" class="text-white/70 hover:text-primary transition-colors">理论介绍</a></li>
+                        <li><a href="#conceptual-model" class="text-white/70 hover:text-primary transition-colors">概念框架</a></li>
+                        <li><a href="#research-hypotheses" class="text-white/70 hover:text-primary transition-colors">研究假设</a></li>
+                        <li><a href="#paper-reproduction" class="text-white/70 hover:text-primary transition-colors">论文复现</a></li>
+                        <li><a href="#case-study" class="text-white/70 hover:text-primary transition-colors">案例研究</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-white/70"><i class="fa fa-envelope mr-2"></i> contact@tat-learning.com</li>
+                        <li class="flex items-center text-white/70"><i class="fa fa-phone mr-2"></i> +86 123 4567 8910</li>
+                        <li class="flex items-start text-white/70"><i class="fa fa-map-marker mt-1 mr-2"></i> <span>北京市海淀区中关村大街1号</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
+                <p>© 2023 特质激发理论学习平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('bg-white/95', 'backdrop-blur-sm');
+                navbar.classList.remove('bg-white');
+            } else {
+                navbar.classList.add('bg-white');
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-sm');
+            }
+        });
+
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // 关闭移动端菜单
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // 初始化Mermaid
+        mermaid.initialize({ startOnLoad: true });
+
+        // 初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 应用领域图表
+            const applicationCtx = document.getElementById('application-chart').getContext('2d');
+            new Chart(applicationCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['领导力开发', '绩效管理', '员工激励', '团队建设', '人才选拔'],
+                    datasets: [{
+                        data: [25, 20, 25, 15, 15],
+                        backgroundColor: [
+                            '#3B82F6',
+                            '#8B5CF6',
+                            '#10B981',
+                            '#F59E0B',
+                            '#EF4444'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 服务质量维度图表
+            const serviceQualityCtx = document.getElementById('service-quality-chart').getContext('2d');
+            new Chart(serviceQualityCtx, {
+                type: 'radar',
+                    data: {
+                        labels: ['有形性', '可靠性', '响应性', '保证性', '移情性'],
+                        datasets: [{
+                            label: '内向型顾客',
+                            data: [85, 75, 60, 65, 55],
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                        }, {
+                            label: '外向型顾客',
+                            data: [60, 75, 70, 75, 85],
+                            backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                            borderColor: 'rgba(139, 92, 246, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(139, 92, 246, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    stepSize: 20
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+
+                // 效果评估图表
+                const effectivenessCtx = document.getElementById('effectiveness-chart').getContext('2d');
+                new Chart(effectivenessCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['工作动机', '创新行为', '知识共享', '团队协作', '绩效表现'],
+                        datasets: [{
+                            label: '实施前',
+                            data: [60, 55, 50, 45, 65],
+                            backgroundColor: 'rgba(209, 213, 219, 0.6)',
+                            borderColor: 'rgba(209, 213, 219, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: '实施后',
+                            data: [85, 80, 75, 70, 85],
+                            backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.raw}分`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+            // 动画效果
+            const animateElements = document.querySelectorAll('.animate-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            animateElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(element);
+            });
+        </script>
+</body>
+</html>

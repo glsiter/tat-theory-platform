@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片测试页面</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .image-container { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        img { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <h1>TAT理论平台图片测试</h1>
+    
+    <div class="image-container">
+        <h2>思维导图 (原始文件名)</h2>
+        <img src="Mind Map.png" alt="TAT理论思维导图" onerror="this.style.border='2px solid red'; this.alt='图片加载失败';">
+    </div>
+    
+    <div class="image-container">
+        <h2>思维导图 (URL编码)</h2>
+        <img src="Mind%20Map.png" alt="TAT理论思维导图" onerror="this.style.border='2px solid red'; this.alt='图片加载失败';">
+    </div>
+    
+    <div class="image-container">
+        <h2>结构方程 (原始文件名)</h2>
+        <img src="TAT理论的结构方程.png" alt="TAT理论结构方程模型" onerror="this.style.border='2px solid red'; this.alt='图片加载失败';">
+    </div>
+    
+    <div class="image-container">
+        <h2>结构方程 (URL编码)</h2>
+        <img src="TAT%E7%90%86%E8%AE%BA%E7%9A%84%E7%BB%93%E6%9E%84%E6%96%B9%E7%A8%8B.png" alt="TAT理论结构方程模型" onerror="this.style.border='2px solid red'; this.alt='图片加载失败';">
+    </div>
+    
+    <script>
+        // 检查图片加载状态
+        document.querySelectorAll('img').forEach((img, index) => {
+            img.onload = function() {
+                console.log(`图片 ${index + 1} 加载成功:`, this.src);
+            };
+            img.onerror = function() {
+                console.error(`图片 ${index + 1} 加载失败:`, this.src);
+            };
+        });
+    </script>
+</body>
+</html>
