@@ -4,7 +4,17 @@
 export interface StructuralEquationNode {
   id: string
   label: string
-  type: 'context-group' | 'situational-cue' | 'core-construct' | 'mediator' | 'outcome' | 'final-outcome' | 'outcome-group' | 'motivation'
+  type:
+    | 'context-group'
+    | 'situational-cue'
+    | 'core-construct'
+    | 'mediator'
+    | 'outcome'
+    | 'final-outcome'
+    | 'outcome-group'
+    | 'motivation'
+    | 'independent-variable'
+    | 'dependent-variable'
   description: string
   examples: string[]
   position: { x: number; y: number }
@@ -16,6 +26,7 @@ export interface StructuralEquationNode {
   relatedConcepts: string[]
   version: string
   lastUpdated: Date
+  measurementItems?: string[]
 }
 
 export interface StructuralEquationRelationship {
@@ -25,10 +36,21 @@ export interface StructuralEquationRelationship {
   label: string
   description: string
   strength: number
-  type: 'activation' | 'direct-effect' | 'mediation' | 'moderation' | 'feedback'
+  type:
+    | 'activation'
+    | 'direct-effect'
+    | 'mediation'
+    | 'moderation'
+    | 'feedback'
+    | 'positive-effect'
+    | 'negative-effect'
+    | 'marginal-effect'
+    | 'non-significant'
   researchEvidence: ResearchEvidence[]
   pathCoefficient?: number
-  significance?: 'p<0.001' | 'p<0.01' | 'p<0.05' | 'ns'
+  significance?: 'p<0.001' | 'p<0.01' | 'p<0.05' | 'ns' | string
+  tStatistic?: number
+  standardError?: number
   version: string
   lastUpdated: Date
 }
@@ -44,6 +66,7 @@ export interface ResearchEvidence {
   effectSize?: number
   reliability: number
   validity: 'high' | 'medium' | 'low'
+  cronbachAlpha?: number
 }
 
 export interface CaseStudy {
@@ -67,7 +90,7 @@ export interface StructuralEquationModel {
   lastUpdated: Date
   nodes: Record<string, StructuralEquationNode>
   relationships: StructuralEquationRelationship[]
-  originalImage: {
+  originalImage?: {
     filename: string
     description: string
     source: string
@@ -75,11 +98,47 @@ export interface StructuralEquationModel {
   }
   validationResults: ValidationResult[]
   changeHistory: ChangeHistoryEntry[]
+  modelFitStatistics?: {
+    cronbachAlpha: Record<string, number>
+    compositeReliability: Record<string, number>
+    averageVarianceExtracted: Record<string, number>
+    rSquared: Record<string, number>
+    fSquared: Record<string, number>
+    qSquared: Record<string, number>
+  }
+  originalStudy?: {
+    title: string
+    authors: string
+    year: number
+    journal: string
+    doi: string
+    sampleSize: number
+    methodology: string
+    participants: string
+    setting: string
+  }
+  theoreticalFoundation?: {
+    mainTheory: string
+    supportingTheories: string[]
+    keyPrinciples: string[]
+  }
+  researchHypotheses?: {
+    id: string
+    hypothesis: string
+    result: string
+    interpretation: string
+  }[]
 }
 
 export interface ValidationResult {
   id: string
-  validationType: 'structural' | 'theoretical' | 'empirical'
+  validationType:
+    | 'structural'
+    | 'theoretical'
+    | 'empirical'
+    | 'measurement-model'
+    | 'structural-model'
+    | 'discriminant-validity'
   status: 'valid' | 'warning' | 'error'
   message: string
   timestamp: Date
@@ -89,9 +148,16 @@ export interface ValidationResult {
 export interface ChangeHistoryEntry {
   id: string
   timestamp: Date
-  changeType: 'node-added' | 'node-modified' | 'node-removed' | 'relationship-added' | 'relationship-modified' | 'relationship-removed'
+  changeType:
+    | 'node-added'
+    | 'node-modified'
+    | 'node-removed'
+    | 'relationship-added'
+    | 'relationship-modified'
+    | 'relationship-removed'
+    | 'model-creation'
   elementId: string
-  changes: Record<string, { old: any; new: any }>
+  changes: Record<string, { old: unknown; new: unknown }>
   author: string
   reason: string
 }

@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, type Component } from 'vue'
+import { ref, computed, type Component, useSlots } from 'vue'
 import { useResponsive } from '@/composables/useResponsive'
 import { usePerformanceOptimization } from '@/composables/usePerformanceOptimization'
 
@@ -78,6 +78,7 @@ const { deviceInfo, isMobile } = useResponsive()
 const { performanceConfig } = usePerformanceOptimization()
 
 const showTouchFeedback = ref(false)
+const slots = useSlots()
 const touchFeedbackStyle = ref({})
 
 // 自适应尺寸
@@ -109,7 +110,7 @@ const buttonClasses = computed(() => [
     'button-disabled': props.disabled,
     'button-touch-optimized': props.touchOptimized && deviceInfo.value.touchSupport,
     'button-with-icon': props.icon,
-    'button-icon-only': props.icon && !props.$slots.default,
+    'button-icon-only': props.icon && !slots.default,
     'button-reduced-motion': !performanceConfig.value.enableAnimations
   }
 ])

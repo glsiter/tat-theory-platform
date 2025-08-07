@@ -66,11 +66,11 @@
             </div>
           </div>
         </div>
-        <div class="info-section">
+        <div class="info-section" v-if="model.originalImage">
           <h4>原始图片信息</h4>
-          <p><strong>文件名:</strong> {{ model.originalImage.filename }}</p>
-          <p><strong>来源:</strong> {{ model.originalImage.source }}</p>
-          <p><strong>分析日期:</strong> {{ model.originalImage.analysisDate }}</p>
+          <p><strong>文件名:</strong> {{ model.originalImage?.filename }}</p>
+          <p><strong>来源:</strong> {{ model.originalImage?.source }}</p>
+          <p><strong>分析日期:</strong> {{ model.originalImage?.analysisDate }}</p>
         </div>
       </div>
     </div>
