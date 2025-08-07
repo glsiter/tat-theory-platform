@@ -237,8 +237,8 @@ interface SyncConflict {
   id: string
   moduleName: string
   description: string
-  localData: any
-  remoteData: any
+  localData: unknown
+  remoteData: unknown
   timestamp: Date
 }
 
@@ -296,9 +296,9 @@ const syncStatusText = computed(() => {
 
 // 获取设备图标
 const getDeviceIcon = (deviceType: string) => {
-  const icons = {
+  const icons: Record<string, string> = {
     mobile: 'PhoneIcon',
-    tablet: 'TabletIcon', 
+    tablet: 'TabletIcon',
     desktop: 'ComputerDesktopIcon'
   }
   return icons[deviceType] || 'DevicePhoneMobileIcon'
@@ -436,18 +436,6 @@ const loadStats = () => {
   }
 }
 
-// 更新统计数据
-const updateStats = (success: boolean, dataSize: number = 0) => {
-  stats.value.totalSyncs++
-  if (success) {
-    stats.value.successfulSyncs++
-    stats.value.dataSynced += dataSize
-  } else {
-    stats.value.failedSyncs++
-  }
-  
-  localStorage.setItem(`sync_stats_${props.userId}`, JSON.stringify(stats.value))
-}
 
 // 检测连接的设备
 const detectConnectedDevices = () => {

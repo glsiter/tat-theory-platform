@@ -156,6 +156,7 @@ mermaid.initialize({
   gantt: {
     titleTopMargin: 25,
     barHeight: 20,
+    // @ts-expect-error - fontFamily is not defined in Mermaid's Gantt config types
     fontFamily: '"Inter", "Noto Sans SC", system-ui, sans-serif',
     fontSize: 11,
     gridLineStartPadding: 35,

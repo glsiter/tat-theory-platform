@@ -182,7 +182,7 @@
         <h2>Research Model</h2>
         <div class="model-container">
           <div class="research-model">
-            <img src="/research-model.png" alt="Research Model" class="model-diagram">
+            <img src="/TAT理论的结构方程.png" alt="Research Model" class="model-diagram" />
             <p class="model-caption">Figure 1. Research Model</p>
           </div>
           
@@ -446,14 +446,14 @@
         <div class="model-fit-section">
           <h3>Model Fit Statistics</h3>
           <div class="fit-stats-grid">
-            <div class="fit-card">
-              <h4>Reliability</h4>
-              <ul>
-                <li>Cronbach's α: {{ modelFit.cronbachAlpha.extroversion }}</li>
-                <li>Composite Reliability: {{ modelFit.compositeReliability.extroversion }}</li>
-                <li>AVE: {{ modelFit.averageVarianceExtracted.extroversion }}</li>
-              </ul>
-            </div>
+              <div class="fit-card">
+                <h4>Reliability</h4>
+                <ul>
+                  <li>Cronbach's α: {{ measurementModel.extroversion.cronbachAlpha }}</li>
+                  <li>Composite Reliability: {{ measurementModel.extroversion.compositeReliability }}</li>
+                  <li>AVE: {{ measurementModel.extroversion.averageVarianceExtracted }}</li>
+                </ul>
+              </div>
 
             <div class="fit-card">
               <h4>Explained Variance (R²)</h4>
@@ -466,16 +466,16 @@
               </ul>
             </div>
 
-            <div class="fit-card">
-              <h4>Effect Size (f²)</h4>
-              <ul>
-                <li>Tangibles: {{ modelFit.fSquared.tangibles }} (small)</li>
-                <li>Reliability: {{ modelFit.fSquared.reliability }} (none)</li>
-                <li>Responsiveness: {{ modelFit.fSquared.responsiveness }} (very small)</li>
-                <li>Assurance: {{ modelFit.fSquared.assurance }} (very small)</li>
-                <li>Empathy: {{ modelFit.fSquared.empathy }} (very small)</li>
-              </ul>
-            </div>
+              <div class="fit-card">
+                <h4>Effect Size (f²)</h4>
+                <ul>
+                  <li>Tangibles: {{ modelFit.effectSize.tangibles }} (small)</li>
+                  <li>Reliability: {{ modelFit.effectSize.reliability }} (none)</li>
+                  <li>Responsiveness: {{ modelFit.effectSize.responsiveness }} (very small)</li>
+                  <li>Assurance: {{ modelFit.effectSize.assurance }} (very small)</li>
+                  <li>Empathy: {{ modelFit.effectSize.empathy }} (very small)</li>
+                </ul>
+              </div>
           </div>
         </div>
       </section>
@@ -575,7 +575,7 @@
                 <span class="finding-icon">✓</span>
                 <strong>H1 Supported: Tangibles Dimension</strong>
               </div>
-              <p>Introverts attach significantly more value to tangibles (β = -0.215, p < 0.01). This supports TAT theory as introverts are more sensitive to environmental stimuli and physical surroundings.</p>
+                <p>Introverts attach significantly more value to tangibles (β = -0.215, p &lt; 0.01). This supports TAT theory as introverts are more sensitive to environmental stimuli and physical surroundings.</p>
             </div>
 
             <div class="finding-item not-supported">
@@ -591,12 +591,105 @@
                 <span class="finding-icon">✓</span>
                 <strong>H5 Supported: Empathy Dimension</strong>
               </div>
-              <p>Extroverts attach significantly more value to empathy (β = 0.109, p < 0.05). This aligns with extroverts' preference for social interaction and personalized attention.</p>
+                <p>Extroverts attach significantly more value to empathy (β = 0.109, p &lt; 0.05). This aligns with extroverts' preference for social interaction and personalized attention.</p>
             </div>
           </div>
         </div>
 
-        <!-- Advanced Statistical Analysis -->\n        <div class=\"analysis-section\">\n          <h3>Advanced Statistical Metrics</h3>\n          <div class=\"stats-grid\">\n            <div class=\"stat-card\">\n              <h4>Effect Sizes (Cohen's d)</h4>\n              <ul>\n                <li><strong>Tangibles:</strong> d = {{ calculateEffectSize(servqualComparison.tangibles.introverts, servqualComparison.tangibles.extroverts).toFixed(3) }} ({{ getEffectSizeLabel(calculateEffectSize(servqualComparison.tangibles.introverts, servqualComparison.tangibles.extroverts)) }})</li>\n                <li><strong>Empathy:</strong> d = {{ calculateEffectSize(servqualComparison.empathy.extroverts, servqualComparison.empathy.introverts).toFixed(3) }} ({{ getEffectSizeLabel(calculateEffectSize(servqualComparison.empathy.extroverts, servqualComparison.empathy.introverts)) }})</li>\n                <li><strong>Reliability:</strong> d = {{ calculateEffectSize(servqualComparison.reliability.introverts, servqualComparison.reliability.extroverts).toFixed(3) }} ({{ getEffectSizeLabel(calculateEffectSize(servqualComparison.reliability.introverts, servqualComparison.reliability.extroverts)) }})</li>\n              </ul>\n            </div>\n\n            <div class=\"stat-card\">\n              <h4>Statistical Power Analysis</h4>\n              <ul>\n                <li><strong>Sample Size:</strong> N = {{ descriptiveStats.sampleSize }}</li>\n                <li><strong>Power (1-β):</strong> 0.80 (adequate)</li>\n                <li><strong>Alpha Level:</strong> α = 0.05</li>\n                <li><strong>Minimum Detectable Effect:</strong> d = 0.25</li>\n              </ul>\n            </div>\n\n            <div class=\"stat-card\">\n              <h4>Model Validation Metrics</h4>\n              <ul>\n                <li><strong>Bootstraps:</strong> 5,000 samples</li>\n                <li><strong>Path Significance:</strong> 2/5 hypotheses supported</li>\n                <li><strong>Total Variance Explained:</strong> {{ ((modelFit.rSquared.tangibles + modelFit.rSquared.empathy) * 100 / 2).toFixed(1) }}%</li>\n                <li><strong>Predictive Relevance:</strong> Q² > 0 for significant paths</li>\n              </ul>\n            </div>\n          </div>\n        </div>
+        <!-- Advanced Statistical Analysis -->
+        <div class="analysis-section">
+          <h3>Advanced Statistical Metrics</h3>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <h4>Effect Sizes (Cohen's d)</h4>
+              <ul>
+                <li>
+                  <strong>Tangibles:</strong>
+                  d =
+                  {{
+                    calculateEffectSize(
+                      servqualComparison.tangibles.introverts,
+                      servqualComparison.tangibles.extroverts
+                    ).toFixed(3)
+                  }}
+                  (
+                  {{
+                    getEffectSizeLabel(
+                      calculateEffectSize(
+                        servqualComparison.tangibles.introverts,
+                        servqualComparison.tangibles.extroverts
+                      )
+                    )
+                  }}
+                  )
+                </li>
+                <li>
+                  <strong>Empathy:</strong>
+                  d =
+                  {{
+                    calculateEffectSize(
+                      servqualComparison.empathy.extroverts,
+                      servqualComparison.empathy.introverts
+                    ).toFixed(3)
+                  }}
+                  (
+                  {{
+                    getEffectSizeLabel(
+                      calculateEffectSize(
+                        servqualComparison.empathy.extroverts,
+                        servqualComparison.empathy.introverts
+                      )
+                    )
+                  }}
+                  )
+                </li>
+                <li>
+                  <strong>Reliability:</strong>
+                  d =
+                  {{
+                    calculateEffectSize(
+                      servqualComparison.reliability.introverts,
+                      servqualComparison.reliability.extroverts
+                    ).toFixed(3)
+                  }}
+                  (
+                  {{
+                    getEffectSizeLabel(
+                      calculateEffectSize(
+                        servqualComparison.reliability.introverts,
+                        servqualComparison.reliability.extroverts
+                      )
+                    )
+                  }}
+                  )
+                </li>
+              </ul>
+            </div>
+
+            <div class="stat-card">
+              <h4>Statistical Power Analysis</h4>
+              <ul>
+                <li><strong>Sample Size:</strong> N = {{ descriptiveStats.sampleSize }}</li>
+                <li><strong>Power (1-β):</strong> 0.80 (adequate)</li>
+                <li><strong>Alpha Level:</strong> α = 0.05</li>
+                <li><strong>Minimum Detectable Effect:</strong> d = 0.25</li>
+              </ul>
+            </div>
+
+            <div class="stat-card">
+              <h4>Model Validation Metrics</h4>
+              <ul>
+                <li><strong>Bootstraps:</strong> 5,000 samples</li>
+                <li><strong>Path Significance:</strong> 2/5 hypotheses supported</li>
+                <li>
+                  <strong>Total Variance Explained:</strong>
+                  {{ ((modelFit.rSquared.tangibles + modelFit.rSquared.empathy) * 100 / 2).toFixed(1) }}%
+                </li>
+                <li><strong>Predictive Relevance:</strong> Q² > 0 for significant paths</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </div>
@@ -610,7 +703,6 @@ import { descriptiveStatistics, paperResults, simulatedData } from '@/data/simul
 
 // Reactive data
 const activeSection = ref('abstract')
-const comparisonChart = ref<HTMLCanvasElement>()
 
 const sections = [
   { id: 'abstract', title: '摘要 Abstract' },
@@ -653,6 +745,7 @@ const servqualDimensions = [
 const modelResults = paperResults.hypothesisResults
 
 const modelFit = paperResults.structuralModel
+const measurementModel = paperResults.measurementModel
 
 const descriptiveStats = descriptiveStatistics
 
@@ -704,12 +797,6 @@ const getDifferenceClass = (difference: number) => {
   return 'small-difference'
 }
 
-// Add statistical significance indicators
-const getSignificanceIndicator = (difference: number) => {
-  if (Math.abs(difference) > 5) return '***'
-  if (Math.abs(difference) > 2) return '*'
-  return 'n.s.'
-}
 
 // Calculate effect sizes
 const calculateEffectSize = (mean1: number, mean2: number, pooledSD: number = 5.2) => {
