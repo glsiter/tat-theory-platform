@@ -1,5 +1,5 @@
 <template>
-  <nav class="app-navigation">
+  <nav class="app-navigation nav-figma">
     <div class="nav-container">
       <RouterLink to="/" class="nav-logo">
         <div class="logo-icon">🧠</div>
@@ -17,7 +17,12 @@
 
       <button @click="toggleMobileMenu" class="mobile-menu-btn">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
         </svg>
       </button>
     </div>
@@ -25,9 +30,15 @@
     <!-- 移动端菜单 -->
     <div v-if="showMobileMenu" class="mobile-menu">
       <RouterLink to="/" class="mobile-link" @click="closeMobileMenu">首页</RouterLink>
-      <RouterLink to="/theory-learning" class="mobile-link" @click="closeMobileMenu">理论学习</RouterLink>
-      <RouterLink to="/mind-map-test" class="mobile-link" @click="closeMobileMenu">思维导图</RouterLink>
-      <RouterLink to="/structural-equation" class="mobile-link" @click="closeMobileMenu">结构方程</RouterLink>
+      <RouterLink to="/theory-learning" class="mobile-link" @click="closeMobileMenu"
+        >理论学习</RouterLink
+      >
+      <RouterLink to="/mind-map-test" class="mobile-link" @click="closeMobileMenu"
+        >思维导图</RouterLink
+      >
+      <RouterLink to="/structural-equation" class="mobile-link" @click="closeMobileMenu"
+        >结构方程</RouterLink
+      >
       <RouterLink to="/documents" class="mobile-link" @click="closeMobileMenu">文档资源</RouterLink>
       <RouterLink to="/about" class="mobile-link" @click="closeMobileMenu">关于</RouterLink>
     </div>
@@ -49,10 +60,10 @@ function closeMobileMenu(): void {
 </script>
 
 <style scoped>
-.app-navigation {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e5e7eb;
+.app-navigation.nav-figma {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -73,7 +84,7 @@ function closeMobileMenu(): void {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: #1f2937;
+  color: var(--text-color);
   font-weight: 600;
   font-size: 1.125rem;
 }
@@ -90,18 +101,18 @@ function closeMobileMenu(): void {
 
 .nav-link {
   text-decoration: none;
-  color: #6b7280;
+  color: var(--muted-text-color);
   font-weight: 500;
   transition: color 0.2s;
   position: relative;
 }
 
 .nav-link:hover {
-  color: #3b82f6;
+  color: var(--brand);
 }
 
 .nav-link.router-link-active {
-  color: #3b82f6;
+  color: var(--brand);
 }
 
 .nav-link.router-link-active::after {
@@ -111,7 +122,7 @@ function closeMobileMenu(): void {
   left: 0;
   right: 0;
   height: 2px;
-  background: #3b82f6;
+  background: var(--brand);
   border-radius: 1px;
 }
 
@@ -127,15 +138,15 @@ function closeMobileMenu(): void {
 }
 
 .mobile-menu-btn:hover {
-  background: #f3f4f6;
-  color: #374151;
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--brand);
 }
 
 .mobile-menu {
   display: none;
   flex-direction: column;
-  background: white;
-  border-top: 1px solid #e5e7eb;
+  background: var(--surface-color);
+  border-top: 1px solid var(--border-color);
   padding: 16px 20px;
 }
 
@@ -143,9 +154,9 @@ function closeMobileMenu(): void {
   display: block;
   padding: 12px 0;
   text-decoration: none;
-  color: #6b7280;
+  color: var(--muted-text-color);
   font-weight: 500;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
   transition: color 0.2s;
 }
 
@@ -154,11 +165,11 @@ function closeMobileMenu(): void {
 }
 
 .mobile-link:hover {
-  color: #3b82f6;
+  color: var(--brand);
 }
 
 .mobile-link.router-link-active {
-  color: #3b82f6;
+  color: var(--brand);
 }
 
 @media (max-width: 768px) {

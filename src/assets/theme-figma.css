@@ -1,0 +1,46 @@
+:root {
+  /* Figma-like brand palette */
+  --brand-50: #eef2ff;
+  --brand-100: #e0e7ff;
+  --brand-200: #c7d2fe;
+  --brand-300: #a5b4fc;
+  --brand-400: #818cf8;
+  --brand-500: #6366f1; /* primary */
+  --brand-600: #4f46e5;
+  --brand-700: #4338ca;
+  --brand-800: #3730a3;
+  --brand-900: #312e81;
+
+  --accent-500: #06b6d4; /* cyan accent */
+  --success-500: #10b981;
+  --warning-500: #f59e0b;
+  --danger-500: #ef4444;
+
+  --text-color: #0f172a; /* slate-900 */
+  --muted-text-color: #475569; /* slate-600 */
+  --surface-color: #ffffff;
+  --background-color: #f8fafc; /* slate-50 */
+  --border-color: #e2e8f0; /* slate-200 */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #e2e8f0; /* slate-200 */
+    --muted-text-color: #94a3b8; /* slate-400 */
+    --surface-color: #0b1220; /* dark surface */
+    --background-color: #050b16; /* dark bg */
+    --border-color: #1f2937; /* gray-800 */
+  }
+}
+
+/* Utility tokens mapped to Tailwind-like CSS variables */
+:root {
+  --brand: var(--brand-600);
+  --brand-hover: var(--brand-700);
+  --brand-ring: var(--brand-400);
+}

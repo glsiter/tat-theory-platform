@@ -1,28 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     screens: {
-      'xs': '475px',
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
+      xs: '475px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
       '2xl': '1536px',
       // 自定义断点
-      'mobile': {'max': '767px'},
-      'tablet': {'min': '768px', 'max': '1023px'},
-      'desktop': {'min': '1024px'},
+      mobile: { max: '767px' },
+      tablet: { min: '768px', max: '1023px' },
+      desktop: { min: '1024px' },
       // 方向断点
-      'portrait': {'raw': '(orientation: portrait)'},
-      'landscape': {'raw': '(orientation: landscape)'},
+      portrait: { raw: '(orientation: portrait)' },
+      landscape: { raw: '(orientation: landscape)' },
       // 高度断点
-      'h-sm': {'raw': '(max-height: 600px)'},
-      'h-md': {'raw': '(min-height: 601px) and (max-height: 900px)'},
-      'h-lg': {'raw': '(min-height: 901px)'},
+      'h-sm': { raw: '(max-height: 600px)' },
+      'h-md': { raw: '(min-height: 601px) and (max-height: 900px)' },
+      'h-lg': { raw: '(min-height: 901px)' },
     },
     extend: {
       fontFamily: {
@@ -40,6 +37,22 @@ export default {
           700: '#1d4ed8',
           800: '#1e40af',
           900: '#1e3a8a',
+        },
+        // Figma brand palette
+        brand: {
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+        },
+        accent: {
+          500: '#06b6d4',
         },
         'tat-purple': {
           50: '#f5f3ff',
@@ -76,12 +89,12 @@ export default {
           700: '#b45309',
           800: '#92400e',
           900: '#78350f',
-        }
+        },
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
