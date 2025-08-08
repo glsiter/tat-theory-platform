@@ -1,1488 +1,1662 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="特质激发理论(TAT)深度学习平台 - 全面掌握理论基础、研究应用与实证分析">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="特质激发理论(TAT)深度学习平台 - 全面掌握理论基础、研究应用与实证分析"
+    />
     <title>特质激发理论(TAT)深度学习平台</title>
-    
+
     <!-- 外部资源引入 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Tailwind自定义配置 - Apple风格设计系统 -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        // Apple风格配色方案
-                        primary: '#007AFF',        // Apple蓝
-                        secondary: '#34C759',      // Apple绿
-                        accent: '#5856D6',         // Apple紫
-                        neutral: '#1D1D1F',        // Apple深灰
-                        light: '#F5F5F7',          // Apple浅灰
-                        warm: '#FF9500',           // Apple橙
-                        cool: '#30D158',           // Apple青绿
-                        surface: '#FFFFFF',        // 纯白
-                        'gray-50': '#FAFAFA',
-                        'gray-100': '#F5F5F5',
-                        'gray-200': '#E5E5E5',
-                        'gray-300': '#D4D4D4',
-                        'gray-400': '#A3A3A3',
-                        'gray-500': '#737373',
-                        'gray-600': '#525252',
-                        'gray-700': '#404040',
-                        'gray-800': '#262626',
-                        'gray-900': '#171717',
-                    },
-                    fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Noto Sans SC', 'SF Pro Display', 'system-ui', 'sans-serif'],
-                    },
-                    fontSize: {
-                        'hero': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-                        'display': ['3.5rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
-                        'headline': ['2.25rem', { lineHeight: '1.3' }],
-                        'title': ['1.5rem', { lineHeight: '1.4' }],
-                        'body': ['1rem', { lineHeight: '1.6' }],
-                        'caption': ['0.875rem', { lineHeight: '1.5' }],
-                    },
-                    spacing: {
-                        '18': '4.5rem',
-                        '88': '22rem',
-                        '112': '28rem',
-                        '128': '32rem',
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 1.2s ease-out',
-                        'slide-up': 'slideUp 0.8s ease-out',
-                        'scale-in': 'scaleIn 0.6s ease-out',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(40px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(60px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        scaleIn: {
-                            '0%': { opacity: '0', transform: 'scale(0.95)' },
-                            '100%': { opacity: '1', transform: 'scale(1)' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' }
-                        }
-                    },
-                    backdropBlur: {
-                        'apple': '20px',
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Apple风格配色方案
+              primary: '#007AFF', // Apple蓝
+              secondary: '#34C759', // Apple绿
+              accent: '#5856D6', // Apple紫
+              neutral: '#1D1D1F', // Apple深灰
+              light: '#F5F5F7', // Apple浅灰
+              warm: '#FF9500', // Apple橙
+              cool: '#30D158', // Apple青绿
+              surface: '#FFFFFF', // 纯白
+              'gray-50': '#FAFAFA',
+              'gray-100': '#F5F5F5',
+              'gray-200': '#E5E5E5',
+              'gray-300': '#D4D4D4',
+              'gray-400': '#A3A3A3',
+              'gray-500': '#737373',
+              'gray-600': '#525252',
+              'gray-700': '#404040',
+              'gray-800': '#262626',
+              'gray-900': '#171717',
+            },
+            fontFamily: {
+              sans: [
+                '-apple-system',
+                'BlinkMacSystemFont',
+                'Noto Sans SC',
+                'SF Pro Display',
+                'system-ui',
+                'sans-serif',
+              ],
+            },
+            fontSize: {
+              hero: ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+              display: ['3.5rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+              headline: ['2.25rem', { lineHeight: '1.3' }],
+              title: ['1.5rem', { lineHeight: '1.4' }],
+              body: ['1rem', { lineHeight: '1.6' }],
+              caption: ['0.875rem', { lineHeight: '1.5' }],
+            },
+            spacing: {
+              18: '4.5rem',
+              88: '22rem',
+              112: '28rem',
+              128: '32rem',
+            },
+            animation: {
+              'fade-in': 'fadeIn 1.2s ease-out',
+              'slide-up': 'slideUp 0.8s ease-out',
+              'scale-in': 'scaleIn 0.6s ease-out',
+              float: 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(40px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              slideUp: {
+                '0%': { opacity: '0', transform: 'translateY(60px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              scaleIn: {
+                '0%': { opacity: '0', transform: 'scale(0.95)' },
+                '100%': { opacity: '1', transform: 'scale(1)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+            },
+            backdropBlur: {
+              apple: '20px',
+            },
+          },
+        },
+      }
     </script>
-    
+
     <!-- Apple风格自定义样式 -->
     <style>
-        * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'SF Pro Display', system-ui, sans-serif;
+        scroll-behavior: smooth;
+        background-color: #f5f5f7;
+        color: #1d1d1f;
+      }
+
+      /* Apple风格渐变背景 */
+      .hero-gradient {
+        background: linear-gradient(135deg, #007aff 0%, #5856d6 50%, #34c759 100%);
+        background-size: 200% 200%;
+        animation: gradientShift 8s ease infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'SF Pro Display', system-ui, sans-serif;
-            scroll-behavior: smooth;
-            background-color: #F5F5F7;
-            color: #1D1D1F;
+        50% {
+          background-position: 100% 50%;
         }
-        
-        /* Apple风格渐变背景 */
-        .hero-gradient {
-            background: linear-gradient(135deg, #007AFF 0%, #5856D6 50%, #34C759 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease infinite;
+        100% {
+          background-position: 0% 50%;
         }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Apple风格卡片 */
+      }
+
+      /* Apple风格卡片 */
+      .apple-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .apple-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 32px 64px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      /* Apple风格按钮 */
+      .apple-button {
+        background: #007aff;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .apple-button:hover {
+        background: #0056d2;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+      }
+
+      .apple-button-secondary {
+        background: rgba(0, 122, 255, 0.1);
+        color: #007aff;
+        border: 1px solid rgba(0, 122, 255, 0.2);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .apple-button-secondary:hover {
+        background: rgba(0, 122, 255, 0.15);
+        border-color: rgba(0, 122, 255, 0.3);
+      }
+
+      /* 玻璃态效果 */
+      .glass-morphism {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+      }
+
+      /* 导航栏样式 */
+      .nav-apple {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-link {
+        position: relative;
+        color: #1d1d1f;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #007aff;
+      }
+
+      .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #007aff;
+        border-radius: 1px;
+      }
+
+      /* 区块分隔 */
+      .section-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+        margin: 8rem 0;
+      }
+
+      /* Mermaid图表样式 */
+      .mermaid {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      /* 思维导图样式 */
+      .mindmap-container {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        padding: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .mindmap-container img {
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Apple风格文字层次 */
+      .hero-text {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+      }
+
+      .display-text {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #1d1d1f;
+      }
+
+      .headline-text {
+        font-size: clamp(1.5rem, 4vw, 2.25rem);
+        font-weight: 600;
+        line-height: 1.3;
+        color: #1d1d1f;
+      }
+
+      .body-text {
+        font-size: 1.125rem;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #424245;
+      }
+
+      .caption-text {
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #6e6e73;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
         .apple-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          border-radius: 16px;
+          padding: 1.5rem;
         }
-        
-        .apple-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.1);
-            background: rgba(255, 255, 255, 0.95);
-        }
-        
-        /* Apple风格按钮 */
-        .apple-button {
-            background: #007AFF;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            letter-spacing: -0.01em;
-        }
-        
-        .apple-button:hover {
-            background: #0056D2;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
-        }
-        
-        .apple-button-secondary {
-            background: rgba(0, 122, 255, 0.1);
-            color: #007AFF;
-            border: 1px solid rgba(0, 122, 255, 0.2);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .apple-button-secondary:hover {
-            background: rgba(0, 122, 255, 0.15);
-            border-color: rgba(0, 122, 255, 0.3);
-        }
-        
-        /* 玻璃态效果 */
-        .glass-morphism {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 16px;
-        }
-        
-        /* 导航栏样式 */
-        .nav-apple {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .nav-link {
-            position: relative;
-            color: #1D1D1F;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: #007AFF;
-        }
-        
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #007AFF;
-            border-radius: 1px;
-        }
-        
-        /* 区块分隔 */
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
-            margin: 8rem 0;
-        }
-        
-        /* Mermaid图表样式 */
-        .mermaid {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        /* 思维导图样式 */
+
         .mindmap-container {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 2rem;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+          border-radius: 20px;
+          padding: 1.5rem;
         }
-        
-        .mindmap-container img {
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+        .section-divider {
+          margin: 4rem 0;
         }
-        
-        /* Apple风格文字层次 */
-        .hero-text {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            color: #FFFFFF;
+      }
+
+      /* 滚动优化 */
+      @media (prefers-reduced-motion: no-preference) {
+        .fade-in-section {
+          opacity: 0;
+          transform: translateY(40px);
+          transition:
+            opacity 0.8s ease-out,
+            transform 0.8s ease-out;
         }
-        
-        .display-text {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 600;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
-            color: #1D1D1F;
+
+        .fade-in-section.visible {
+          opacity: 1;
+          transform: translateY(0);
         }
-        
-        .headline-text {
-            font-size: clamp(1.5rem, 4vw, 2.25rem);
-            font-weight: 600;
-            line-height: 1.3;
-            color: #1D1D1F;
-        }
-        
-        .body-text {
-            font-size: 1.125rem;
-            font-weight: 400;
-            line-height: 1.6;
-            color: #424245;
-        }
-        
-        .caption-text {
-            font-size: 0.875rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #6E6E73;
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .apple-card {
-                border-radius: 16px;
-                padding: 1.5rem;
-            }
-            
-            .mindmap-container {
-                border-radius: 20px;
-                padding: 1.5rem;
-            }
-            
-            .section-divider {
-                margin: 4rem 0;
-            }
-        }
-        
-        /* 滚动优化 */
-        @media (prefers-reduced-motion: no-preference) {
-            .fade-in-section {
-                opacity: 0;
-                transform: translateY(40px);
-                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            }
-            
-            .fade-in-section.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      }
     </style>
-</head>
-<body class="bg-gray-50 text-gray-900 leading-relaxed">
-    
+  </head>
+  <body class="bg-gray-50 text-gray-900 leading-relaxed">
     <!-- Apple风格固定导航栏 -->
     <nav class="fixed top-0 left-0 right-0 nav-apple z-50">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-3">
-                    <div class="w-7 h-7 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                        <i class="fa fa-brain text-white text-xs"></i>
-                    </div>
-                    <h1 class="text-lg font-semibold text-neutral">TAT理论学习平台</h1>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-10">
-                    <a href="#theory-foundation" class="nav-link py-2 text-sm">理论基础</a>
-                    <a href="#original-research" class="nav-link py-2 text-sm">原创研究</a>
-                    <a href="#paper-reproduction" class="nav-link py-2 text-sm">论文复现</a>
-                    <a href="#learning-tools" class="nav-link py-2 text-sm">学习工具</a>
-                </div>
-                
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-black/5 transition-colors">
-                    <i class="fa fa-bars text-neutral"></i>
-                </button>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-7 h-7 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"
+            >
+              <i class="fa fa-brain text-white text-xs"></i>
             </div>
+            <h1 class="text-lg font-semibold text-neutral">TAT理论学习平台</h1>
+          </div>
+
+          <div class="hidden md:flex items-center space-x-10">
+            <a href="#theory-foundation" class="nav-link py-2 text-sm">理论基础</a>
+            <a href="#original-research" class="nav-link py-2 text-sm">原创研究</a>
+            <a href="#paper-reproduction" class="nav-link py-2 text-sm">论文复现</a>
+            <a href="#learning-tools" class="nav-link py-2 text-sm">学习工具</a>
+          </div>
+
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden p-2 rounded-lg hover:bg-black/5 transition-colors"
+          >
+            <i class="fa fa-bars text-neutral"></i>
+          </button>
         </div>
-        
-        <!-- 移动端菜单 -->
-        <div id="mobile-menu" class="hidden md:hidden glass-morphism mx-4 mt-2 rounded-2xl">
-            <div class="p-4 space-y-1">
-                <a href="#theory-foundation" class="block px-4 py-3 text-neutral hover:text-primary hover:bg-primary/5 rounded-xl transition-all">理论基础</a>
-                <a href="#original-research" class="block px-4 py-3 text-neutral hover:text-primary hover:bg-primary/5 rounded-xl transition-all">原创研究</a>
-                <a href="#paper-reproduction" class="block px-4 py-3 text-neutral hover:text-primary hover:bg-primary/5 rounded-xl transition-all">论文复现</a>
-                <a href="#learning-tools" class="block px-4 py-3 text-neutral hover:text-primary hover:bg-primary/5 rounded-xl transition-all">学习工具</a>
-            </div>
+      </div>
+
+      <!-- 移动端菜单 -->
+      <div id="mobile-menu" class="hidden md:hidden glass-morphism mx-4 mt-2 rounded-2xl">
+        <div class="p-4 space-y-1">
+          <a
+            href="#theory-foundation"
+            class="block px-4 py-3 text-neutral hover:text-primary hover:bg-primary/5 rounded-xl transition-all"
+            >理论基础</a
+          >
+          <a
+            href="#original-research"
+            class="block px-4 py-3 text-neutral hover:text-primary hover:bg-primary/5 rounded-xl transition-all"
+            >原创研究</a
+          >
+          <a
+            href="#paper-reproduction"
+            class="block px-4 py-3 text-neutral hover:text-primary hover:bg-primary/5 rounded-xl transition-all"
+            >论文复现</a
+          >
+          <a
+            href="#learning-tools"
+            class="block px-4 py-3 text-neutral hover:text-primary hover:bg-primary/5 rounded-xl transition-all"
+            >学习工具</a
+          >
         </div>
+      </div>
     </nav>
-    
+
     <!-- Apple风格英雄区域 -->
-    <header class="hero-gradient text-white pt-24 pb-32 overflow-hidden relative min-h-screen flex items-center">
-        <div class="absolute inset-0 bg-black/20"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
-            <div class="text-center animate-fade-in">
-                <div class="inline-flex items-center glass-morphism rounded-full px-6 py-3 mb-8">
-                    <i class="fa fa-graduation-cap mr-3 text-white/80"></i>
-                    <span class="text-sm font-medium text-white/90">Trait Activation Theory Learning Platform</span>
-                </div>
-                
-                <h1 class="hero-text mb-8">
-                    特质激发理论
-                    <span class="block text-white/80 font-normal mt-4">深度学习平台</span>
-                </h1>
-                
-                <p class="body-text text-white/80 max-w-4xl mx-auto mb-12 leading-relaxed">
-                    全面掌握TAT理论的核心概念、发展历程、实证研究与实践应用<br>
-                    探索特质-情境-行为的动态交互机制，构建数字时代的管理智慧
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="#theory-foundation" class="apple-button text-white px-10 py-4 font-medium text-lg inline-flex items-center">
-                        <i class="fa fa-book mr-3"></i>开始学习
-                    </a>
-                    <a href="#original-research" class="apple-button-secondary text-white border-white/30 bg-white/10 px-10 py-4 font-medium text-lg inline-flex items-center">
-                        <i class="fa fa-flask mr-3"></i>查看研究
-                    </a>
-                </div>
-                
-                <!-- 滚动提示 -->
-                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float">
-                    <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-                        <div class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
-                    </div>
-                </div>
+    <header
+      class="hero-gradient text-white pt-24 pb-32 overflow-hidden relative min-h-screen flex items-center"
+    >
+      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+        <div class="text-center animate-fade-in">
+          <div class="inline-flex items-center glass-morphism rounded-full px-6 py-3 mb-8">
+            <i class="fa fa-graduation-cap mr-3 text-white/80"></i>
+            <span class="text-sm font-medium text-white/90"
+              >Trait Activation Theory Learning Platform</span
+            >
+          </div>
+
+          <h1 class="hero-text mb-8">
+            特质激发理论
+            <span class="block text-white/80 font-normal mt-4">深度学习平台</span>
+          </h1>
+
+          <p class="body-text text-white/80 max-w-4xl mx-auto mb-12 leading-relaxed">
+            全面掌握TAT理论的核心概念、发展历程、实证研究与实践应用<br />
+            探索特质-情境-行为的动态交互机制，构建数字时代的管理智慧
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a
+              href="#theory-foundation"
+              class="apple-button text-white px-10 py-4 font-medium text-lg inline-flex items-center"
+            >
+              <i class="fa fa-book mr-3"></i>开始学习
+            </a>
+            <a
+              href="#original-research"
+              class="apple-button-secondary text-white border-white/30 bg-white/10 px-10 py-4 font-medium text-lg inline-flex items-center"
+            >
+              <i class="fa fa-flask mr-3"></i>查看研究
+            </a>
+          </div>
+
+          <!-- 滚动提示 -->
+          <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float">
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+              <div class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
             </div>
+          </div>
         </div>
-        
-        <!-- Apple风格波浪装饰 -->
-        <div class="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" class="w-full h-16 fill-light">
-                <path d="M0,80 C300,120 900,40 1200,80 L1200,120 L0,120 Z"/>
-            </svg>
-        </div>
+      </div>
+
+      <!-- Apple风格波浪装饰 -->
+      <div class="absolute bottom-0 left-0 right-0">
+        <svg
+          viewBox="0 0 1200 120"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-full h-16 fill-light"
+        >
+          <path d="M0,80 C300,120 900,40 1200,80 L1200,120 L0,120 Z" />
+        </svg>
+      </div>
     </header>
-    
+
     <!-- 主要内容区域 -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- 1. TAT理论基础模块 -->
-        <section id="theory-foundation" class="py-24 fade-in-section">
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center glass-morphism rounded-full px-6 py-3 mb-6">
-                    <i class="fa fa-book text-primary mr-3"></i>
-                    <span class="text-primary font-medium">Theory Foundation</span>
-                </div>
-                <h2 class="display-text mb-6">TAT理论基础</h2>
-                <p class="body-text max-w-3xl mx-auto">深入理解特质激发理论的核心概念、发展历程和理论框架</p>
+      <!-- 1. TAT理论基础模块 -->
+      <section id="theory-foundation" class="py-24 fade-in-section">
+        <div class="text-center mb-20">
+          <div class="inline-flex items-center glass-morphism rounded-full px-6 py-3 mb-6">
+            <i class="fa fa-book text-primary mr-3"></i>
+            <span class="text-primary font-medium">Theory Foundation</span>
+          </div>
+          <h2 class="display-text mb-6">TAT理论基础</h2>
+          <p class="body-text max-w-3xl mx-auto">
+            深入理解特质激发理论的核心概念、发展历程和理论框架
+          </p>
+        </div>
+
+        <!-- TAT理论详细内容 -->
+        <div class="mb-20">
+          <div class="apple-card p-12 mb-12">
+            <h3 class="headline-text text-center mb-12">特质激发理论 (TAT) 核心概念</h3>
+            <div class="grid md:grid-cols-2 gap-10 mb-12">
+              <div class="glass-morphism p-8 rounded-2xl">
+                <h4 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                  <span class="mr-4 text-3xl">🧠</span>理论定义
+                </h4>
+                <p class="body-text leading-relaxed">
+                  特质激发理论（TAT）是由Tett和Guterman（2000）提出的重要人格心理学理论，
+                  旨在解释<strong class="text-primary"
+                    >人格特质如何在特定情境中被激发并影响个体行为</strong
+                  >。
+                </p>
+              </div>
+              <div class="glass-morphism p-8 rounded-2xl">
+                <h4 class="text-2xl font-bold text-secondary mb-6 flex items-center">
+                  <span class="mr-4 text-3xl">🎯</span>核心观点
+                </h4>
+                <p class="body-text leading-relaxed">
+                  人格特质只有在相关的情境线索存在时才会被激发，进而预测和影响个体的行为表现。
+                  这一观点整合了特质论和情境论的优势。
+                </p>
+              </div>
             </div>
 
-            <!-- TAT理论详细内容 -->
-            <div class="mb-20">
-                <div class="apple-card p-12 mb-12">
-                    <h3 class="headline-text text-center mb-12">特质激发理论 (TAT) 核心概念</h3>
-                    <div class="grid md:grid-cols-2 gap-10 mb-12">
-                        <div class="glass-morphism p-8 rounded-2xl">
-                            <h4 class="text-2xl font-bold text-primary mb-6 flex items-center">
-                                <span class="mr-4 text-3xl">🧠</span>理论定义
-                            </h4>
-                            <p class="body-text leading-relaxed">
-                                特质激发理论（TAT）是由Tett和Guterman（2000）提出的重要人格心理学理论，
-                                旨在解释<strong class="text-primary">人格特质如何在特定情境中被激发并影响个体行为</strong>。
-                            </p>
-                        </div>
-                        <div class="glass-morphism p-8 rounded-2xl">
-                            <h4 class="text-2xl font-bold text-secondary mb-6 flex items-center">
-                                <span class="mr-4 text-3xl">🎯</span>核心观点
-                            </h4>
-                            <p class="body-text leading-relaxed">
-                                人格特质只有在相关的情境线索存在时才会被激发，进而预测和影响个体的行为表现。
-                                这一观点整合了特质论和情境论的优势。
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-4 gap-6 mb-12">
-                        <div class="text-center glass-morphism p-6 rounded-2xl hover:scale-105 transition-transform">
-                            <div class="text-4xl mb-4">👤</div>
-                            <h5 class="font-bold text-primary mb-3 text-lg">人格特质</h5>
-                            <p class="caption-text">相对稳定的个体差异变量</p>
-                        </div>
-                        <div class="text-center glass-morphism p-6 rounded-2xl hover:scale-105 transition-transform">
-                            <div class="text-4xl mb-4">🌍</div>
-                            <h5 class="font-bold text-secondary mb-3 text-lg">情境线索</h5>
-                            <p class="caption-text">环境中的激发因素</p>
-                        </div>
-                        <div class="text-center glass-morphism p-6 rounded-2xl hover:scale-105 transition-transform">
-                            <div class="text-4xl mb-4">⚡</div>
-                            <h5 class="font-bold text-accent mb-3 text-lg">激发过程</h5>
-                            <p class="caption-text">特质被唤醒的动态机制</p>
-                        </div>
-                        <div class="text-center glass-morphism p-6 rounded-2xl hover:scale-105 transition-transform">
-                            <div class="text-4xl mb-4">🎯</div>
-                            <h5 class="font-bold text-warm mb-3 text-lg">行为表现</h5>
-                            <p class="caption-text">最终的行为输出</p>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-morphism p-8 rounded-2xl">
-                        <h4 class="text-2xl font-bold text-neutral mb-8 flex items-center">
-                            <span class="mr-4 text-3xl">📋</span>理论基本假设
-                        </h4>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="flex items-start space-x-4 bg-white/50 rounded-xl p-6 shadow-sm">
-                                <div class="bg-gradient-to-r from-primary to-accent text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">1</div>
-                                <div>
-                                    <h5 class="font-bold text-neutral mb-2">情境敏感性</h5>
-                                    <p class="caption-text">人格特质的行为表达依赖于情境因素</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-4 bg-white/50 rounded-xl p-6 shadow-sm">
-                                <div class="bg-gradient-to-r from-secondary to-cool text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">2</div>
-                                <div>
-                                    <h5 class="font-bold text-neutral mb-2">选择性激发</h5>
-                                    <p class="caption-text">只有相关的特质才会被激活</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-4 bg-white/50 rounded-xl p-6 shadow-sm">
-                                <div class="bg-gradient-to-r from-accent to-primary text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">3</div>
-                                <div>
-                                    <h5 class="font-bold text-neutral mb-2">动态交互</h5>
-                                    <p class="caption-text">个体与情境间的持续交互过程</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-4 bg-white/50 rounded-xl p-6 shadow-sm">
-                                <div class="bg-gradient-to-r from-warm to-secondary text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg">4</div>
-                                <div>
-                                    <h5 class="font-bold text-neutral mb-2">预测有效性</h5>
-                                    <p class="caption-text">激发的特质具有更强的预测力</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid md:grid-cols-4 gap-6 mb-12">
+              <div
+                class="text-center glass-morphism p-6 rounded-2xl hover:scale-105 transition-transform"
+              >
+                <div class="text-4xl mb-4">👤</div>
+                <h5 class="font-bold text-primary mb-3 text-lg">人格特质</h5>
+                <p class="caption-text">相对稳定的个体差异变量</p>
+              </div>
+              <div
+                class="text-center glass-morphism p-6 rounded-2xl hover:scale-105 transition-transform"
+              >
+                <div class="text-4xl mb-4">🌍</div>
+                <h5 class="font-bold text-secondary mb-3 text-lg">情境线索</h5>
+                <p class="caption-text">环境中的激发因素</p>
+              </div>
+              <div
+                class="text-center glass-morphism p-6 rounded-2xl hover:scale-105 transition-transform"
+              >
+                <div class="text-4xl mb-4">⚡</div>
+                <h5 class="font-bold text-accent mb-3 text-lg">激发过程</h5>
+                <p class="caption-text">特质被唤醒的动态机制</p>
+              </div>
+              <div
+                class="text-center glass-morphism p-6 rounded-2xl hover:scale-105 transition-transform"
+              >
+                <div class="text-4xl mb-4">🎯</div>
+                <h5 class="font-bold text-warm mb-3 text-lg">行为表现</h5>
+                <p class="caption-text">最终的行为输出</p>
+              </div>
             </div>
 
-            <!-- TAT理论思维导图 -->
-            <div class="mb-20">
-                <h3 class="headline-text text-center mb-12">TAT理论思维导图</h3>
-                <div class="mindmap-container max-w-6xl mx-auto">
-                    <div class="text-center mb-6">
-                        <h4 class="text-xl font-semibold text-neutral mb-2">特质激发理论全景图</h4>
-                        <p class="caption-text">全面展示TAT理论的核心要素、关键概念和应用领域</p>
-                    </div>
-                    <div class="text-center">
-                        <img src="Mind%20Map.png" alt="TAT理论思维导图" class="w-full h-auto max-w-full">
-                    </div>
-                    <div class="mt-6 text-center">
-                        <p class="caption-text">该思维导图清晰展示了TAT理论的完整结构，包括理论基础、核心概念、应用领域和发展趋势</p>
-                    </div>
+            <div class="glass-morphism p-8 rounded-2xl">
+              <h4 class="text-2xl font-bold text-neutral mb-8 flex items-center">
+                <span class="mr-4 text-3xl">📋</span>理论基本假设
+              </h4>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div class="flex items-start space-x-4 bg-white/50 rounded-xl p-6 shadow-sm">
+                  <div
+                    class="bg-gradient-to-r from-primary to-accent text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg"
+                  >
+                    1
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-neutral mb-2">情境敏感性</h5>
+                    <p class="caption-text">人格特质的行为表达依赖于情境因素</p>
+                  </div>
                 </div>
+                <div class="flex items-start space-x-4 bg-white/50 rounded-xl p-6 shadow-sm">
+                  <div
+                    class="bg-gradient-to-r from-secondary to-cool text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg"
+                  >
+                    2
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-neutral mb-2">选择性激发</h5>
+                    <p class="caption-text">只有相关的特质才会被激活</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-4 bg-white/50 rounded-xl p-6 shadow-sm">
+                  <div
+                    class="bg-gradient-to-r from-accent to-primary text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg"
+                  >
+                    3
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-neutral mb-2">动态交互</h5>
+                    <p class="caption-text">个体与情境间的持续交互过程</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-4 bg-white/50 rounded-xl p-6 shadow-sm">
+                  <div
+                    class="bg-gradient-to-r from-warm to-secondary text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg"
+                  >
+                    4
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-neutral mb-2">预测有效性</h5>
+                    <p class="caption-text">激发的特质具有更强的预测力</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            <!-- 核心概念框架 -->
-            <div class="mb-20">
-                <h3 class="headline-text text-center mb-12">核心理论框架</h3>
-                <div class="apple-card p-12">
-                    <div class="text-center mb-8">
-                        <h4 class="text-2xl font-semibold text-neutral mb-3">TAT理论作用机制模型</h4>
-                        <p class="body-text">特质-情境-激发-行为的动态交互过程</p>
-                    </div>
-                    <div class="mermaid" id="tat-mechanism">
-                        graph TD
-                            A[个体特质<br/>Personality Traits] --> B[情境评估<br/>Situational Assessment]
-                            C[情境线索<br/>Situational Cues] --> B
-                            B --> D{特质-情境匹配<br/>Trait-Situation Match}
-                            D -->|匹配| E[特质激发<br/>Trait Activation]
-                            D -->|不匹配| F[特质未激发<br/>Trait Dormant]
-                            E --> G[行为表达<br/>Behavioral Expression]
-                            F --> H[潜在状态<br/>Latent State]
-                            G --> I[绩效结果<br/>Performance Outcomes]
-                            
-                            style A fill:#E3F2FD,stroke:#007AFF,stroke-width:2px
-                            style C fill:#FFF3E0,stroke:#FF9500,stroke-width:2px
-                            style E fill:#E8F5E8,stroke:#34C759,stroke-width:2px
-                            style G fill:#F3E5F5,stroke:#5856D6,stroke-width:2px
-                            style I fill:#FFF0F5,stroke:#FF2D92,stroke-width:2px
-                    </div>
-                </div>
+          </div>
+        </div>
+
+        <!-- TAT理论思维导图 -->
+        <div class="mb-20">
+          <h3 class="headline-text text-center mb-12">TAT理论思维导图</h3>
+          <div class="mindmap-container max-w-6xl mx-auto">
+            <div class="text-center mb-6">
+              <h4 class="text-xl font-semibold text-neutral mb-2">特质激发理论全景图</h4>
+              <p class="caption-text">全面展示TAT理论的核心要素、关键概念和应用领域</p>
             </div>
-            
-            <!-- 理论演化历程 -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">20年理论演化历程</h3>
-                <div class="relative">
-                    <!-- 时间轴线 -->
-                    <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-primary to-accent h-full"></div>
-                    
-                    <!-- 阶段一：基础理论构建 (2000-2007) -->
-                    <div class="relative mb-12">
-                        <div class="flex items-center justify-center">
-                            <div class="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center font-bold z-10 relative">1</div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-8 mt-8">
-                            <div class="md:text-right">
-                                <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-l-4 border-primary">
-                                    <h4 class="text-xl font-bold text-primary mb-3">基础理论构建期</h4>
-                                    <p class="text-sm text-gray-500 mb-3">2000-2007年</p>
-                                    <ul class="text-gray-700 space-y-2">
-                                        <li>• Tett和Burnett首次提出TAT基本框架</li>
-                                        <li>• 强调特质与情境的交互作用</li>
-                                        <li>• 挑战传统特质理论和情境理论</li>
-                                        <li>• 提出特质激活的核心概念</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="hidden md:block"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- 阶段二：实证研究与拓展 (2008-2014) -->
-                    <div class="relative mb-12">
-                        <div class="flex items-center justify-center">
-                            <div class="bg-secondary text-white rounded-full w-12 h-12 flex items-center justify-center font-bold z-10 relative">2</div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-8 mt-8">
-                            <div class="hidden md:block"></div>
-                            <div class="md:text-left">
-                                <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-r-4 border-secondary">
-                                    <h4 class="text-xl font-bold text-secondary mb-3">实证研究与拓展期</h4>
-                                    <p class="text-sm text-gray-500 mb-3">2008-2014年</p>
-                                    <ul class="text-gray-700 space-y-2">
-                                        <li>• 大量实证研究验证理论有效性</li>
-                                        <li>• 拓展应用领域至领导力、团队协作</li>
-                                        <li>• 关注特质激活的边界条件</li>
-                                        <li>• 引入调节变量和中介变量</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 阶段三：跨文化与应用研究 (2015-至今) -->
-                    <div class="relative">
-                        <div class="flex items-center justify-center">
-                            <div class="bg-accent text-white rounded-full w-12 h-12 flex items-center justify-center font-bold z-10 relative">3</div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-8 mt-8">
-                            <div class="md:text-right">
-                                <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-l-4 border-accent">
-                                    <h4 class="text-xl font-bold text-accent mb-3">跨文化与应用研究期</h4>
-                                    <p class="text-sm text-gray-500 mb-3">2015年-至今</p>
-                                    <ul class="text-gray-700 space-y-2">
-                                        <li>• 跨文化研究探讨理论适用性</li>
-                                        <li>• 深化具体情境下的激发机制</li>
-                                        <li>• 与其他理论整合形成综合模型</li>
-                                        <li>• 应用于数字化转型、远程工作等新情境</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="hidden md:block"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-center">
+              <img
+                src="/Mind%20Map.png"
+                alt="TAT理论思维导图"
+                class="w-full h-auto max-w-full"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            
-            <!-- 量表测量体系 -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">TAT理论测量体系</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- 特质测量量表 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-blue-500">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <i class="fa fa-user text-blue-600 text-xl"></i>
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900">特质测量量表</h4>
-                        </div>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• 大五人格量表(NEO-PI-R)</li>
-                            <li>• MBTI人格量表</li>
-                            <li>• 16PF人格量表</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- 情境特征量表 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-green-500">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <i class="fa fa-sitemap text-green-600 text-xl"></i>
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900">情境特征量表</h4>
-                        </div>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• 工作情境强度量表</li>
-                            <li>• 组织文化量表</li>
-                            <li>• 领导风格量表</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- 特质激活量表 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-purple-500">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <i class="fa fa-bolt text-purple-600 text-xl"></i>
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900">特质激活量表</h4>
-                        </div>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• 特质激活问卷(TAQ)</li>
-                            <li>• 情境-特质匹配量表</li>
-                            <li>• 激活强度测量</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- 行为表现量表 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-orange-500">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <i class="fa fa-line-chart text-orange-600 text-xl"></i>
-                            </div>
-                            <h4 class="text-lg font-bold text-gray-900">行为表现量表</h4>
-                        </div>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• 工作绩效量表</li>
-                            <li>• 组织公民行为量表</li>
-                            <li>• 反生产行为量表</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="mt-6 text-center">
+              <p class="caption-text">
+                该思维导图清晰展示了TAT理论的完整结构，包括理论基础、核心概念、应用领域和发展趋势
+              </p>
             </div>
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <!-- 2. 原创研究设计模块 -->
-        <section id="original-research" class="py-16">
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center bg-secondary/10 rounded-full px-4 py-2 mb-4">
-                    <i class="fa fa-flask text-secondary mr-2"></i>
-                    <span class="text-secondary font-medium">Original Research</span>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">数字时代企业合伙人研究</h2>
-                <p class="text-gray-600 max-w-3xl mx-auto">基于TAT理论的数字化转型背景下企业合伙人特质激发与组织绩效关系研究</p>
+          </div>
+        </div>
+
+        <!-- 核心概念框架 -->
+        <div class="mb-20">
+          <h3 class="headline-text text-center mb-12">核心理论框架</h3>
+          <div class="apple-card p-12">
+            <div class="text-center mb-8">
+              <h4 class="text-2xl font-semibold text-neutral mb-3">TAT理论作用机制模型</h4>
+              <p class="body-text">特质-情境-激发-行为的动态交互过程</p>
             </div>
-            
-            <!-- 研究概述 -->
-            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 mb-12 border border-blue-100">
-                <div class="grid lg:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">研究题目</h3>
-                        <p class="text-lg text-gray-800 mb-6 font-medium">
-                            数字化转型背景下企业合伙人特质激发机制及其对组织创新绩效的影响研究
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">TAT理论</span>
-                            <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">数字化转型</span>
-                            <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">企业合伙人</span>
-                            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">组织创新</span>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <div class="bg-white rounded-xl p-6 shadow-lg">
-                            <div class="text-3xl font-bold text-primary mb-2">13</div>
-                            <p class="text-gray-600 mb-3">核心变量</p>
-                            <div class="text-3xl font-bold text-secondary mb-2">12</div>
-                            <p class="text-gray-600 mb-3">研究假设</p>
-                            <div class="text-3xl font-bold text-accent mb-2">4</div>
-                            <p class="text-gray-600">测量维度</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="mermaid" id="tat-mechanism">
+              graph TD A[个体特质<br />Personality Traits] --> B[情境评估<br />Situational
+              Assessment] C[情境线索<br />Situational Cues] --> B B --> D{特质-情境匹配<br />Trait-Situation
+              Match} D -->|匹配| E[特质激发<br />Trait Activation] D -->|不匹配| F[特质未激发<br />Trait
+              Dormant] E --> G[行为表达<br />Behavioral Expression] F --> H[潜在状态<br />Latent
+              State] G --> I[绩效结果<br />Performance Outcomes] style A
+              fill:#E3F2FD,stroke:#007AFF,stroke-width:2px style C
+              fill:#FFF3E0,stroke:#FF9500,stroke-width:2px style E
+              fill:#E8F5E8,stroke:#34C759,stroke-width:2px style G
+              fill:#F3E5F5,stroke:#5856D6,stroke-width:2px style I
+              fill:#FFF0F5,stroke:#FF2D92,stroke-width:2px
             </div>
-            
-            <!-- 研究模型 -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">概念模型框架</h3>
-                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-                    <div class="mermaid" id="research-model">
-                        graph TD
-                            subgraph "数字化转型情境 Digital Transformation Context"
-                                DT1[数字化转型战略<br/>Digital Transformation Strategy]
-                                DT2[数字化基础设施<br/>Digital Infrastructure]
-                                DT3[数字化文化氛围<br/>Digital Culture Atmosphere]
-                            end
-                            
-                            subgraph "企业合伙人特质 Partner Traits"
-                                PT1[数字敏锐性<br/>Digital Acuity]
-                                PT2[创新开放性<br/>Innovation Openness]
-                                PT3[风险承担倾向<br/>Risk Taking Propensity]
-                                PT4[学习敏捷性<br/>Learning Agility]
-                            end
-                            
-                            subgraph "特质激发机制 Trait Activation Mechanism"
-                                TA1[数字化任务特征感知<br/>Digital Task Perception]
-                                TA2[数字化机会识别<br/>Digital Opportunity Recognition]
-                                TA3[数字化挑战应对<br/>Digital Challenge Response]
-                            end
-                            
-                            subgraph "中介变量 Mediating Variables"
-                                MV1[数字化创新行为<br/>Digital Innovation Behavior]
-                                MV2[数字化协作行为<br/>Digital Collaboration Behavior]
-                                MV3[数字化学习行为<br/>Digital Learning Behavior]
-                            end
-                            
-                            subgraph "组织创新绩效 Organizational Innovation Performance"
-                                OP1[产品创新绩效<br/>Product Innovation Performance]
-                                OP2[流程创新绩效<br/>Process Innovation Performance]
-                                OP3[数字化转型绩效<br/>Digital Transformation Performance]
-                            end
-                            
-                            DT1 --> TA1
-                            DT2 --> TA2
-                            DT3 --> TA3
-                            
-                            PT1 --> TA1
-                            PT2 --> TA2
-                            PT3 --> TA3
-                            PT4 --> TA1
-                            PT4 --> TA2
-                            PT4 --> TA3
-                            
-                            TA1 --> MV1
-                            TA2 --> MV2
-                            TA3 --> MV3
-                            
-                            MV1 --> OP1
-                            MV2 --> OP2
-                            MV3 --> OP3
-                            
-                            style DT1 fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-                            style DT2 fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-                            style DT3 fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-                            style PT1 fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-                            style PT2 fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-                            style PT3 fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-                            style PT4 fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-                            style TA1 fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-                            style TA2 fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-                            style TA3 fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-                            style MV1 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-                            style MV2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-                            style MV3 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-                            style OP1 fill:#e0f2f1,stroke:#00695c,stroke-width:2px
-                            style OP2 fill:#e0f2f1,stroke:#00695c,stroke-width:2px
-                            style OP3 fill:#e0f2f1,stroke:#00695c,stroke-width:2px
-                    </div>
-                    
-                    <!-- 研究假设说明 -->
-                    <div class="mt-8 bg-gray-50 rounded-xl p-6">
-                        <h4 class="text-lg font-bold text-gray-800 mb-4">研究假设体系 (12个核心假设)</h4>
-                        <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
-                            <div>
-                                <p class="font-semibold mb-2">直接效应假设 (H1-H4):</p>
-                                <ul class="space-y-1 text-xs">
-                                    <li>• H1: 数字化转型情境正向影响企业合伙人特质激发</li>
-                                    <li>• H2: 企业合伙人特质正向影响特质激发程度</li>
-                                    <li>• H3: 特质激发正向影响数字化创新行为</li>
-                                    <li>• H4: 数字化创新行为正向影响组织创新绩效</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <p class="font-semibold mb-2">中介效应假设 (H5-H8):</p>
-                                <ul class="space-y-1 text-xs">
-                                    <li>• H5: 特质激发中介数字化情境与创新行为关系</li>
-                                    <li>• H6: 创新行为中介特质激发与组织绩效关系</li>
-                                    <li>• H7: 特质激发与创新行为双重中介情境与绩效关系</li>
-                                    <li>• H8: 合伙人特质调节数字化情境对激发的影响</li>
-                                </ul>
-                            </div>
-                            <div class="col-span-2 mt-4 pt-4 border-t border-gray-200">
-                                <p class="font-semibold mb-2">调节效应假设 (H9-H12):</p>
-                                <div class="grid md:grid-cols-2 gap-2">
-                                    <ul class="space-y-1 text-xs">
-                                        <li>• H9: 数字化转型战略调节合伙人特质与激发关系</li>
-                                        <li>• H10: 数字化基础设施调节特质激发与行为关系</li>
-                                    </ul>
-                                    <ul class="space-y-1 text-xs">
-                                        <li>• H11: 数字化文化氛围调节创新行为与绩效关系</li>
-                                        <li>• H12: 学习敏捷性调节所有主效应关系强度</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          </div>
+        </div>
+
+        <!-- 理论演化历程 -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">20年理论演化历程</h3>
+          <div class="relative">
+            <!-- 时间轴线 -->
+            <div
+              class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-primary to-accent h-full"
+            ></div>
+
+            <!-- 阶段一：基础理论构建 (2000-2007) -->
+            <div class="relative mb-12">
+              <div class="flex items-center justify-center">
+                <div
+                  class="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center font-bold z-10 relative"
+                >
+                  1
                 </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="md:text-right">
+                  <div
+                    class="bg-white p-6 rounded-xl shadow-lg card-hover border-l-4 border-primary"
+                  >
+                    <h4 class="text-xl font-bold text-primary mb-3">基础理论构建期</h4>
+                    <p class="text-sm text-gray-500 mb-3">2000-2007年</p>
+                    <ul class="text-gray-700 space-y-2">
+                      <li>• Tett和Burnett首次提出TAT基本框架</li>
+                      <li>• 强调特质与情境的交互作用</li>
+                      <li>• 挑战传统特质理论和情境理论</li>
+                      <li>• 提出特质激活的核心概念</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="hidden md:block"></div>
+              </div>
             </div>
-            
-            <!-- 核心变量详解 -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">核心变量体系</h3>
-                <div class="grid lg:grid-cols-2 xl:grid-cols-4 gap-6">
-                    <!-- 情境变量 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
-                        <h4 class="text-lg font-bold text-blue-600 mb-4">数字化转型情境</h4>
-                        <div class="space-y-3">
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">数字化转型战略</h5>
-                                <p class="text-xs text-gray-500">企业数字化转型的整体战略规划与实施</p>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">数字化基础设施</h5>
-                                <p class="text-xs text-gray-500">技术平台、数据系统、数字化工具等基础设施</p>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">数字化文化氛围</h5>
-                                <p class="text-xs text-gray-500">组织对数字化转型的态度、价值观和行为规范</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 特质变量 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
-                        <h4 class="text-lg font-bold text-green-600 mb-4">企业合伙人特质</h4>
-                        <div class="space-y-3">
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">数字敏锐性</h5>
-                                <p class="text-xs text-gray-500">对数字技术趋势和商业机会的敏感度</p>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">创新开放性</h5>
-                                <p class="text-xs text-gray-500">接受新想法、新技术和创新实践的开放态度</p>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">风险承担倾向</h5>
-                                <p class="text-xs text-gray-500">在不确定环境中做出决策的风险偏好</p>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">学习敏捷性</h5>
-                                <p class="text-xs text-gray-500">快速学习新知识和适应变化的能力</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 中介变量 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500">
-                        <h4 class="text-lg font-bold text-purple-600 mb-4">激发机制与创新行为</h4>
-                        <div class="space-y-3">
-                            <div>
-                                <h6 class="font-semibold text-gray-700 mb-2 text-sm">特质激发机制</h6>
-                                <ul class="text-xs text-gray-500 space-y-1">
-                                    <li>• 数字化任务特征感知</li>
-                                    <li>• 数字化机会识别</li>
-                                    <li>• 数字化挑战应对</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h6 class="font-semibold text-gray-700 mb-2 text-sm">数字化创新行为</h6>
-                                <ul class="text-xs text-gray-500 space-y-1">
-                                    <li>• 数字化创新行为</li>
-                                    <li>• 数字化协作行为</li>
-                                    <li>• 数字化学习行为</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 结果变量 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-orange-500">
-                        <h4 class="text-lg font-bold text-orange-600 mb-4">组织创新绩效</h4>
-                        <div class="space-y-3">
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">产品创新绩效</h5>
-                                <p class="text-xs text-gray-500">新产品开发、产品改进和产品创新成功率</p>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">流程创新绩效</h5>
-                                <p class="text-xs text-gray-500">业务流程优化、管理流程创新和效率提升</p>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-gray-800 mb-1">数字化转型绩效</h5>
-                                <p class="text-xs text-gray-500">数字化能力提升、数字化收益和转型目标实现</p>
-                            </div>
-                        </div>
-                    </div>
+
+            <!-- 阶段二：实证研究与拓展 (2008-2014) -->
+            <div class="relative mb-12">
+              <div class="flex items-center justify-center">
+                <div
+                  class="bg-secondary text-white rounded-full w-12 h-12 flex items-center justify-center font-bold z-10 relative"
+                >
+                  2
                 </div>
-                
-                <!-- 变量操作化定义 -->
-                <div class="mt-8 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6">
-                    <h4 class="text-lg font-bold text-gray-800 mb-4">变量操作化定义与测量维度</h4>
-                    <div class="grid md:grid-cols-2 gap-6 text-sm">
-                        <div>
-                            <h5 class="font-semibold text-blue-700 mb-3">核心构念测量</h5>
-                            <ul class="space-y-2 text-gray-700">
-                                <li><strong>数字敏锐性:</strong> 基于数字化素养量表(DLL)改编，包含技术理解、数据分析、趋势判断3个维度</li>
-                                <li><strong>创新开放性:</strong> 采用大五人格开放性量表，结合创新接受度量表，测量对新技术的开放态度</li>
-                                <li><strong>特质激发:</strong> 基于TAT激发量表(Tett & Burnett, 2003)，结合数字化情境特征进行改编</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h5 class="font-semibold text-green-700 mb-3">绩效测量指标</h5>
-                            <ul class="space-y-2 text-gray-700">
-                                <li><strong>创新绩效:</strong> 新产品/服务推出数量、创新项目成功率、专利申请数量</li>
-                                <li><strong>数字化绩效:</strong> 数字化流程比例、数据驱动决策频率、数字化收入占比</li>
-                                <li><strong>转型绩效:</strong> 数字化成熟度评估、客户数字化体验满意度、员工数字化能力提升</li>
-                            </ul>
-                        </div>
-                    </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="hidden md:block"></div>
+                <div class="md:text-left">
+                  <div
+                    class="bg-white p-6 rounded-xl shadow-lg card-hover border-r-4 border-secondary"
+                  >
+                    <h4 class="text-xl font-bold text-secondary mb-3">实证研究与拓展期</h4>
+                    <p class="text-sm text-gray-500 mb-3">2008-2014年</p>
+                    <ul class="text-gray-700 space-y-2">
+                      <li>• 大量实证研究验证理论有效性</li>
+                      <li>• 拓展应用领域至领导力、团队协作</li>
+                      <li>• 关注特质激活的边界条件</li>
+                      <li>• 引入调节变量和中介变量</li>
+                    </ul>
+                  </div>
                 </div>
+              </div>
             </div>
-            
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <!-- 3. 论文复现模块 -->
-        <section id="paper-reproduction" class="py-16">
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center bg-accent/10 rounded-full px-4 py-2 mb-4">
-                    <i class="fa fa-file-text-o text-accent mr-2"></i>
-                    <span class="text-accent font-medium">Paper Reproduction</span>
+
+            <!-- 阶段三：跨文化与应用研究 (2015-至今) -->
+            <div class="relative">
+              <div class="flex items-center justify-center">
+                <div
+                  class="bg-accent text-white rounded-full w-12 h-12 flex items-center justify-center font-bold z-10 relative"
+                >
+                  3
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">论文复现研究</h2>
-                <p class="text-gray-600 max-w-3xl mx-auto">深度复现《内外向人格特质与服务质量维度关系研究》的理论框架、研究方法与核心发现</p>
-            </div>
-            
-            <!-- 论文信息卡片 -->
-            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 mb-12 border border-purple-100">
-                <div class="grid lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">论文标题</h3>
-                        <p class="text-lg text-gray-800 mb-4 font-medium">
-                            The Influence of Introversion–Extroversion on Service Quality Dimensions：A Trait Activation Theory Study
-                        </p>
-                        <p class="text-gray-600 mb-4">
-                            本研究基于TAT理论和Eysenck觉醒理论，探讨了内外向人格特质如何影响酒店顾客对SERVQUAL五个服务质量维度的价值评估。
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">TAT理论</span>
-                            <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm">内外向性格</span>
-                            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">SERVQUAL</span>
-                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">酒店服务</span>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <div class="bg-white rounded-xl p-6 shadow-lg">
-                            <div class="text-2xl font-bold text-purple-600 mb-2">485</div>
-                            <p class="text-gray-600 mb-3">有效样本</p>
-                            <div class="text-2xl font-bold text-pink-600 mb-2">5</div>
-                            <p class="text-gray-600 mb-3">研究假设</p>
-                            <div class="text-2xl font-bold text-blue-600 mb-2">2</div>
-                            <p class="text-gray-600">支持假设</p>
-                        </div>
-                    </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="md:text-right">
+                  <div
+                    class="bg-white p-6 rounded-xl shadow-lg card-hover border-l-4 border-accent"
+                  >
+                    <h4 class="text-xl font-bold text-accent mb-3">跨文化与应用研究期</h4>
+                    <p class="text-sm text-gray-500 mb-3">2015年-至今</p>
+                    <ul class="text-gray-700 space-y-2">
+                      <li>• 跨文化研究探讨理论适用性</li>
+                      <li>• 深化具体情境下的激发机制</li>
+                      <li>• 与其他理论整合形成综合模型</li>
+                      <li>• 应用于数字化转型、远程工作等新情境</li>
+                    </ul>
+                  </div>
                 </div>
+                <div class="hidden md:block"></div>
+              </div>
             </div>
-            
-            <!-- 理论框架 -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">理论框架模型</h3>
-                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-                    <div class="mermaid" id="servqual-model">
-                        graph TD
-                            A[内外向人格特质<br/>Introversion-Extroversion] --> B[服务质量维度评价<br/>Service Quality Dimensions]
-                            
-                            A1[内向特质<br/>Introversion<br/>• 冷静害羞<br/>• 偏好独处<br/>• 对刺激敏感] --> A
-                            A2[外向特质<br/>Extroversion<br/>• 乐观自信<br/>• 喜欢社交<br/>• 需要刺激] --> A
-                            
-                            B --> B1[有形性<br/>Tangibles<br/>设施设备外观]
-                            B --> B2[可靠性<br/>Reliability<br/>准确履行承诺]
-                            B --> B3[响应性<br/>Responsiveness<br/>及时帮助顾客]
-                            B --> B4[保证性<br/>Assurance<br/>员工知识礼貌]
-                            B --> B5[同理心<br/>Empathy<br/>个性化关注]
-                            
-                            C[TAT激发机制<br/>TAT Activation] --> A
-                            D[酒店服务情境<br/>Hotel Service Context] --> C
-                            
-                            style A fill:#e8eaf6,stroke:#3f51b5,stroke-width:2px
-                            style B fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
-                            style C fill:#e0f2f1,stroke:#4caf50,stroke-width:2px
-                            style D fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-                            style B1 fill:#e1f5fe,stroke:#03a9f4,stroke-width:1px
-                            style B5 fill:#e8f5e8,stroke:#4caf50,stroke-width:1px
-                    </div>
+          </div>
+        </div>
+
+        <!-- 量表测量体系 -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">TAT理论测量体系</h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- 特质测量量表 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-blue-500">
+              <div class="text-center mb-4">
+                <div
+                  class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3"
+                >
+                  <i class="fa fa-user text-blue-600 text-xl"></i>
                 </div>
+                <h4 class="text-lg font-bold text-gray-900">特质测量量表</h4>
+              </div>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>• 大五人格量表(NEO-PI-R)</li>
+                <li>• MBTI人格量表</li>
+                <li>• 16PF人格量表</li>
+              </ul>
             </div>
-            
-            <!-- 研究发现 -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">核心研究发现</h3>
-                <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- 支持的假设 -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-green-500">
-                        <div class="flex items-center mb-6">
-                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                                <i class="fa fa-check text-green-600 text-lg"></i>
-                            </div>
-                            <h4 class="text-xl font-bold text-green-700">支持的假设</h4>
-                        </div>
-                        
-                        <div class="space-y-6">
-                            <div class="bg-green-50 p-4 rounded-lg">
-                                <h5 class="font-bold text-green-800 mb-2">H1: 外向性 → 有形性 (支持)</h5>
-                                <div class="text-sm text-green-700 space-y-1">
-                                    <p><strong>路径系数:</strong> β = -0.215, p < 0.01</p>
-                                    <p><strong>解释:</strong> 内向客户更重视酒店的物理设施和环境</p>
-                                    <p><strong>理论依据:</strong> 内向者对外部刺激更敏感，更关注有形环境</p>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-green-50 p-4 rounded-lg">
-                                <h5 class="font-bold text-green-800 mb-2">H5: 外向性 → 同理心 (支持)</h5>
-                                <div class="text-sm text-green-700 space-y-1">
-                                    <p><strong>路径系数:</strong> β = 0.109, p < 0.05</p>
-                                    <p><strong>解释:</strong> 外向客户更重视员工的个性化服务和关注</p>
-                                    <p><strong>理论依据:</strong> 外向者需要更多社交互动和个人关注</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 不支持的假设 -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-gray-400">
-                        <div class="flex items-center mb-6">
-                            <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
-                                <i class="fa fa-times text-gray-600 text-lg"></i>
-                            </div>
-                            <h4 class="text-xl font-bold text-gray-700">不支持的假设</h4>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <h5 class="font-bold text-gray-800 mb-2">H2: 外向性 → 可靠性</h5>
-                                <p class="text-sm text-gray-600">β = -0.018, p = 0.743 (不显著)</p>
-                            </div>
-                            
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <h5 class="font-bold text-gray-800 mb-2">H3: 外向性 → 响应性</h5>
-                                <p class="text-sm text-gray-600">β = 0.086, p = 0.076 (边缘显著)</p>
-                            </div>
-                            
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <h5 class="font-bold text-gray-800 mb-2">H4: 外向性 → 保证性</h5>
-                                <p class="text-sm text-gray-600">β = 0.099, p = 0.052 (边缘显著)</p>
-                            </div>
-                        </div>
-                    </div>
+
+            <!-- 情境特征量表 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-green-500">
+              <div class="text-center mb-4">
+                <div
+                  class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3"
+                >
+                  <i class="fa fa-sitemap text-green-600 text-xl"></i>
                 </div>
+                <h4 class="text-lg font-bold text-gray-900">情境特征量表</h4>
+              </div>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>• 工作情境强度量表</li>
+                <li>• 组织文化量表</li>
+                <li>• 领导风格量表</li>
+              </ul>
             </div>
-            
-            <!-- 数据可视化 -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">研究结果可视化</h3>
-                <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- 路径系数图 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <h4 class="text-lg font-bold text-gray-800 mb-4 text-center">路径系数分析</h4>
-                        <canvas id="pathChart" width="400" height="300"></canvas>
-                    </div>
-                    
-                    <!-- 效应量对比 -->
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <h4 class="text-lg font-bold text-gray-800 mb-4 text-center">效应量对比</h4>
-                        <canvas id="effectChart" width="400" height="300"></canvas>
-                    </div>
+
+            <!-- 特质激活量表 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-purple-500">
+              <div class="text-center mb-4">
+                <div
+                  class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3"
+                >
+                  <i class="fa fa-bolt text-purple-600 text-xl"></i>
                 </div>
+                <h4 class="text-lg font-bold text-gray-900">特质激活量表</h4>
+              </div>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>• 特质激活问卷(TAQ)</li>
+                <li>• 情境-特质匹配量表</li>
+                <li>• 激活强度测量</li>
+              </ul>
             </div>
-            
-            <!-- 实践启示 -->
-            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-100">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">实践管理启示</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="text-lg font-bold text-blue-700 mb-4">针对内向客户的服务策略</h4>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start">
-                                <i class="fa fa-lightbulb-o text-blue-500 mr-2 mt-1"></i>
-                                <span>重视物理环境设计，采用冷静色调(蓝色、绿色)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa fa-lightbulb-o text-blue-500 mr-2 mt-1"></i>
-                                <span>提供安静、低刺激的服务环境</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa fa-lightbulb-o text-blue-500 mr-2 mt-1"></i>
-                                <span>注重设施设备的现代化和完善性</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-bold text-purple-700 mb-4">针对外向客户的服务策略</h4>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start">
-                                <i class="fa fa-heart text-purple-500 mr-2 mt-1"></i>
-                                <span>强化员工同理心培训，提供个性化关注</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa fa-heart text-purple-500 mr-2 mt-1"></i>
-                                <span>采用鲜艳色彩(红色、橙色)营造活跃氛围</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa fa-heart text-purple-500 mr-2 mt-1"></i>
-                                <span>增加社交互动机会和个性化服务接触</span>
-                            </li>
-                        </ul>
-                    </div>
+
+            <!-- 行为表现量表 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-orange-500">
+              <div class="text-center mb-4">
+                <div
+                  class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3"
+                >
+                  <i class="fa fa-line-chart text-orange-600 text-xl"></i>
                 </div>
+                <h4 class="text-lg font-bold text-gray-900">行为表现量表</h4>
+              </div>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>• 工作绩效量表</li>
+                <li>• 组织公民行为量表</li>
+                <li>• 反生产行为量表</li>
+              </ul>
             </div>
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <!-- 4. 学习工具模块 -->
-        <section id="learning-tools" class="py-16">
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center bg-orange-100 rounded-full px-4 py-2 mb-4">
-                    <i class="fa fa-graduation-cap text-orange-600 mr-2"></i>
-                    <span class="text-orange-600 font-medium">Learning Tools</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 2. 原创研究设计模块 -->
+      <section id="original-research" class="py-16">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center bg-secondary/10 rounded-full px-4 py-2 mb-4">
+            <i class="fa fa-flask text-secondary mr-2"></i>
+            <span class="text-secondary font-medium">Original Research</span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">数字时代企业合伙人研究</h2>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            基于TAT理论的数字化转型背景下企业合伙人特质激发与组织绩效关系研究
+          </p>
+        </div>
+
+        <!-- 研究概述 -->
+        <div
+          class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 mb-12 border border-blue-100"
+        >
+          <div class="grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">研究题目</h3>
+              <p class="text-lg text-gray-800 mb-6 font-medium">
+                数字化转型背景下企业合伙人特质激发机制及其对组织创新绩效的影响研究
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                  >TAT理论</span
+                >
+                <span
+                  class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium"
+                  >数字化转型</span
+                >
+                <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium"
+                  >企业合伙人</span
+                >
+                <span
+                  class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium"
+                  >组织创新</span
+                >
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <div class="text-3xl font-bold text-primary mb-2">13</div>
+                <p class="text-gray-600 mb-3">核心变量</p>
+                <div class="text-3xl font-bold text-secondary mb-2">12</div>
+                <p class="text-gray-600 mb-3">研究假设</p>
+                <div class="text-3xl font-bold text-accent mb-2">4</div>
+                <p class="text-gray-600">测量维度</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 研究模型 -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">概念模型框架</h3>
+          <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+            <div class="mermaid" id="research-model">
+              graph TD subgraph "数字化转型情境 Digital Transformation Context"
+              DT1[数字化转型战略<br />Digital Transformation Strategy] DT2[数字化基础设施<br />Digital
+              Infrastructure] DT3[数字化文化氛围<br />Digital Culture Atmosphere] end subgraph
+              "企业合伙人特质 Partner Traits" PT1[数字敏锐性<br />Digital Acuity] PT2[创新开放性<br />Innovation
+              Openness] PT3[风险承担倾向<br />Risk Taking Propensity] PT4[学习敏捷性<br />Learning
+              Agility] end subgraph "特质激发机制 Trait Activation Mechanism"
+              TA1[数字化任务特征感知<br />Digital Task Perception] TA2[数字化机会识别<br />Digital
+              Opportunity Recognition] TA3[数字化挑战应对<br />Digital Challenge Response] end
+              subgraph "中介变量 Mediating Variables" MV1[数字化创新行为<br />Digital Innovation
+              Behavior] MV2[数字化协作行为<br />Digital Collaboration Behavior]
+              MV3[数字化学习行为<br />Digital Learning Behavior] end subgraph "组织创新绩效
+              Organizational Innovation Performance" OP1[产品创新绩效<br />Product Innovation
+              Performance] OP2[流程创新绩效<br />Process Innovation Performance]
+              OP3[数字化转型绩效<br />Digital Transformation Performance] end DT1 --> TA1 DT2 -->
+              TA2 DT3 --> TA3 PT1 --> TA1 PT2 --> TA2 PT3 --> TA3 PT4 --> TA1 PT4 --> TA2 PT4 -->
+              TA3 TA1 --> MV1 TA2 --> MV2 TA3 --> MV3 MV1 --> OP1 MV2 --> OP2 MV3 --> OP3 style DT1
+              fill:#e3f2fd,stroke:#1976d2,stroke-width:2px style DT2
+              fill:#e3f2fd,stroke:#1976d2,stroke-width:2px style DT3
+              fill:#e3f2fd,stroke:#1976d2,stroke-width:2px style PT1
+              fill:#e8f5e8,stroke:#388e3c,stroke-width:2px style PT2
+              fill:#e8f5e8,stroke:#388e3c,stroke-width:2px style PT3
+              fill:#e8f5e8,stroke:#388e3c,stroke-width:2px style PT4
+              fill:#e8f5e8,stroke:#388e3c,stroke-width:2px style TA1
+              fill:#fff3e0,stroke:#f57c00,stroke-width:2px style TA2
+              fill:#fff3e0,stroke:#f57c00,stroke-width:2px style TA3
+              fill:#fff3e0,stroke:#f57c00,stroke-width:2px style MV1
+              fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px style MV2
+              fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px style MV3
+              fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px style OP1
+              fill:#e0f2f1,stroke:#00695c,stroke-width:2px style OP2
+              fill:#e0f2f1,stroke:#00695c,stroke-width:2px style OP3
+              fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+            </div>
+
+            <!-- 研究假设说明 -->
+            <div class="mt-8 bg-gray-50 rounded-xl p-6">
+              <h4 class="text-lg font-bold text-gray-800 mb-4">研究假设体系 (12个核心假设)</h4>
+              <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+                <div>
+                  <p class="font-semibold mb-2">直接效应假设 (H1-H4):</p>
+                  <ul class="space-y-1 text-xs">
+                    <li>• H1: 数字化转型情境正向影响企业合伙人特质激发</li>
+                    <li>• H2: 企业合伙人特质正向影响特质激发程度</li>
+                    <li>• H3: 特质激发正向影响数字化创新行为</li>
+                    <li>• H4: 数字化创新行为正向影响组织创新绩效</li>
+                  </ul>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">学习辅助工具</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">交互式学习工具帮助您更好地理解和掌握TAT理论</p>
-            </div>
-            
-            <!-- 概念词典 -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">TAT理论概念词典</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer" onclick="toggleConcept('trait')">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-lg font-bold text-primary">特质 (Trait)</h4>
-                            <i class="fa fa-chevron-down text-gray-400 transition-transform" id="trait-icon"></i>
-                        </div>
-                        <div id="trait-content" class="hidden">
-                            <p class="text-gray-600 text-sm mb-3">相对稳定的个体差异变量，代表个体的行为倾向和心理特征。</p>
-                            <ul class="text-xs text-gray-500 space-y-1">
-                                <li>• 跨时间和情境的稳定性</li>
-                                <li>• 个体间的差异性</li>
-                                <li>• 对行为的预测作用</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer" onclick="toggleConcept('activation')">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-lg font-bold text-secondary">激发 (Activation)</h4>
-                            <i class="fa fa-chevron-down text-gray-400 transition-transform" id="activation-icon"></i>
-                        </div>
-                        <div id="activation-content" class="hidden">
-                            <p class="text-gray-600 text-sm mb-3">特质在特定情境下被唤醒并影响行为的动态过程。</p>
-                            <ul class="text-xs text-gray-500 space-y-1">
-                                <li>• 情境依赖性</li>
-                                <li>• 选择性激发</li>
-                                <li>• 强度变化</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer" onclick="toggleConcept('situation')">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-lg font-bold text-accent">情境线索 (Situational Cues)</h4>
-                            <i class="fa fa-chevron-down text-gray-400 transition-transform" id="situation-icon"></i>
-                        </div>
-                        <div id="situation-content" class="hidden">
-                            <p class="text-gray-600 text-sm mb-3">环境中能够激发特定特质的刺激因素和环境特征。</p>
-                            <ul class="text-xs text-gray-500 space-y-1">
-                                <li>• 任务特征</li>
-                                <li>• 社会环境</li>
-                                <li>• 物理环境</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div>
+                  <p class="font-semibold mb-2">中介效应假设 (H5-H8):</p>
+                  <ul class="space-y-1 text-xs">
+                    <li>• H5: 特质激发中介数字化情境与创新行为关系</li>
+                    <li>• H6: 创新行为中介特质激发与组织绩效关系</li>
+                    <li>• H7: 特质激发与创新行为双重中介情境与绩效关系</li>
+                    <li>• H8: 合伙人特质调节数字化情境对激发的影响</li>
+                  </ul>
                 </div>
-            </div>
-            
-            <!-- 知识测试 -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">知识理解测试</h3>
-                <div class="bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
-                    <div id="quiz-container">
-                        <div class="mb-6">
-                            <h4 class="text-lg font-bold text-gray-800 mb-4">问题 1: TAT理论的核心观点是什么？</h4>
-                            <div class="space-y-3">
-                                <label class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50">
-                                    <input type="radio" name="q1" value="A" class="text-primary">
-                                    <span class="text-gray-700">A. 人格特质完全决定个体行为</span>
-                                </label>
-                                <label class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50">
-                                    <input type="radio" name="q1" value="B" class="text-primary">
-                                    <span class="text-gray-700">B. 情境因素完全决定个体行为</span>
-                                </label>
-                                <label class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50">
-                                    <input type="radio" name="q1" value="C" class="text-primary">
-                                    <span class="text-gray-700">C. 特质只有在相关情境线索存在时才会被激发并影响行为</span>
-                                </label>
-                                <label class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50">
-                                    <input type="radio" name="q1" value="D" class="text-primary">
-                                    <span class="text-gray-700">D. 所有特质在所有情境中都会被激发</span>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="text-center">
-                            <button onclick="checkQuiz()" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-                                <i class="fa fa-check mr-2"></i>检查答案
-                            </button>
-                        </div>
-                        
-                        <div id="quiz-result" class="hidden mt-6 p-4 rounded-lg"></div>
-                    </div>
+                <div class="col-span-2 mt-4 pt-4 border-t border-gray-200">
+                  <p class="font-semibold mb-2">调节效应假设 (H9-H12):</p>
+                  <div class="grid md:grid-cols-2 gap-2">
+                    <ul class="space-y-1 text-xs">
+                      <li>• H9: 数字化转型战略调节合伙人特质与激发关系</li>
+                      <li>• H10: 数字化基础设施调节特质激发与行为关系</li>
+                    </ul>
+                    <ul class="space-y-1 text-xs">
+                      <li>• H11: 数字化文化氛围调节创新行为与绩效关系</li>
+                      <li>• H12: 学习敏捷性调节所有主效应关系强度</li>
+                    </ul>
+                  </div>
                 </div>
+              </div>
             </div>
-            
-            <!-- 扩展阅读 -->
-            <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">扩展阅读推荐</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <h4 class="text-lg font-bold text-gray-800 mb-3">奠基性文献</h4>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• Tett, R. P., & Guterman, H. A. (2000). Situation trait relevance, trait expression, and cross-situational consistency.</li>
-                            <li>• Tett, R. P., & Burnett, D. D. (2003). A personality trait-based interactionist model of job performance.</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <h4 class="text-lg font-bold text-gray-800 mb-3">最新研究</h4>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• 数字化转型中的特质激发研究</li>
-                            <li>• 跨文化情境下的TAT理论验证</li>
-                            <li>• 远程工作情境的特质激活机制</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg">
-                        <h4 class="text-lg font-bold text-gray-800 mb-3">应用案例</h4>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• 企业人才选拔中的TAT应用</li>
-                            <li>• 团队构建的特质匹配策略</li>
-                            <li>• 服务业的个性化管理实践</li>
-                        </ul>
-                    </div>
+          </div>
+        </div>
+
+        <!-- 核心变量详解 -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">核心变量体系</h3>
+          <div class="grid lg:grid-cols-2 xl:grid-cols-4 gap-6">
+            <!-- 情境变量 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
+              <h4 class="text-lg font-bold text-blue-600 mb-4">数字化转型情境</h4>
+              <div class="space-y-3">
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">数字化转型战略</h5>
+                  <p class="text-xs text-gray-500">企业数字化转型的整体战略规划与实施</p>
                 </div>
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">数字化基础设施</h5>
+                  <p class="text-xs text-gray-500">技术平台、数据系统、数字化工具等基础设施</p>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">数字化文化氛围</h5>
+                  <p class="text-xs text-gray-500">组织对数字化转型的态度、价值观和行为规范</p>
+                </div>
+              </div>
             </div>
-        </section>
+
+            <!-- 特质变量 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+              <h4 class="text-lg font-bold text-green-600 mb-4">企业合伙人特质</h4>
+              <div class="space-y-3">
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">数字敏锐性</h5>
+                  <p class="text-xs text-gray-500">对数字技术趋势和商业机会的敏感度</p>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">创新开放性</h5>
+                  <p class="text-xs text-gray-500">接受新想法、新技术和创新实践的开放态度</p>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">风险承担倾向</h5>
+                  <p class="text-xs text-gray-500">在不确定环境中做出决策的风险偏好</p>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">学习敏捷性</h5>
+                  <p class="text-xs text-gray-500">快速学习新知识和适应变化的能力</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 中介变量 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500">
+              <h4 class="text-lg font-bold text-purple-600 mb-4">激发机制与创新行为</h4>
+              <div class="space-y-3">
+                <div>
+                  <h6 class="font-semibold text-gray-700 mb-2 text-sm">特质激发机制</h6>
+                  <ul class="text-xs text-gray-500 space-y-1">
+                    <li>• 数字化任务特征感知</li>
+                    <li>• 数字化机会识别</li>
+                    <li>• 数字化挑战应对</li>
+                  </ul>
+                </div>
+                <div>
+                  <h6 class="font-semibold text-gray-700 mb-2 text-sm">数字化创新行为</h6>
+                  <ul class="text-xs text-gray-500 space-y-1">
+                    <li>• 数字化创新行为</li>
+                    <li>• 数字化协作行为</li>
+                    <li>• 数字化学习行为</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- 结果变量 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-orange-500">
+              <h4 class="text-lg font-bold text-orange-600 mb-4">组织创新绩效</h4>
+              <div class="space-y-3">
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">产品创新绩效</h5>
+                  <p class="text-xs text-gray-500">新产品开发、产品改进和产品创新成功率</p>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">流程创新绩效</h5>
+                  <p class="text-xs text-gray-500">业务流程优化、管理流程创新和效率提升</p>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-1">数字化转型绩效</h5>
+                  <p class="text-xs text-gray-500">数字化能力提升、数字化收益和转型目标实现</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 变量操作化定义 -->
+          <div class="mt-8 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6">
+            <h4 class="text-lg font-bold text-gray-800 mb-4">变量操作化定义与测量维度</h4>
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+              <div>
+                <h5 class="font-semibold text-blue-700 mb-3">核心构念测量</h5>
+                <ul class="space-y-2 text-gray-700">
+                  <li>
+                    <strong>数字敏锐性:</strong>
+                    基于数字化素养量表(DLL)改编，包含技术理解、数据分析、趋势判断3个维度
+                  </li>
+                  <li>
+                    <strong>创新开放性:</strong>
+                    采用大五人格开放性量表，结合创新接受度量表，测量对新技术的开放态度
+                  </li>
+                  <li>
+                    <strong>特质激发:</strong> 基于TAT激发量表(Tett & Burnett,
+                    2003)，结合数字化情境特征进行改编
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h5 class="font-semibold text-green-700 mb-3">绩效测量指标</h5>
+                <ul class="space-y-2 text-gray-700">
+                  <li>
+                    <strong>创新绩效:</strong> 新产品/服务推出数量、创新项目成功率、专利申请数量
+                  </li>
+                  <li>
+                    <strong>数字化绩效:</strong> 数字化流程比例、数据驱动决策频率、数字化收入占比
+                  </li>
+                  <li>
+                    <strong>转型绩效:</strong>
+                    数字化成熟度评估、客户数字化体验满意度、员工数字化能力提升
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 3. 论文复现模块 -->
+      <section id="paper-reproduction" class="py-16">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center bg-accent/10 rounded-full px-4 py-2 mb-4">
+            <i class="fa fa-file-text-o text-accent mr-2"></i>
+            <span class="text-accent font-medium">Paper Reproduction</span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">论文复现研究</h2>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            深度复现《内外向人格特质与服务质量维度关系研究》的理论框架、研究方法与核心发现
+          </p>
+        </div>
+
+        <!-- 论文信息卡片 -->
+        <div
+          class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 mb-12 border border-purple-100"
+        >
+          <div class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">论文标题</h3>
+              <p class="text-lg text-gray-800 mb-4 font-medium">
+                The Influence of Introversion–Extroversion on Service Quality Dimensions：A Trait
+                Activation Theory Study
+              </p>
+              <p class="text-gray-600 mb-4">
+                本研究基于TAT理论和Eysenck觉醒理论，探讨了内外向人格特质如何影响酒店顾客对SERVQUAL五个服务质量维度的价值评估。
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm"
+                  >TAT理论</span
+                >
+                <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm"
+                  >内外向性格</span
+                >
+                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm"
+                  >SERVQUAL</span
+                >
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm"
+                  >酒店服务</span
+                >
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <div class="text-2xl font-bold text-purple-600 mb-2">485</div>
+                <p class="text-gray-600 mb-3">有效样本</p>
+                <div class="text-2xl font-bold text-pink-600 mb-2">5</div>
+                <p class="text-gray-600 mb-3">研究假设</p>
+                <div class="text-2xl font-bold text-blue-600 mb-2">2</div>
+                <p class="text-gray-600">支持假设</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 理论框架 -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">理论框架模型</h3>
+          <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+            <div class="mermaid" id="servqual-model">
+              graph TD A[内外向人格特质<br />Introversion-Extroversion] --> B[服务质量维度评价<br />Service
+              Quality Dimensions] A1[内向特质<br />Introversion<br />• 冷静害羞<br />• 偏好独处<br />•
+              对刺激敏感] --> A A2[外向特质<br />Extroversion<br />• 乐观自信<br />• 喜欢社交<br />•
+              需要刺激] --> A B --> B1[有形性<br />Tangibles<br />设施设备外观] B --> B2[可靠性<br />Reliability<br />准确履行承诺]
+              B --> B3[响应性<br />Responsiveness<br />及时帮助顾客] B --> B4[保证性<br />Assurance<br />员工知识礼貌]
+              B --> B5[同理心<br />Empathy<br />个性化关注] C[TAT激发机制<br />TAT Activation] --> A
+              D[酒店服务情境<br />Hotel Service Context] --> C style A
+              fill:#e8eaf6,stroke:#3f51b5,stroke-width:2px style B
+              fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px style C
+              fill:#e0f2f1,stroke:#4caf50,stroke-width:2px style D
+              fill:#fff3e0,stroke:#ff9800,stroke-width:2px style B1
+              fill:#e1f5fe,stroke:#03a9f4,stroke-width:1px style B5
+              fill:#e8f5e8,stroke:#4caf50,stroke-width:1px
+            </div>
+          </div>
+        </div>
+
+        <!-- 研究发现 -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">核心研究发现</h3>
+          <div class="grid lg:grid-cols-2 gap-8">
+            <!-- 支持的假设 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-green-500">
+              <div class="flex items-center mb-6">
+                <div
+                  class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fa fa-check text-green-600 text-lg"></i>
+                </div>
+                <h4 class="text-xl font-bold text-green-700">支持的假设</h4>
+              </div>
+
+              <div class="space-y-6">
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <h5 class="font-bold text-green-800 mb-2">H1: 外向性 → 有形性 (支持)</h5>
+                  <div class="text-sm text-green-700 space-y-1">
+                    <p><strong>路径系数:</strong> β = -0.215, p < 0.01</p>
+                    <p><strong>解释:</strong> 内向客户更重视酒店的物理设施和环境</p>
+                    <p><strong>理论依据:</strong> 内向者对外部刺激更敏感，更关注有形环境</p>
+                  </div>
+                </div>
+
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <h5 class="font-bold text-green-800 mb-2">H5: 外向性 → 同理心 (支持)</h5>
+                  <div class="text-sm text-green-700 space-y-1">
+                    <p><strong>路径系数:</strong> β = 0.109, p < 0.05</p>
+                    <p><strong>解释:</strong> 外向客户更重视员工的个性化服务和关注</p>
+                    <p><strong>理论依据:</strong> 外向者需要更多社交互动和个人关注</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 不支持的假设 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-gray-400">
+              <div class="flex items-center mb-6">
+                <div
+                  class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fa fa-times text-gray-600 text-lg"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-700">不支持的假设</h4>
+              </div>
+
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h5 class="font-bold text-gray-800 mb-2">H2: 外向性 → 可靠性</h5>
+                  <p class="text-sm text-gray-600">β = -0.018, p = 0.743 (不显著)</p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h5 class="font-bold text-gray-800 mb-2">H3: 外向性 → 响应性</h5>
+                  <p class="text-sm text-gray-600">β = 0.086, p = 0.076 (边缘显著)</p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h5 class="font-bold text-gray-800 mb-2">H4: 外向性 → 保证性</h5>
+                  <p class="text-sm text-gray-600">β = 0.099, p = 0.052 (边缘显著)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 数据可视化 -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">研究结果可视化</h3>
+          <div class="grid lg:grid-cols-2 gap-8">
+            <!-- 路径系数图 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <h4 class="text-lg font-bold text-gray-800 mb-4 text-center">路径系数分析</h4>
+              <canvas id="pathChart" width="400" height="300"></canvas>
+            </div>
+
+            <!-- 效应量对比 -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <h4 class="text-lg font-bold text-gray-800 mb-4 text-center">效应量对比</h4>
+              <canvas id="effectChart" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- 实践启示 -->
+        <div
+          class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-100"
+        >
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">实践管理启示</h3>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 class="text-lg font-bold text-blue-700 mb-4">针对内向客户的服务策略</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                  <i class="fa fa-lightbulb-o text-blue-500 mr-2 mt-1"></i>
+                  <span>重视物理环境设计，采用冷静色调(蓝色、绿色)</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-lightbulb-o text-blue-500 mr-2 mt-1"></i>
+                  <span>提供安静、低刺激的服务环境</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-lightbulb-o text-blue-500 mr-2 mt-1"></i>
+                  <span>注重设施设备的现代化和完善性</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-purple-700 mb-4">针对外向客户的服务策略</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                  <i class="fa fa-heart text-purple-500 mr-2 mt-1"></i>
+                  <span>强化员工同理心培训，提供个性化关注</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-heart text-purple-500 mr-2 mt-1"></i>
+                  <span>采用鲜艳色彩(红色、橙色)营造活跃氛围</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-heart text-purple-500 mr-2 mt-1"></i>
+                  <span>增加社交互动机会和个性化服务接触</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 4. 学习工具模块 -->
+      <section id="learning-tools" class="py-16">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center bg-orange-100 rounded-full px-4 py-2 mb-4">
+            <i class="fa fa-graduation-cap text-orange-600 mr-2"></i>
+            <span class="text-orange-600 font-medium">Learning Tools</span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">学习辅助工具</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">交互式学习工具帮助您更好地理解和掌握TAT理论</p>
+        </div>
+
+        <!-- 概念词典 -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">TAT理论概念词典</h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+              class="bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer"
+              onclick="toggleConcept('trait')"
+            >
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-lg font-bold text-primary">特质 (Trait)</h4>
+                <i
+                  class="fa fa-chevron-down text-gray-400 transition-transform"
+                  id="trait-icon"
+                ></i>
+              </div>
+              <div id="trait-content" class="hidden">
+                <p class="text-gray-600 text-sm mb-3">
+                  相对稳定的个体差异变量，代表个体的行为倾向和心理特征。
+                </p>
+                <ul class="text-xs text-gray-500 space-y-1">
+                  <li>• 跨时间和情境的稳定性</li>
+                  <li>• 个体间的差异性</li>
+                  <li>• 对行为的预测作用</li>
+                </ul>
+              </div>
+            </div>
+
+            <div
+              class="bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer"
+              onclick="toggleConcept('activation')"
+            >
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-lg font-bold text-secondary">激发 (Activation)</h4>
+                <i
+                  class="fa fa-chevron-down text-gray-400 transition-transform"
+                  id="activation-icon"
+                ></i>
+              </div>
+              <div id="activation-content" class="hidden">
+                <p class="text-gray-600 text-sm mb-3">
+                  特质在特定情境下被唤醒并影响行为的动态过程。
+                </p>
+                <ul class="text-xs text-gray-500 space-y-1">
+                  <li>• 情境依赖性</li>
+                  <li>• 选择性激发</li>
+                  <li>• 强度变化</li>
+                </ul>
+              </div>
+            </div>
+
+            <div
+              class="bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer"
+              onclick="toggleConcept('situation')"
+            >
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-lg font-bold text-accent">情境线索 (Situational Cues)</h4>
+                <i
+                  class="fa fa-chevron-down text-gray-400 transition-transform"
+                  id="situation-icon"
+                ></i>
+              </div>
+              <div id="situation-content" class="hidden">
+                <p class="text-gray-600 text-sm mb-3">
+                  环境中能够激发特定特质的刺激因素和环境特征。
+                </p>
+                <ul class="text-xs text-gray-500 space-y-1">
+                  <li>• 任务特征</li>
+                  <li>• 社会环境</li>
+                  <li>• 物理环境</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 知识测试 -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">知识理解测试</h3>
+          <div class="bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
+            <div id="quiz-container">
+              <div class="mb-6">
+                <h4 class="text-lg font-bold text-gray-800 mb-4">
+                  问题 1: TAT理论的核心观点是什么？
+                </h4>
+                <div class="space-y-3">
+                  <label
+                    class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50"
+                  >
+                    <input type="radio" name="q1" value="A" class="text-primary" />
+                    <span class="text-gray-700">A. 人格特质完全决定个体行为</span>
+                  </label>
+                  <label
+                    class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50"
+                  >
+                    <input type="radio" name="q1" value="B" class="text-primary" />
+                    <span class="text-gray-700">B. 情境因素完全决定个体行为</span>
+                  </label>
+                  <label
+                    class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50"
+                  >
+                    <input type="radio" name="q1" value="C" class="text-primary" />
+                    <span class="text-gray-700"
+                      >C. 特质只有在相关情境线索存在时才会被激发并影响行为</span
+                    >
+                  </label>
+                  <label
+                    class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50"
+                  >
+                    <input type="radio" name="q1" value="D" class="text-primary" />
+                    <span class="text-gray-700">D. 所有特质在所有情境中都会被激发</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button
+                  onclick="checkQuiz()"
+                  class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+                >
+                  <i class="fa fa-check mr-2"></i>检查答案
+                </button>
+              </div>
+
+              <div id="quiz-result" class="hidden mt-6 p-4 rounded-lg"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 扩展阅读 -->
+        <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">扩展阅读推荐</h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <h4 class="text-lg font-bold text-gray-800 mb-3">奠基性文献</h4>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>
+                  • Tett, R. P., & Guterman, H. A. (2000). Situation trait relevance, trait
+                  expression, and cross-situational consistency.
+                </li>
+                <li>
+                  • Tett, R. P., & Burnett, D. D. (2003). A personality trait-based interactionist
+                  model of job performance.
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <h4 class="text-lg font-bold text-gray-800 mb-3">最新研究</h4>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>• 数字化转型中的特质激发研究</li>
+                <li>• 跨文化情境下的TAT理论验证</li>
+                <li>• 远程工作情境的特质激活机制</li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+              <h4 class="text-lg font-bold text-gray-800 mb-3">应用案例</h4>
+              <ul class="text-sm text-gray-600 space-y-2">
+                <li>• 企业人才选拔中的TAT应用</li>
+                <li>• 团队构建的特质匹配策略</li>
+                <li>• 服务业的个性化管理实践</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-    
+
     <!-- 页脚 -->
     <footer class="bg-gray-900 text-white py-12 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="flex items-center justify-center space-x-2 mb-4">
-                    <div class="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                        <i class="fa fa-brain text-white text-sm"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">TAT理论学习平台</h3>
-                </div>
-                <p class="text-gray-400 mb-6">深入理解特质激发理论，掌握人格心理学前沿研究</p>
-                <div class="flex justify-center space-x-6 text-gray-400">
-                    <span>© 2024 TAT Learning Platform</span>
-                    <span>•</span>
-                    <span>Educational Use Only</span>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <div
+              class="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"
+            >
+              <i class="fa fa-brain text-white text-sm"></i>
             </div>
+            <h3 class="text-xl font-bold">TAT理论学习平台</h3>
+          </div>
+          <p class="text-gray-400 mb-6">深入理解特质激发理论，掌握人格心理学前沿研究</p>
+          <div class="flex justify-center space-x-6 text-gray-400">
+            <span>© 2024 TAT Learning Platform</span>
+            <span>•</span>
+            <span>Educational Use Only</span>
+          </div>
         </div>
+      </div>
     </footer>
-    
+
     <!-- JavaScript脚本 -->
     <script>
-        // Mermaid初始化
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
-            themeVariables: {
-                primaryColor: '#3B82F6',
-                primaryTextColor: '#1F2937',
-                primaryBorderColor: '#3B82F6',
-                lineColor: '#6B7280',
-                sectionBkgColor: '#F9FAFB',
-                altSectionBkgColor: '#FFFFFF',
-                gridColor: '#E5E7EB',
-                secondaryColor: '#10B981',
-                tertiaryColor: '#8B5CF6'
-            }
-        });
-        
-        // 移动端菜单切换
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // 平滑滚动到锚点
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-                
-                // 移动端菜单关闭
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-        
-        // 导航栏活动状态
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-        
-        // 滚动动画
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        // 观察所有需要动画的元素
-        document.querySelectorAll('.animate-slide-up, .card-hover').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-        
-        // 概念词典切换功能
-        function toggleConcept(conceptId) {
-            const content = document.getElementById(conceptId + '-content');
-            const icon = document.getElementById(conceptId + '-icon');
-            
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
-            }
+      // Mermaid初始化
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        themeVariables: {
+          primaryColor: '#3B82F6',
+          primaryTextColor: '#1F2937',
+          primaryBorderColor: '#3B82F6',
+          lineColor: '#6B7280',
+          sectionBkgColor: '#F9FAFB',
+          altSectionBkgColor: '#FFFFFF',
+          gridColor: '#E5E7EB',
+          secondaryColor: '#10B981',
+          tertiaryColor: '#8B5CF6',
+        },
+      })
+
+      // 移动端菜单切换
+      document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+        const mobileMenu = document.getElementById('mobile-menu')
+        mobileMenu.classList.toggle('hidden')
+      })
+
+      // 平滑滚动到锚点
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault()
+          const target = document.querySelector(this.getAttribute('href'))
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            })
+          }
+
+          // 移动端菜单关闭
+          const mobileMenu = document.getElementById('mobile-menu')
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden')
+          }
+        })
+      })
+
+      // 导航栏活动状态
+      window.addEventListener('scroll', function () {
+        const sections = document.querySelectorAll('section[id]')
+        const navLinks = document.querySelectorAll('.nav-link')
+
+        let current = ''
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 100
+          if (scrollY >= sectionTop) {
+            current = section.getAttribute('id')
+          }
+        })
+
+        navLinks.forEach((link) => {
+          link.classList.remove('active')
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active')
+          }
+        })
+      })
+
+      // 滚动动画
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      }
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1'
+            entry.target.style.transform = 'translateY(0)'
+          }
+        })
+      }, observerOptions)
+
+      // 观察所有需要动画的元素
+      document.querySelectorAll('.animate-slide-up, .card-hover').forEach((el) => {
+        el.style.opacity = '0'
+        el.style.transform = 'translateY(20px)'
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'
+        observer.observe(el)
+      })
+
+      // 概念词典切换功能
+      function toggleConcept(conceptId) {
+        const content = document.getElementById(conceptId + '-content')
+        const icon = document.getElementById(conceptId + '-icon')
+
+        if (content.classList.contains('hidden')) {
+          content.classList.remove('hidden')
+          icon.style.transform = 'rotate(180deg)'
+        } else {
+          content.classList.add('hidden')
+          icon.style.transform = 'rotate(0deg)'
         }
-        
-        // 知识测试功能
-        function checkQuiz() {
-            const selected = document.querySelector('input[name="q1"]:checked');
-            const resultDiv = document.getElementById('quiz-result');
-            
-            if (!selected) {
-                resultDiv.className = 'mt-6 p-4 rounded-lg bg-yellow-100 border border-yellow-300';
-                resultDiv.innerHTML = '<p class="text-yellow-800"><i class="fa fa-exclamation-triangle mr-2"></i>请选择一个答案</p>';
-                resultDiv.classList.remove('hidden');
-                return;
-            }
-            
-            if (selected.value === 'C') {
-                resultDiv.className = 'mt-6 p-4 rounded-lg bg-green-100 border border-green-300';
-                resultDiv.innerHTML = '<p class="text-green-800"><i class="fa fa-check-circle mr-2"></i><strong>正确！</strong> TAT理论的核心观点确实是特质只有在相关的情境线索存在时才会被激发并影响个体行为。这是区别于传统特质理论和情境理论的关键所在。</p>';
-            } else {
-                resultDiv.className = 'mt-6 p-4 rounded-lg bg-red-100 border border-red-300';
-                resultDiv.innerHTML = '<p class="text-red-800"><i class="fa fa-times-circle mr-2"></i><strong>不正确。</strong> TAT理论强调特质与情境的交互作用，认为特质只有在相关情境线索存在时才会被激发。正确答案是C。</p>';
-            }
-            
-            resultDiv.classList.remove('hidden');
+      }
+
+      // 知识测试功能
+      function checkQuiz() {
+        const selected = document.querySelector('input[name="q1"]:checked')
+        const resultDiv = document.getElementById('quiz-result')
+
+        if (!selected) {
+          resultDiv.className = 'mt-6 p-4 rounded-lg bg-yellow-100 border border-yellow-300'
+          resultDiv.innerHTML =
+            '<p class="text-yellow-800"><i class="fa fa-exclamation-triangle mr-2"></i>请选择一个答案</p>'
+          resultDiv.classList.remove('hidden')
+          return
         }
-        
-        // 图表初始化
-        window.addEventListener('load', function() {
-            // 路径系数图表
-            const pathCtx = document.getElementById('pathChart');
-            if (pathCtx) {
-                new Chart(pathCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['有形性', '可靠性', '响应性', '保证性', '同理心'],
-                        datasets: [{
-                            label: '路径系数',
-                            data: [-0.215, -0.018, 0.086, 0.099, 0.109],
-                            backgroundColor: [
-                                '#ef4444', '#9ca3af', '#9ca3af', '#9ca3af', '#10b981'
-                            ],
-                            borderColor: [
-                                '#dc2626', '#6b7280', '#6b7280', '#6b7280', '#059669'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                min: -0.3,
-                                max: 0.2
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-            }
-            
-            // 效应量图表
-            const effectCtx = document.getElementById('effectChart');
-            if (effectCtx) {
-                new Chart(effectCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['显著效应', '非显著效应'],
-                        datasets: [{
-                            data: [2, 3],
-                            backgroundColor: ['#10b981', '#e5e7eb'],
-                            borderColor: ['#059669', '#d1d5db'],
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }
-                });
-            }
-        });
-        
-        console.log('TAT理论深度学习平台已加载完成 - 包含完整的理论基础、原创研究、论文复现和学习工具');
+
+        if (selected.value === 'C') {
+          resultDiv.className = 'mt-6 p-4 rounded-lg bg-green-100 border border-green-300'
+          resultDiv.innerHTML =
+            '<p class="text-green-800"><i class="fa fa-check-circle mr-2"></i><strong>正确！</strong> TAT理论的核心观点确实是特质只有在相关的情境线索存在时才会被激发并影响个体行为。这是区别于传统特质理论和情境理论的关键所在。</p>'
+        } else {
+          resultDiv.className = 'mt-6 p-4 rounded-lg bg-red-100 border border-red-300'
+          resultDiv.innerHTML =
+            '<p class="text-red-800"><i class="fa fa-times-circle mr-2"></i><strong>不正确。</strong> TAT理论强调特质与情境的交互作用，认为特质只有在相关情境线索存在时才会被激发。正确答案是C。</p>'
+        }
+
+        resultDiv.classList.remove('hidden')
+      }
+
+      // 图表初始化
+      window.addEventListener('load', function () {
+        // 路径系数图表
+        const pathCtx = document.getElementById('pathChart')
+        if (pathCtx) {
+          new Chart(pathCtx, {
+            type: 'bar',
+            data: {
+              labels: ['有形性', '可靠性', '响应性', '保证性', '同理心'],
+              datasets: [
+                {
+                  label: '路径系数',
+                  data: [-0.215, -0.018, 0.086, 0.099, 0.109],
+                  backgroundColor: ['#ef4444', '#9ca3af', '#9ca3af', '#9ca3af', '#10b981'],
+                  borderColor: ['#dc2626', '#6b7280', '#6b7280', '#6b7280', '#059669'],
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  min: -0.3,
+                  max: 0.2,
+                },
+              },
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+            },
+          })
+        }
+
+        // 效应量图表
+        const effectCtx = document.getElementById('effectChart')
+        if (effectCtx) {
+          new Chart(effectCtx, {
+            type: 'doughnut',
+            data: {
+              labels: ['显著效应', '非显著效应'],
+              datasets: [
+                {
+                  data: [2, 3],
+                  backgroundColor: ['#10b981', '#e5e7eb'],
+                  borderColor: ['#059669', '#d1d5db'],
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                },
+              },
+            },
+          })
+        }
+      })
+
+      console.log(
+        'TAT理论深度学习平台已加载完成 - 包含完整的理论基础、原创研究、论文复现和学习工具',
+      )
     </script>
-</body>
+  </body>
 </html>

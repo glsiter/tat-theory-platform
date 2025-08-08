@@ -3,13 +3,16 @@
     <!-- Paper Header -->
     <header class="paper-header">
       <h1 class="paper-title">
-        The Influence of Introversion–Extroversion on Service Quality Dimensions: A Trait Activation Theory Study
+        The Influence of Introversion–Extroversion on Service Quality Dimensions: A Trait Activation
+        Theory Study
       </h1>
       <div class="paper-meta">
         <p class="authors">Sercan Hatipoglu<sup>1</sup>, Erdogan Koc<sup>2,*</sup></p>
         <p class="affiliations">
-          <sup>1</sup> Faculty of Economics and Administrative Sciences, Bandirma Onyedi Eylul University, Balikesir 10200, Türkiye<br>
-          <sup>2</sup> Faculty of Economics, Administrative and Social Sciences, Bahcesehir University, Istanbul 34000, Türkiye
+          <sup>1</sup> Faculty of Economics and Administrative Sciences, Bandirma Onyedi Eylul
+          University, Balikesir 10200, Türkiye<br />
+          <sup>2</sup> Faculty of Economics, Administrative and Social Sciences, Bahcesehir
+          University, Istanbul 34000, Türkiye
         </p>
         <p class="journal">
           <strong>Sustainability 2023</strong>, 15, 798. https://doi.org/10.3390/su15010798
@@ -19,8 +22,8 @@
 
     <!-- Navigation Tabs -->
     <nav class="paper-nav">
-      <button 
-        v-for="section in sections" 
+      <button
+        v-for="section in sections"
         :key="section.id"
         @click="activeSection = section.id"
         :class="['nav-btn', { active: activeSection === section.id }]"
@@ -50,22 +53,32 @@
           <div class="language-section">
             <h3>English Abstract</h3>
             <p>
-              Personality characteristics influence individuals' perceptions, evaluations, and behaviors toward external stimuli. 
-              This study aims to investigate the influence of the extroversion–introversion personality characteristics of 
-              hospitality customers on the amount of value they attached to the different service quality dimensions.
+              Personality characteristics influence individuals' perceptions, evaluations, and
+              behaviors toward external stimuli. This study aims to investigate the influence of the
+              extroversion–introversion personality characteristics of hospitality customers on the
+              amount of value they attached to the different service quality dimensions.
             </p>
             <p>
-              The data were obtained from <strong>508 Turkish tourists</strong> staying at five-star hotels in holiday resorts 
-              located on the Aegean coast of Turkey. <strong>Partial least-squares structural equation modelling (PLS-SEM)</strong> 
+              The data were obtained from <strong>508 Turkish tourists</strong> staying at five-star
+              hotels in holiday resorts located on the Aegean coast of Turkey.
+              <strong>Partial least-squares structural equation modelling (PLS-SEM)</strong>
               was used to analyze the data.
             </p>
             <p>
-              The results show that while <strong>introvert customers tend to attach more value to the tangibles dimension</strong> 
-              of service quality, <strong>extrovert customers tend to attach more value to the empathy dimension</strong> of service quality.
+              The results show that while
+              <strong
+                >introvert customers tend to attach more value to the tangibles dimension</strong
+              >
+              of service quality,
+              <strong
+                >extrovert customers tend to attach more value to the empathy dimension</strong
+              >
+              of service quality.
             </p>
           </div>
           <div class="keywords">
-            <strong>关键词 Keywords:</strong> 外向性；内向性；服务质量；SERVQUAL；旅游业 | extroversion; introversion; service quality; SERVQUAL; tourism
+            <strong>关键词 Keywords:</strong> 外向性；内向性；服务质量；SERVQUAL；旅游业 |
+            extroversion; introversion; service quality; SERVQUAL; tourism
           </div>
         </div>
       </section>
@@ -79,9 +92,11 @@
             在全球化的服务经济时代，服务质量成为企业获得竞争优势的关键因素。特别是在旅游和酒店业中，顾客对服务质量的感知直接影响其满意度、忠诚度和重复消费意愿。然而，研究表明，不同顾客对同样的服务质量会产生不同的评价，这种差异可能源于顾客个体特征的差异。
           </p>
           <p>
-            人格特质作为个体心理特征的重要组成部分，能够预测个体在特定情境下的行为模式和反应方式。特质激发理论（Trait Activation Theory, TAT）指出，人格特质只有在相关的情境线索存在时才会被激发，进而影响个体的行为和态度。在服务环境中，不同的情境特征可能会激发顾客不同的人格特质，从而影响其对服务质量的感知和评价。
+            人格特质作为个体心理特征的重要组成部分，能够预测个体在特定情境下的行为模式和反应方式。特质激发理论（Trait
+            Activation Theory,
+            TAT）指出，人格特质只有在相关的情境线索存在时才会被激发，进而影响个体的行为和态度。在服务环境中，不同的情境特征可能会激发顾客不同的人格特质，从而影响其对服务质量的感知和评价。
           </p>
-          
+
           <h3>研究问题 Research Questions</h3>
           <div class="research-questions">
             <div class="question-item">
@@ -135,7 +150,9 @@
           <h3>服务质量研究现状</h3>
           <div class="service-quality-research">
             <h4>SERVQUAL模型的发展与应用</h4>
-            <p>SERVQUAL模型由Parasuraman等人于1985年提出，经过多次修订和完善，目前包括五个核心维度：</p>
+            <p>
+              SERVQUAL模型由Parasuraman等人于1985年提出，经过多次修订和完善，目前包括五个核心维度：
+            </p>
             <div class="servqual-dimensions">
               <div class="dimension-card">
                 <h5>有形性（Tangibles）</h5>
@@ -182,15 +199,25 @@
         <h2>Research Model</h2>
         <div class="model-container">
           <div class="research-model">
-            <img src="/TAT理论的结构方程.png" alt="Research Model" class="model-diagram" />
+            <img
+              :src="modelImg"
+              alt="Research Model"
+              class="model-diagram"
+              loading="lazy"
+              decoding="async"
+            />
             <p class="model-caption">Figure 1. Research Model</p>
           </div>
-          
+
           <!-- Hypotheses -->
           <div class="hypotheses-section">
             <h3>Research Hypotheses</h3>
             <div class="hypotheses-list">
-              <div v-for="hypothesis in researchHypotheses" :key="hypothesis.id" class="hypothesis-item">
+              <div
+                v-for="hypothesis in researchHypotheses"
+                :key="hypothesis.id"
+                class="hypothesis-item"
+              >
                 <div class="hypothesis-header">
                   <span class="hypothesis-id">{{ hypothesis.id }}</span>
                   <span :class="['hypothesis-result', getResultClass(hypothesis.result)]">
@@ -208,7 +235,7 @@
       <!-- Methodology Section -->
       <section v-if="activeSection === 'methodology'" class="content-section">
         <h2>Methodology</h2>
-        
+
         <div class="methodology-grid">
           <div class="method-card">
             <h3>Sample</h3>
@@ -259,7 +286,7 @@
       <!-- Results Section -->
       <section v-if="activeSection === 'results'" class="content-section">
         <h2>Results</h2>
-        
+
         <!-- Measurement Model Results -->
         <div class="results-section">
           <h3>Table 1. Measurement Model Results</h3>
@@ -411,8 +438,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="result in modelResults" :key="result.hypothesis" :class="getRowClass(result.result)">
-                  <td><strong>{{ result.hypothesis }}</strong></td>
+                <tr
+                  v-for="result in modelResults"
+                  :key="result.hypothesis"
+                  :class="getRowClass(result.result)"
+                >
+                  <td>
+                    <strong>{{ result.hypothesis }}</strong>
+                  </td>
                   <td>{{ result.beta }}</td>
                   <td>{{ result.standardError }}</td>
                   <td>{{ result.tStatistic }}</td>
@@ -432,10 +465,10 @@
       <!-- Structural Model Section -->
       <section v-if="activeSection === 'structural-model'" class="content-section">
         <h2>Structural Equation Model Visualization</h2>
-        
+
         <!-- SEM Diagram Component -->
         <div class="sem-container">
-          <StructuralEquationVisualization 
+          <StructuralEquationVisualization
             :model="extroversionServqualModel"
             :height="600"
             :interactive="true"
@@ -446,14 +479,16 @@
         <div class="model-fit-section">
           <h3>Model Fit Statistics</h3>
           <div class="fit-stats-grid">
-              <div class="fit-card">
-                <h4>Reliability</h4>
-                <ul>
-                  <li>Cronbach's α: {{ measurementModel.extroversion.cronbachAlpha }}</li>
-                  <li>Composite Reliability: {{ measurementModel.extroversion.compositeReliability }}</li>
-                  <li>AVE: {{ measurementModel.extroversion.averageVarianceExtracted }}</li>
-                </ul>
-              </div>
+            <div class="fit-card">
+              <h4>Reliability</h4>
+              <ul>
+                <li>Cronbach's α: {{ measurementModel.extroversion.cronbachAlpha }}</li>
+                <li>
+                  Composite Reliability: {{ measurementModel.extroversion.compositeReliability }}
+                </li>
+                <li>AVE: {{ measurementModel.extroversion.averageVarianceExtracted }}</li>
+              </ul>
+            </div>
 
             <div class="fit-card">
               <h4>Explained Variance (R²)</h4>
@@ -466,16 +501,16 @@
               </ul>
             </div>
 
-              <div class="fit-card">
-                <h4>Effect Size (f²)</h4>
-                <ul>
-                  <li>Tangibles: {{ modelFit.effectSize.tangibles }} (small)</li>
-                  <li>Reliability: {{ modelFit.effectSize.reliability }} (none)</li>
-                  <li>Responsiveness: {{ modelFit.effectSize.responsiveness }} (very small)</li>
-                  <li>Assurance: {{ modelFit.effectSize.assurance }} (very small)</li>
-                  <li>Empathy: {{ modelFit.effectSize.empathy }} (very small)</li>
-                </ul>
-              </div>
+            <div class="fit-card">
+              <h4>Effect Size (f²)</h4>
+              <ul>
+                <li>Tangibles: {{ modelFit.effectSize.tangibles }} (small)</li>
+                <li>Reliability: {{ modelFit.effectSize.reliability }} (none)</li>
+                <li>Responsiveness: {{ modelFit.effectSize.responsiveness }} (very small)</li>
+                <li>Assurance: {{ modelFit.effectSize.assurance }} (very small)</li>
+                <li>Empathy: {{ modelFit.effectSize.empathy }} (very small)</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -483,7 +518,7 @@
       <!-- Data Analysis Section -->
       <section v-if="activeSection === 'data-analysis'" class="content-section">
         <h2>Data Analysis & Simulated Results</h2>
-        
+
         <!-- Descriptive Statistics -->
         <div class="analysis-section">
           <h3>Sample Characteristics</h3>
@@ -492,7 +527,10 @@
               <h4>Demographics</h4>
               <ul>
                 <li>Sample Size: {{ descriptiveStats.sampleSize }}</li>
-                <li>Age: M = {{ descriptiveStats.demographics.age.mean.toFixed(1) }}, SD = {{ descriptiveStats.demographics.age.std.toFixed(1) }}</li>
+                <li>
+                  Age: M = {{ descriptiveStats.demographics.age.mean.toFixed(1) }}, SD =
+                  {{ descriptiveStats.demographics.age.std.toFixed(1) }}
+                </li>
                 <li>Male: {{ descriptiveStats.demographics.gender.malePercentage }}%</li>
                 <li>Female: {{ descriptiveStats.demographics.gender.femalePercentage }}%</li>
               </ul>
@@ -501,8 +539,16 @@
             <div class="stat-card">
               <h4>Personality Distribution</h4>
               <ul>
-                <li>Introverts: {{ descriptiveStats.demographics.personality.introverts }} ({{ descriptiveStats.demographics.personality.introvertPercentage }}%)</li>
-                <li>Extroverts: {{ descriptiveStats.demographics.personality.extroverts }} ({{ descriptiveStats.demographics.personality.extrovertPercentage }}%)</li>
+                <li>
+                  Introverts: {{ descriptiveStats.demographics.personality.introverts }} ({{
+                    descriptiveStats.demographics.personality.introvertPercentage
+                  }}%)
+                </li>
+                <li>
+                  Extroverts: {{ descriptiveStats.demographics.personality.extroverts }} ({{
+                    descriptiveStats.demographics.personality.extrovertPercentage
+                  }}%)
+                </li>
                 <li>Extroversion M: {{ descriptiveStats.extroversion.mean.toFixed(2) }}</li>
                 <li>Cronbach's α: {{ descriptiveStats.extroversion.cronbachAlpha }}</li>
               </ul>
@@ -521,10 +567,16 @@
                   <div v-for="(dimension, key) in servqualComparison" :key="key" class="bar-group">
                     <div class="bar-label">{{ dimension.label }}</div>
                     <div class="bars">
-                      <div class="bar introvert" :style="{ width: dimension.introverts * 3 + 'px' }">
+                      <div
+                        class="bar introvert"
+                        :style="{ width: dimension.introverts * 3 + 'px' }"
+                      >
                         <span class="bar-value">{{ dimension.introverts.toFixed(1) }}%</span>
                       </div>
-                      <div class="bar extrovert" :style="{ width: dimension.extroverts * 3 + 'px' }">
+                      <div
+                        class="bar extrovert"
+                        :style="{ width: dimension.extroverts * 3 + 'px' }"
+                      >
                         <span class="bar-value">{{ dimension.extroverts.toFixed(1) }}%</span>
                       </div>
                     </div>
@@ -542,7 +594,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="weights-table">
               <table class="comparison-table">
                 <thead>
@@ -554,11 +606,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(dimension, key) in servqualComparison" :key="key" :class="getDifferenceClass(dimension.difference)">
-                    <td><strong>{{ dimension.label }}</strong></td>
+                  <tr
+                    v-for="(dimension, key) in servqualComparison"
+                    :key="key"
+                    :class="getDifferenceClass(dimension.difference)"
+                  >
+                    <td>
+                      <strong>{{ dimension.label }}</strong>
+                    </td>
                     <td>{{ dimension.introverts.toFixed(1) }}%</td>
                     <td>{{ dimension.extroverts.toFixed(1) }}%</td>
-                    <td>{{ dimension.difference > 0 ? '+' : '' }}{{ dimension.difference.toFixed(1) }}%</td>
+                    <td>
+                      {{ dimension.difference > 0 ? '+' : ''
+                      }}{{ dimension.difference.toFixed(1) }}%
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -575,7 +636,11 @@
                 <span class="finding-icon">✓</span>
                 <strong>H1 Supported: Tangibles Dimension</strong>
               </div>
-                <p>Introverts attach significantly more value to tangibles (β = -0.215, p &lt; 0.01). This supports TAT theory as introverts are more sensitive to environmental stimuli and physical surroundings.</p>
+              <p>
+                Introverts attach significantly more value to tangibles (β = -0.215, p &lt; 0.01).
+                This supports TAT theory as introverts are more sensitive to environmental stimuli
+                and physical surroundings.
+              </p>
             </div>
 
             <div class="finding-item not-supported">
@@ -583,7 +648,10 @@
                 <span class="finding-icon">×</span>
                 <strong>H2-H4 Not Supported: Reliability, Responsiveness, Assurance</strong>
               </div>
-              <p>No significant differences found between introverts and extroverts for these dimensions. This suggests universal importance across personality types.</p>
+              <p>
+                No significant differences found between introverts and extroverts for these
+                dimensions. This suggests universal importance across personality types.
+              </p>
             </div>
 
             <div class="finding-item supported">
@@ -591,7 +659,11 @@
                 <span class="finding-icon">✓</span>
                 <strong>H5 Supported: Empathy Dimension</strong>
               </div>
-                <p>Extroverts attach significantly more value to empathy (β = 0.109, p &lt; 0.05). This aligns with extroverts' preference for social interaction and personalized attention.</p>
+              <p>
+                Extroverts attach significantly more value to empathy (β = 0.109, p &lt; 0.05). This
+                aligns with extroverts' preference for social interaction and personalized
+                attention.
+              </p>
             </div>
           </div>
         </div>
@@ -609,7 +681,7 @@
                   {{
                     calculateEffectSize(
                       servqualComparison.tangibles.introverts,
-                      servqualComparison.tangibles.extroverts
+                      servqualComparison.tangibles.extroverts,
                     ).toFixed(3)
                   }}
                   (
@@ -617,8 +689,8 @@
                     getEffectSizeLabel(
                       calculateEffectSize(
                         servqualComparison.tangibles.introverts,
-                        servqualComparison.tangibles.extroverts
-                      )
+                        servqualComparison.tangibles.extroverts,
+                      ),
                     )
                   }}
                   )
@@ -629,7 +701,7 @@
                   {{
                     calculateEffectSize(
                       servqualComparison.empathy.extroverts,
-                      servqualComparison.empathy.introverts
+                      servqualComparison.empathy.introverts,
                     ).toFixed(3)
                   }}
                   (
@@ -637,8 +709,8 @@
                     getEffectSizeLabel(
                       calculateEffectSize(
                         servqualComparison.empathy.extroverts,
-                        servqualComparison.empathy.introverts
-                      )
+                        servqualComparison.empathy.introverts,
+                      ),
                     )
                   }}
                   )
@@ -649,7 +721,7 @@
                   {{
                     calculateEffectSize(
                       servqualComparison.reliability.introverts,
-                      servqualComparison.reliability.extroverts
+                      servqualComparison.reliability.extroverts,
                     ).toFixed(3)
                   }}
                   (
@@ -657,8 +729,8 @@
                     getEffectSizeLabel(
                       calculateEffectSize(
                         servqualComparison.reliability.introverts,
-                        servqualComparison.reliability.extroverts
-                      )
+                        servqualComparison.reliability.extroverts,
+                      ),
                     )
                   }}
                   )
@@ -683,7 +755,11 @@
                 <li><strong>Path Significance:</strong> 2/5 hypotheses supported</li>
                 <li>
                   <strong>Total Variance Explained:</strong>
-                  {{ ((modelFit.rSquared.tangibles + modelFit.rSquared.empathy) * 100 / 2).toFixed(1) }}%
+                  {{
+                    (((modelFit.rSquared.tangibles + modelFit.rSquared.empathy) * 100) / 2).toFixed(
+                      1,
+                    )
+                  }}%
                 </li>
                 <li><strong>Predictive Relevance:</strong> Q² > 0 for significant paths</li>
               </ul>
@@ -703,6 +779,8 @@ import { descriptiveStatistics, paperResults, simulatedData } from '@/data/simul
 
 // Reactive data
 const activeSection = ref('abstract')
+// Encoded static image path to avoid issues with non-ASCII filenames on some servers
+const modelImg = '/TAT%E7%90%86%E8%AE%BA%E7%9A%84%E7%BB%93%E6%9E%84%E6%96%B9%E7%A8%8B.png'
 
 const sections = [
   { id: 'abstract', title: '摘要 Abstract' },
@@ -716,30 +794,48 @@ const sections = [
   { id: 'related-studies', title: '相关研究 Related Studies' },
   { id: 'theoretical-framework', title: '理论框架 Theoretical Framework' },
   { id: 'practical-implications', title: '实践启示 Practical Implications' },
-  { id: 'future-research', title: '未来研究 Future Research' }
+  { id: 'future-research', title: '未来研究 Future Research' },
 ]
 
-const researchHypotheses = paperResults.hypothesisResults.map(h => ({
+const researchHypotheses = paperResults.hypothesisResults.map((h) => ({
   id: h.hypothesis.split(':')[0],
   hypothesis: h.hypothesis,
   result: h.result,
-  interpretation: h.interpretation
+  interpretation: h.interpretation,
 }))
 
 const measurementItems = {
-  dd1: { text: "I see myself as someone talkative", loading: '0.735' },
-  dd3: { text: "I see myself as someone full of energy", loading: '0.856' },
-  dd4: { text: "I see myself as someone who generates a lot of enthusiasm", loading: '0.719' },
-  dd6: { text: "I see myself as someone who has an assertive personality", loading: '0.578' },
-  dd8: { text: "I see myself as someone outgoing, and sociable", loading: '0.874' }
+  dd1: { text: 'I see myself as someone talkative', loading: '0.735' },
+  dd3: { text: 'I see myself as someone full of energy', loading: '0.856' },
+  dd4: { text: 'I see myself as someone who generates a lot of enthusiasm', loading: '0.719' },
+  dd6: { text: 'I see myself as someone who has an assertive personality', loading: '0.578' },
+  dd8: { text: 'I see myself as someone outgoing, and sociable', loading: '0.874' },
 }
 
 const servqualDimensions = [
-  { id: 'tangibles', description: 'The appearance of hotel\'s physical facilities, equipment, personnel, and communication materials.' },
-  { id: 'reliability', description: 'The ability of the hotel to perform the promised service dependably and accurately.' },
-  { id: 'responsiveness', description: 'The willingness of the hotel to help customers and provide prompt service.' },
-  { id: 'assurance', description: 'The knowledge and courtesy of the hotel\'s employees and their ability to convey trust and confidence.' },
-  { id: 'empathy', description: 'The caring, individualized attention the hotel provides its customers.' }
+  {
+    id: 'tangibles',
+    description:
+      "The appearance of hotel's physical facilities, equipment, personnel, and communication materials.",
+  },
+  {
+    id: 'reliability',
+    description:
+      'The ability of the hotel to perform the promised service dependably and accurately.',
+  },
+  {
+    id: 'responsiveness',
+    description: 'The willingness of the hotel to help customers and provide prompt service.',
+  },
+  {
+    id: 'assurance',
+    description:
+      "The knowledge and courtesy of the hotel's employees and their ability to convey trust and confidence.",
+  },
+  {
+    id: 'empathy',
+    description: 'The caring, individualized attention the hotel provides its customers.',
+  },
 ]
 
 const modelResults = paperResults.hypothesisResults
@@ -754,32 +850,42 @@ const servqualComparison = reactive({
     label: 'Tangibles',
     introverts: descriptiveStats.servqualWeights.introverts.tangibles,
     extroverts: descriptiveStats.servqualWeights.extroverts.tangibles,
-    difference: descriptiveStats.servqualWeights.introverts.tangibles - descriptiveStats.servqualWeights.extroverts.tangibles
+    difference:
+      descriptiveStats.servqualWeights.introverts.tangibles -
+      descriptiveStats.servqualWeights.extroverts.tangibles,
   },
   reliability: {
-    label: 'Reliability', 
+    label: 'Reliability',
     introverts: descriptiveStats.servqualWeights.introverts.reliability,
     extroverts: descriptiveStats.servqualWeights.extroverts.reliability,
-    difference: descriptiveStats.servqualWeights.introverts.reliability - descriptiveStats.servqualWeights.extroverts.reliability
+    difference:
+      descriptiveStats.servqualWeights.introverts.reliability -
+      descriptiveStats.servqualWeights.extroverts.reliability,
   },
   responsiveness: {
     label: 'Responsiveness',
     introverts: descriptiveStats.servqualWeights.introverts.responsiveness,
     extroverts: descriptiveStats.servqualWeights.extroverts.responsiveness,
-    difference: descriptiveStats.servqualWeights.introverts.responsiveness - descriptiveStats.servqualWeights.extroverts.responsiveness
+    difference:
+      descriptiveStats.servqualWeights.introverts.responsiveness -
+      descriptiveStats.servqualWeights.extroverts.responsiveness,
   },
   assurance: {
     label: 'Assurance',
     introverts: descriptiveStats.servqualWeights.introverts.assurance,
     extroverts: descriptiveStats.servqualWeights.extroverts.assurance,
-    difference: descriptiveStats.servqualWeights.introverts.assurance - descriptiveStats.servqualWeights.extroverts.assurance
+    difference:
+      descriptiveStats.servqualWeights.introverts.assurance -
+      descriptiveStats.servqualWeights.extroverts.assurance,
   },
   empathy: {
     label: 'Empathy',
     introverts: descriptiveStats.servqualWeights.introverts.empathy,
     extroverts: descriptiveStats.servqualWeights.extroverts.empathy,
-    difference: descriptiveStats.servqualWeights.introverts.empathy - descriptiveStats.servqualWeights.extroverts.empathy
-  }
+    difference:
+      descriptiveStats.servqualWeights.introverts.empathy -
+      descriptiveStats.servqualWeights.extroverts.empathy,
+  },
 })
 
 // Methods
@@ -797,7 +903,6 @@ const getDifferenceClass = (difference: number) => {
   return 'small-difference'
 }
 
-
 // Calculate effect sizes
 const calculateEffectSize = (mean1: number, mean2: number, pooledSD: number = 5.2) => {
   return Math.abs(mean1 - mean2) / pooledSD
@@ -806,7 +911,7 @@ const calculateEffectSize = (mean1: number, mean2: number, pooledSD: number = 5.
 // Get effect size interpretation
 const getEffectSizeLabel = (d: number) => {
   if (d >= 0.8) return 'Large'
-  if (d >= 0.5) return 'Medium' 
+  if (d >= 0.5) return 'Medium'
   if (d >= 0.2) return 'Small'
   return 'Negligible'
 }
@@ -1086,7 +1191,9 @@ onMounted(() => {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.results-table, .correlation-table, .comparison-table {
+.results-table,
+.correlation-table,
+.comparison-table {
   width: 100%;
   border-collapse: collapse;
   background: white;
@@ -1149,7 +1256,8 @@ onMounted(() => {
   margin-bottom: 30px;
 }
 
-.stat-card, .fit-card {
+.stat-card,
+.fit-card {
   background: #f8fafc;
   padding: 25px;
   border-radius: 12px;
@@ -1335,21 +1443,21 @@ onMounted(() => {
   .paper-reproduction-container {
     padding: 15px;
   }
-  
+
   .paper-title {
     font-size: 22px;
   }
-  
+
   .content-section {
     padding: 20px;
   }
-  
+
   .methodology-grid,
   .stats-grid,
   .fit-stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .nav-btn {
     min-width: auto;
     flex: none;
