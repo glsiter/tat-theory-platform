@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>开题报告：变革型教学对学生自我效能的影响</title>
+<meta name="description" content="定量研究开题报告：变革型教学对学生自我效能的影响（一个自变量：变革型教学；一个因变量：学生自我效能；含维度；SPSS 分析方案）" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0c0f; /* used only for gradient */
+    --surface: #ffffff;
+    --elev: #f7f8fc;
+    --text: #15171a;
+    --muted: #5b6472;
+    --primary: #0b6cff;
+    --primary-ink: #ffffff;
+    --border: #e6eaf2;
+    --accent-soft: #e9f2ff;
+    --shadow: 0 10px 24px rgba(16,24,40,.08), 0 2px 6px rgba(16,24,40,.05);
+  }
+  [data-theme="dark"]{
+    --surface: #121418;
+    --elev: #171a20;
+    --text: #e9eef7;
+    --muted: #a3adbd;
+    --primary: #6aa3ff;
+    --primary-ink: #0e1116;
+    --border: #242a34;
+    --accent-soft: #1a263a;
+    --shadow: 0 10px 24px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.25);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --surface: #121418;
+      --elev: #171a20;
+      --text: #e9eef7;
+      --muted: #a3adbd;
+      --primary: #6aa3ff;
+      --primary-ink: #0e1116;
+      --border: #242a34;
+      --accent-soft: #1a263a;
+      --shadow: 0 10px 24px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.25);
+    }
+  }
+  * { box-sizing: border-box }
+  html,body{ height:100% }
+  body{
+    margin:0;
+    color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(11,108,255,.08), transparent 60%),
+      radial-gradient(1000px 500px at 120% -20%, rgba(129,140,248,.10), transparent 60%),
+      var(--surface);
+    font: 16px/1.65 Inter, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans SC, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  a{ color:var(--primary); text-decoration:none }
+  a:hover{ text-decoration:underline }
+  .app{
+    display:grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 96px 24px 80px;
+  }
+  header.appbar{
+    position: fixed; inset: 0 0 auto 0; height: 64px;
+    backdrop-filter: saturate(1.2) blur(8px);
+    background: color-mix(in oklab, var(--surface) 88%, transparent);
+    border-bottom: 1px solid var(--border);
+    display:flex; align-items:center; gap:16px; padding:0 20px; z-index: 50;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; font-weight:700; }
+  .brand .dot{ width:12px; height:12px; border-radius:50%; background:linear-gradient(135deg, var(--primary), #8aa7ff) }
+  .grow{ flex:1 }
+  .actionbar{ display:flex; gap:8px; align-items:center }
+  .btn{ border:1px solid var(--border); background:var(--elev); color:var(--text); padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600 }
+  .btn.primary{ background:var(--primary); color:var(--primary-ink); border-color: color-mix(in oklab, var(--primary), #000 12%) }
+  .btn:active{ transform: translateY(1px) }
+
+  aside.toc{
+    position: sticky; top: 88px; height: calc(100dvh - 112px);
+    border:1px solid var(--border); background:var(--elev); border-radius:14px; padding:14px 12px; overflow:auto;
+    box-shadow: var(--shadow);
+  }
+  .toc h3{ margin:4px 8px 8px; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted) }
+  .toc nav{ font-size:14px }
+  .toc a{ display:block; padding:6px 10px; border-radius:8px; color:var(--muted) }
+  .toc a.level-2{ font-weight:600; color:var(--text) }
+  .toc a.level-3{ padding-left:18px }
+  .toc a.active{ background:var(--accent-soft); color:var(--text) }
+
+  main.content{
+    min-width: 0;
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero{
+    padding: 28px 28px 16px; border-bottom:1px solid var(--border);
+    background: linear-gradient(180deg, color-mix(in oklab, var(--accent-soft) 70%, transparent), transparent 50%);
+  }
+  h1{ margin:0 0 6px; font-size:28px; line-height:1.25 }
+  .lead{ margin:0; color:var(--muted) }
+
+  section{ padding: 24px 28px }
+  h2{ margin: 8px 0 12px; font-size:22px; line-height:1.35; scroll-margin-top: 88px }
+  h3{ margin: 6px 0 8px; font-size:18px; line-height:1.35; scroll-margin-top: 88px }
+  p{ margin: 8px 0 }
+  ul,ol{ margin: 8px 0 8px 18px }
+
+  .card{ background: var(--elev); border:1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .callout{ border-left:4px solid var(--primary); padding:10px 12px; background: color-mix(in oklab, var(--accent-soft) 60%, transparent); border-radius: 8px }
+
+  table{ width:100%; border-collapse:collapse; margin: 10px 0 14px; font-size: 15px }
+  th,td{ border:1px solid var(--border); padding:10px; text-align:left; vertical-align:top }
+  th{ background: color-mix(in oklab, var(--elev), #fff 6%); position: sticky; top:0; z-index: 1 }
+  tr:nth-child(even) td{ background: color-mix(in oklab, var(--elev), #fff 3%)}
+
+  code, pre{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }
+  code{ background: color-mix(in oklab, var(--elev), #000 2%); padding: 0 5px; border-radius:6px }
+  pre{ background: color-mix(in oklab, var(--elev), #000 2%); border:1px solid var(--border); border-radius: 12px; padding: 12px; overflow:auto }
+
+  .grid{ display:grid; gap:14px }
+  .grid-2{ grid-template-columns: 1fr 1fr }
+  @media (max-width: 980px){
+    .app{ grid-template-columns: 1fr; padding: 88px 16px 56px }
+    aside.toc{ display:none }
+  }
+
+  .footer{ color:var(--muted); font-size: 14px; border-top:1px solid var(--border); padding: 16px 28px }
+  .top-btn{
+    position: fixed; right: 16px; bottom: 16px; z-index: 40;
+    background: var(--primary); color: var(--primary-ink); border:none; border-radius: 28px; padding: 10px 14px; cursor:pointer; box-shadow: var(--shadow); display:none
+  }
+  .top-btn.show{ display:inline-flex }
+</style>
+</head>
+<body>
+  <header class="appbar">
+    <div class="brand"><span class="dot"></span><span>变革型教学 × 自我效能</span></div>
+    <div class="grow"></div>
+    <div class="actionbar">
+      <button id="toggle-theme" class="btn" title="切换主题">切换主题</button>
+      <a class="btn primary" href="#六、SPSS 数据分析方案" title="跳至分析方案">SPSS 分析</a>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="toc" id="toc">
+      <h3>目录</h3>
+      <nav id="toc-nav"></nav>
+    </aside>
+
+    <main class="content" id="content">
+      <div class="hero">
+        <h1>开题报告：变革型教学对学生自我效能的影响</h1>
+        <p class="lead">研究类型：定量研究（一个自变量：变革型教学；一个因变量：学生自我效能）。工具与方法：基于 SPSS 的数据分析。</p>
+      </div>
+
+      <section id="一、研究背景与意义">
+        <h2>一、研究背景与意义</h2>
+        <p>在高校课堂中，教师如何激发学生学习动机与自主性，是教学质量提升的关键议题。变革型教学强调教师通过树立榜样、激发愿景、促进思辨、个别关怀等行为，促成学生内在动机与自我调节的提升。自我效能作为预测学习坚持性、策略使用与成绩表现的核心心理变量，受到课堂互动与教师行为风格的重要影响。厘清变革型教学与学生自我效能之间的因果关联，不仅具有理论价值（验证社会认知理论在课堂场域的适用性），也具有实践意义（为教师教学行为改进提供可操作的路径）。</p>
+      </section>
+
+      <section id="二、研究问题与假设">
+        <h2>二、研究问题与假设</h2>
+        <p><b>研究问题</b>：变革型教学是否正向影响学生自我效能？影响强度如何？</p>
+        <div class="card">
+          <p><b>H1</b>：变革型教学对学生自我效能具有显著正向影响。</p>
+          <p class="muted">说明：主模型采用变革型教学的综合得分预测自我效能的综合得分，以保持单一自变量与单一因变量的模型结构。维度层面的检验仅作稳健性补充，不改变主模型设定。</p>
+        </div>
+      </section>
+
+      <section id="三、概念模型">
+        <h2>三、概念模型</h2>
+        <div class="card">
+          <p style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface)"><b>变革型教学</b><br><span class="muted">（综合得分）</span></span>
+            <span style="font-size:22px;color:var(--primary)">⟶</span>
+            <span style="padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface)"><b>学生自我效能</b><br><span class="muted">（综合得分）</span></span>
+          </p>
+        </div>
+      </section>
+
+      <section id="四、变量界定、维度与量表">
+        <h2>四、变量界定、维度与量表</h2>
+        <h3>4.1 自变量：变革型教学（Transformational Teaching）</h3>
+        <p><b>概念界定</b>：指教师在课堂中通过理想化影响、鼓舞激励、智力激发与个别化关怀等行为，促进学生内在动机、认知投入与个人成长的教学风格。</p>
+        <p><b>量表与维度</b>：采用<b>变革型教学行为量表 TTBS-15（Transformational Teaching Behavior Scale, 15项）</b>，四个维度与条目数量如下，Likert 5点计分（1=非常不同意，5=非常同意）：</p>
+        <table>
+          <thead><tr><th>维度</th><th>含义</th><th>条目数</th><th>示例条目（节选）</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>理想化影响（Idealized Influence）</td>
+              <td>教师以身作则，树立价值导向与专业榜样</td>
+              <td>4</td>
+              <td>例如：“教师的言行让我愿意以其为榜样。”</td>
+            </tr>
+            <tr>
+              <td>鼓舞激励（Inspirational Motivation）</td>
+              <td>教师传递清晰愿景与高期望，激发学习热情</td>
+              <td>4</td>
+              <td>例如：“教师激发我对课程的热情和目标感。”</td>
+            </tr>
+            <tr>
+              <td>智力激发（Intellectual Stimulation）</td>
+              <td>教师鼓励质疑、创新与多元思考</td>
+              <td>4</td>
+              <td>例如：“教师鼓励我用不同方法解决问题。”</td>
+            </tr>
+            <tr>
+              <td>个别化关怀（Individualized Consideration）</td>
+              <td>教师关注个体差异并给予针对性支持</td>
+              <td>3</td>
+              <td>例如：“教师关注我的学习需要并提供帮助。”</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="muted">注：TTBS-15 的四维结构与条目数量一致，适用于课堂教学情境；采用中文版经前测信效度检验后正式施测。</p>
+
+        <h3>4.2 因变量：学生自我效能（Student Self-Efficacy）</h3>
+        <p><b>概念界定</b>：指学生对自己能够组织并执行必要的行动以达成学业任务与学习目标的信念强度。</p>
+        <p><b>量表与维度</b>：采用 <b>MSLQ 自我效能与学习表现分量表（Motivated Strategies for Learning Questionnaire, 8项）</b>。该分量表为单维结构，Likert 7点计分（1=非常不同意，7=非常同意）。</p>
+        <table>
+          <thead><tr><th>维度</th><th>含义</th><th>条目数</th><th>示例条目（节选）</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>总体自我效能（单维）</td>
+              <td>对完成课程学习任务的自信与能力判断</td>
+              <td>8</td>
+              <td>例如：“我有信心在这门课上掌握困难的内容。”</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="muted">注：本研究主模型以自我效能单维综合得分作为因变量；该定义与所用量表完全一致。</p>
+
+        <h3>4.3 操作化与得分</h3>
+        <ul>
+          <li><b>TTBS-15</b>：各维度均分与总均分（四维加权等同）作为自变量的<b>综合得分</b>。</li>
+          <li><b>MSLQ自我效能</b>：8项均分作为<b>因变量</b>。</li>
+          <li>如有反向题，按量表说明进行反向计分；缺失值采用列表法或期望最大化视情况处理。</li>
+        </ul>
+      </section>
+
+      <section id="五、研究设计">
+        <h2>五、研究设计</h2>
+        <h3>5.1 样本与抽样</h3>
+        <ul>
+          <li><b>对象</b>：高校本科生与研究生课堂。</li>
+          <li><b>抽样</b>：分层便利抽样（不同年级/专业/课程类型分层）。</li>
+          <li><b>样本量</b>：建议 N ≥ 300（兼顾信效度与回归稳健性；回归最小样本量亦满足 50+8m 经验法则，m=1）。</li>
+        </ul>
+
+        <h3>5.2 数据收集</h3>
+        <ul>
+          <li>采用匿名自填问卷（线上/线下），统一指导语，控制同源偏差（随机呈现、强调无对错）。</li>
+          <li>记录人口统计学变量（性别、年级、专业、GPA分组、课程类型等）用于描述与稳健性检验。</li>
+        </ul>
+      </section>
+
+      <section id="六、SPSS 数据分析方案">
+        <h2>六、SPSS 数据分析方案</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>6.1 数据准备</h3>
+            <ul>
+              <li>缺失与异常：频数检查、箱线图；必要时进行温和截尾或多重插补（若比例极低可列表删除）。</li>
+              <li>编码：Likert 题按 1–5/1–7 编码；反向题倒序；计算维度均分与总均分。</li>
+            </ul>
+            <pre>* 计算综合得分.
+COMPUTE ttbs_total = MEAN(ttbs1 TO ttbs15).
+COMPUTE selfeff_total = MEAN(mslq1 TO mslq8).
+EXECUTE.</pre>
+          </div>
+          <div class="card">
+            <h3>6.2 描述统计</h3>
+            <ul>
+              <li>均值、标准差、偏度、峰度；常模比较（如有）。</li>
+            </ul>
+            <pre>DESCRIPTIVES VARIABLES=ttbs_total selfeff_total
+  /STATISTICS=MEAN STDDEV SKEWNESS KURTOSIS.</pre>
+          </div>
+
+          <div class="card">
+            <h3>6.3 信度分析</h3>
+            <ul>
+              <li>各维度与总量表 Cronbach's α ≥ .70；项目剔除检视 CITC。</li>
+            </ul>
+            <pre>RELIABILITY
+  /VARIABLES=ttbs1 ttbs2 ttbs3 ttbs4 ttbs5 ttbs6 ttbs7 ttbs8 ttbs9 ttbs10 ttbs11 ttbs12 ttbs13 ttbs14 ttbs15
+  /SCALE('TTBS_total') ALL /MODEL=ALPHA.
+RELIABILITY
+  /VARIABLES=mslq1 mslq2 mslq3 mslq4 mslq5 mslq6 mslq7 mslq8
+  /SCALE('SELF_total') ALL /MODEL=ALPHA.</pre>
+          </div>
+          <div class="card">
+            <h3>6.4 效度与结构检验（EFA）</h3>
+            <ul>
+              <li>探索性因子分析（主轴因子/极大似然；Oblimin 斜交）；KMO ≥ .70、Bartlett 显著。</li>
+              <li>TTBS 期望提取 4 因子；MSLQ 自我效能期望为单因子。</li>
+            </ul>
+            <pre>FACTOR
+  /VARIABLES=ttbs1 TO ttbs15
+  /MISSING=LISTWISE
+  /ANALYSIS=ttbs1 TO ttbs15
+  /PRINT=KMO EXTRACTION ROTATION
+  /CRITERIA=FACTORS(4) ITERATE(25)
+  /EXTRACTION=PAF
+  /ROTATION=OBLIMIN.
+FACTOR
+  /VARIABLES=mslq1 TO mslq8
+  /MISSING=LISTWISE
+  /ANALYSIS=mslq1 TO mslq8
+  /PRINT=KMO EXTRACTION
+  /CRITERIA=FACTORS(1) ITERATE(25)
+  /EXTRACTION=PAF.</pre>
+          </div>
+
+          <div class="card">
+            <h3>6.5 同源偏差检验</h3>
+            <ul>
+              <li>Harman 单因子检验：未旋转单因子解释的总方差 &lt; 40% 则风险可控。</li>
+            </ul>
+            <pre>FACTOR /VARIABLES=ttbs1 TO ttbs15 mslq1 TO mslq8
+  /MISSING=LISTWISE
+  /ANALYSIS=ttbs1 TO ttbs15 mslq1 TO mslq8
+  /EXTRACTION=PAF
+  /CRITERIA=FACTORS(1) ITERATE(25)
+  /ROTATION=NONE
+  /PRINT=INITIAL EXTRACTION.</pre>
+          </div>
+
+          <div class="card">
+            <h3>6.6 相关与回归（主模型）</h3>
+            <ul>
+              <li>Pearson 相关检验。</li>
+              <li>简单线性回归：自变量为 <b>ttbs_total</b>，因变量为 <b>selfeff_total</b>。</li>
+              <li>假设检验：β&gt;0 且 p&lt;.05；报告 R²、ΔR²、标准化β、95%CI。</li>
+              <li>诊断：正态性（残差）、线性与同方差性（ZPRED×ZRESID）、独立性（Durbin-Watson）。</li>
+            </ul>
+            <pre>CORRELATIONS /VARIABLES=ttbs_total selfeff_total /PRINT=TWOTAIL NOSIG.
+REGRESSION
+  /DEPENDENT selfeff_total
+  /METHOD=ENTER ttbs_total
+  /STATISTICS COEFF OUTS R ANOVA CI(95) DW
+  /PLOT SCATTER(*ZPRED,*ZRESID) HISTOGRAM NORMPROB.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="七、报告与解释规范">
+        <h2>七、报告与解释规范</h2>
+        <ul>
+          <li><b>信度</b>：α（总量表与维度）与CITC；α若提升有限，不轻易删题，保持量表结构一致性。</li>
+          <li><b>效度</b>：KMO、Bartlett、共同度、因子载荷（≥.50）、交叉载荷（≤.30）。</li>
+          <li><b>主效应</b>：报告 β、SE、t、p、R²、95%CI；可报告效应量 f²=R²/(1−R²)。</li>
+          <li><b>稳健性</b>（可选，不改变主模型）：对四个维度分别与自我效能做单变量回归，描述哪一维影响更强。</li>
+        </ul>
+      </section>
+
+      <section id="八、伦理与数据管理">
+        <h2>八、伦理与数据管理</h2>
+        <ul>
+          <li>知情同意与匿名处理；仅用于科研，遵守数据安全要求。</li>
+          <li>原始数据、清洗语法、分析语法、输出结果分文件归档，支持复现。</li>
+        </ul>
+      </section>
+
+      <section id="九、预期结论与贡献">
+        <h2>九、预期结论与贡献</h2>
+        <ul>
+          <li><b>理论</b>：支持社会认知理论框架下，教师变革型行为通过动机路径提升学生自我效能。</li>
+          <li><b>实践</b>：提供以“智力激发”和“鼓舞激励”为抓手的课堂改进建议；形成可执行的课堂观察与自评工具。</li>
+        </ul>
+      </section>
+
+      <section id="十、进度安排">
+        <h2>十、进度安排</h2>
+        <table>
+          <thead><tr><th>阶段</th><th>时间</th><th>关键任务</th></tr></thead>
+          <tbody>
+            <tr><td>文献回顾与工具确定</td><td>第1–2周</td><td>确定TTBS-15与MSLQ中文版；完成预调查问卷</td></tr>
+            <tr><td>预测与修订</td><td>第3周</td><td>小样本预测，检验信效度，细化指导语与条目表述</td></tr>
+            <tr><td>正式施测</td><td>第4–6周</td><td>多课程/年级发放问卷，目标N≥300</td></tr>
+            <tr><td>数据分析</td><td>第7–8周</td><td>SPSS清洗、EFA、信度、相关与回归，完成稳健性检验</td></tr>
+            <tr><td>撰写与修改</td><td>第9–10周</td><td>撰写论文与教学建议，图表规范化</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="十一、量表条目示例（节选，用于理解与预测）">
+        <h2>十一、量表条目示例（节选，用于理解与预测）</h2>
+        <div class="card">
+          <p><b>TTBS-15（5点计分）样例</b>：<br>
+          ttbs1：教师以身作则，展现值得我学习的品质。<br>
+          ttbs7：教师激励我制定并追求更高的学习目标。<br>
+          ttbs10：教师鼓励我从不同角度思考课程问题。<br>
+          ttbs14：教师关注我的个体差异并提供指导。</p>
+          <p><b>MSLQ 自我效能（7点计分）样例</b>：<br>
+          mslq2：我有信心学会这门课程的困难内容。<br>
+          mslq5：只要努力，我就能在本课程取得好成绩。</p>
+          <p class="muted">正式研究以已发表中文版量表条目为准，并获得使用授权或注明来源。</p>
+        </div>
+      </section>
+
+      <section id="十二、结果呈现模版（示例）">
+        <h2>十二、结果呈现模版（示例）</h2>
+        <ul>
+          <li><b>描述统计</b>：M±SD、偏度/峰度；表格含各维度与总分。</li>
+          <li><b>信度</b>：α（TTBS总分=.90；MSLQ=.87，示例）；维度α与CITC范围。</li>
+          <li><b>EFA</b>：TTBS提取4因子，累计方差解释率≥60%；MSLQ单因子解释率≥40%。</li>
+          <li><b>回归</b>：β=0.45, SE=0.05, t=9.00, p&lt;.001，R²=0.20，DW≈2.0；图示散点与残差正态图。</li>
+        </ul>
+      </section>
+
+      <section id="参考文献（节选）">
+        <h2>参考文献（节选）</h2>
+        <ol>
+          <li>Beauchamp, M. R., Barling, J., & Morton, K. L. (2011). Transformational teaching and adolescent self-determined motivation, self-efficacy, and intentions to engage in leisure-time physical activity. Journal of Applied Social Psychology.</li>
+          <li>Morton, K. L., & Beauchamp, M. R. (2010/2011). The Transformational Teaching Behavior Scale (TTBS). （量表与结构说明，中文使用请参照已发表中文版）</li>
+          <li>Pintrich, P. R., Smith, D. A., Garcia, T., & McKeachie, W. J. (1991/1993). A manual for the Motivated Strategies for Learning Questionnaire (MSLQ).</li>
+          <li>Bandura, A. (1997). Self-efficacy: The exercise of control.</li>
+        </ol>
+      </section>
+
+      <div class="footer">
+        变量、维度与量表定义已保持一致；主模型严格遵循“一个自变量、一个因变量”。如需我生成可直接运行的 SPSS 全量语法（含变量字典、反向计分与图形输出），告知量表最终条目与变量命名即可。
+      </div>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="top-btn" aria-label="返回顶部">↑ 返回顶部</button>
+
+<script>
+  // Smooth scroll behavior for anchor links
+  document.documentElement.style.scrollBehavior = 'smooth';
+
+  // Create slug ids for headings and build TOC
+  const tocNav = document.getElementById('toc-nav');
+  const headings = Array.from(document.querySelectorAll('main h2, main h3'));
+  const slugify = (str) => str
+    .replace(/\s+/g, '-')
+    .replace(/[\(\)\[\]\u3001\uFF08\uFF09]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .toLowerCase();
+
+  const used = new Set();
+  headings.forEach(h => {
+    const base = h.textContent.trim();
+    let slug = slugify(base);
+    let n = 1;
+    while (used.has(slug) || document.getElementById(slug)) { slug = `${slug}-${n++}` }
+    used.add(slug);
+    if (!h.id) h.id = base; // keep readable id from original section if exists
+    // also add a data-anchor for TOC
+    h.setAttribute('data-anchor', slug);
+  });
+
+  const frag = document.createDocumentFragment();
+  headings.forEach(h => {
+    const level = h.tagName === 'H2' ? 2 : 3;
+    const a = document.createElement('a');
+    const id = h.id || h.getAttribute('data-anchor');
+    a.href = `#${id}`;
+    a.textContent = h.textContent;
+    a.className = `level-${level}`;
+    frag.appendChild(a);
+  });
+  tocNav.appendChild(frag);
+
+  // Active section highlight
+  const tocLinks = Array.from(tocNav.querySelectorAll('a'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = `#${entry.target.id}`;
+        tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-60% 0px -35% 0px', threshold: [0, 1] });
+  headings.forEach(h => observer.observe(h));
+
+  // Back to top button
+  const topBtn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    topBtn.classList.toggle('show', y > 600);
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+  // Theme toggle
+  const btnTheme = document.getElementById('toggle-theme');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) root.setAttribute('data-theme', saved);
+  btnTheme.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+</script>
+</body>
+</html>
