@@ -1291,24 +1291,8 @@
         })
       })
 
-      // 滚动动画 - Intersection Observer
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      }
-
-      const observer = new IntersectionObserver(function (entries) {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-          }
-        })
-      }, observerOptions)
-
-      // 观察所有需要动画的元素
-      document.querySelectorAll('.fade-in-section').forEach((el) => {
-        observer.observe(el)
-      })
+      // 滚动动画 - Intersection Observer（已在文件底部提供一次实现，这里移除重复定义）
+      // 保留底部统一实现，避免变量重复声明导致的错误
 
       // 概念词典切换功能
       function toggleConcept(conceptId) {

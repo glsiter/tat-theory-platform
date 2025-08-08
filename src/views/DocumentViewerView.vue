@@ -5,11 +5,16 @@
       <div class="header-content">
         <button @click="goBack" class="back-btn">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
           返回文档列表
         </button>
-        
+
         <div class="document-info">
           <h1 class="document-title">{{ documentTitle }}</h1>
           <div class="document-meta">
@@ -21,15 +26,23 @@
         <div class="document-actions">
           <button @click="toggleToc" class="action-btn" :class="{ active: showToc }">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    d="M4 6h16M4 12h16M4 18h7" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
             </svg>
             目录
           </button>
           <button @click="downloadDocument" class="action-btn">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    d="M12 10v6m0 0l-4-4m4 4l4-4m-4 4V3" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 10v6m0 0l-4-4m4 4l4-4m-4 4V3"
+              />
             </svg>
             下载
           </button>
@@ -45,13 +58,18 @@
           <h3>目录</h3>
           <button @click="showToc = false" class="close-toc">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
         <nav class="toc-nav">
-          <a 
-            v-for="heading in tableOfContents" 
+          <a
+            v-for="heading in tableOfContents"
             :key="heading.id"
             :href="`#${heading.id}`"
             :class="['toc-link', `level-${heading.level}`]"
@@ -64,7 +82,10 @@
 
       <!-- 主要内容 -->
       <div class="document-content" :class="{ 'with-toc': showToc && tableOfContents.length > 0 }">
-        <article class="markdown-content prose prose-lg max-w-none" v-html="renderedContent"></article>
+        <article
+          class="markdown-content prose prose-lg max-w-none"
+          v-html="renderedContent"
+        ></article>
       </div>
     </div>
 
@@ -80,8 +101,12 @@
     <div v-if="error" class="error-overlay">
       <div class="error-message">
         <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
         </svg>
         <h3>加载失败</h3>
         <p>{{ error }}</p>
@@ -135,12 +160,12 @@ mermaid.initialize({
     primaryBorderColor: '#e5e7eb',
     lineColor: '#6b7280',
     secondaryColor: '#f3f4f6',
-    tertiaryColor: '#ffffff'
+    tertiaryColor: '#ffffff',
   },
   flowchart: {
     useMaxWidth: true,
     htmlLabels: true,
-    curve: 'basis'
+    curve: 'basis',
   },
   sequence: {
     diagramMarginX: 50,
@@ -151,7 +176,7 @@ mermaid.initialize({
     boxMargin: 10,
     boxTextMargin: 5,
     noteMargin: 10,
-    messageMargin: 35
+    messageMargin: 35,
   },
   gantt: {
     titleTopMargin: 25,
@@ -162,25 +187,25 @@ mermaid.initialize({
     gridLineStartPadding: 35,
     bottomPadding: 25,
     leftPadding: 75,
-    rightPadding: 50
-  }
+    rightPadding: 50,
+  },
 })
 
 // 计算属性
 const renderedContent = computed(() => {
   if (!documentContent.value) return ''
-  
+
   try {
     // 先用 marked 解析 markdown
     let html = marked(documentContent.value) as string
-    
+
     // 然后为标题添加 ID
     html = html.replace(/<h([1-6])>(.*?)<\/h[1-6]>/g, (match, level, text) => {
       const cleanText = text.replace(/<[^>]*>/g, '') // 移除HTML标签
       const id = `heading-${cleanText.replace(/[^\w\u4e00-\u9fa5]/g, '-').toLowerCase()}`
       return `<h${level} id="${id}">${text}</h${level}>`
     })
-    
+
     return html
   } catch (err) {
     console.error('Markdown 解析失败:', err)
@@ -191,20 +216,20 @@ const renderedContent = computed(() => {
 // 渲染 Mermaid 图表
 async function renderMermaidCharts() {
   await nextTick()
-  
+
   const mermaidElements = document.querySelectorAll('.markdown-content pre code.language-mermaid')
-  
+
   for (let i = 0; i < mermaidElements.length; i++) {
     const element = mermaidElements[i] as HTMLElement
     const code = element.textContent || ''
     const id = `mermaid-${Date.now()}-${i}`
-    
+
     try {
       const { svg } = await mermaid.render(id, code)
       const wrapper = document.createElement('div')
       wrapper.className = 'mermaid-wrapper'
       wrapper.innerHTML = svg
-      
+
       // 替换原来的 code 元素
       const preElement = element.parentElement
       if (preElement && preElement.tagName === 'PRE') {
@@ -218,11 +243,14 @@ async function renderMermaidCharts() {
 }
 
 // 监听路由变化
-watch(() => route.params.path, () => {
-  if (route.name === 'document-viewer') {
-    loadDocument()
-  }
-})
+watch(
+  () => route.params.path,
+  () => {
+    if (route.name === 'document-viewer') {
+      loadDocument()
+    }
+  },
+)
 
 // 监听内容变化，重新渲染Mermaid
 watch(renderedContent, async () => {
@@ -242,41 +270,38 @@ async function loadDocument(): Promise<void> {
   try {
     loading.value = true
     error.value = null
-    
-    const docPath = Array.isArray(route.params.path) 
-      ? route.params.path.join('/') 
-      : route.params.path as string
-      
+
+    const docPath = Array.isArray(route.params.path)
+      ? route.params.path.join('/')
+      : (route.params.path as string)
+
     if (!docPath) {
       throw new Error('文档路径不存在')
     }
 
     console.log('加载文档:', docPath)
-    
+
     // 尝试从根目录加载文档
     const response = await fetch(`/${docPath}`)
-    
+
     if (!response.ok) {
       throw new Error(`无法加载文档: ${response.status} ${response.statusText}`)
     }
-    
+
     const content = await response.text()
     documentContent.value = content
-    
+
     // 设置文档标题
-    documentTitle.value = docPath
-      .replace('.md', '')
-      .replace(/_/g, ' ')
-      .split('/').pop() || docPath
-    
+    documentTitle.value = docPath.replace('.md', '').replace(/_/g, ' ').split('/').pop() || docPath
+
     // 设置最后修改时间（这里使用当前时间，实际应该从文件系统获取）
     lastModified.value = new Date().toLocaleDateString('zh-CN')
-    
+
     // 生成目录
     generateTableOfContents()
-    
+
     loading.value = false
-    
+
     // 渲染 Mermaid 图表
     await renderMermaidCharts()
   } catch (err) {
@@ -289,12 +314,12 @@ async function loadDocument(): Promise<void> {
 function generateTableOfContents(): void {
   // 解析markdown标题生成目录
   const headings = documentContent.value.match(/^#{1,6}\s+.+$/gm) || []
-  
+
   tableOfContents.value = headings.map((heading) => {
     const level = heading.match(/^#+/)?.[0].length || 1
     const text = heading.replace(/^#+\s+/, '').trim()
     const id = `heading-${text.replace(/[^\w\u4e00-\u9fa5]/g, '-').toLowerCase()}`
-    
+
     return { id, text, level }
   })
 }
@@ -341,8 +366,14 @@ function retryLoad(): void {
   background: white;
   border-bottom: 1px solid #e5e7eb;
   position: sticky;
-  top: 64px;
+  /* 使用布局组件暴露的 CSS 变量，保证与导航高度一致 */
+  top: var(--desktop-header-height);
   z-index: 10;
+}
+@media (max-width: 768px) {
+  .document-header {
+    top: var(--mobile-header-height);
+  }
 }
 
 .header-content {
@@ -745,7 +776,7 @@ function retryLoad(): void {
 }
 
 .markdown-content :deep(.mermaid-wrapper .flowchart-link.dotted) {
-  stroke-dasharray: 5,5;
+  stroke-dasharray: 5, 5;
 }
 
 /* 子图样式 */
@@ -753,7 +784,7 @@ function retryLoad(): void {
   fill: #f8fafc;
   stroke: #cbd5e1;
   stroke-width: 1px;
-  stroke-dasharray: 5,5;
+  stroke-dasharray: 5, 5;
 }
 
 .markdown-content :deep(.mermaid-wrapper .cluster .label) {
@@ -793,8 +824,12 @@ function retryLoad(): void {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .error-message h3 {
