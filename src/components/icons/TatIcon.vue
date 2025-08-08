@@ -20,16 +20,13 @@ export interface TatIconProps {
   viewBox?: string
 }
 
-const props = withDefaults(defineProps<TatIconProps>(), {
+withDefaults(defineProps<TatIconProps>(), {
   size: 24,
   color: 'currentColor',
-  viewBox: '0 0 24 24'
+  viewBox: '0 0 24 24',
 })
 
-const iconClasses = computed(() => [
-  'inline-block',
-  'flex-shrink-0'
-])
+const iconClasses = computed(() => ['inline-block', 'flex-shrink-0'])
 </script>
 
 <style scoped>

@@ -3,38 +3,42 @@
     <div class="renderer-header">
       <h3 class="renderer-title">{{ model.title }}</h3>
       <div class="renderer-controls">
-        <button 
-          @click="resetView" 
-          class="control-btn"
-          title="重置视图"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
-            <path d="M21 3v5h-5"/>
-            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
-            <path d="M3 21v-5h5"/>
+        <button @click="resetView" class="control-btn" title="重置视图">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+            <path d="M21 3v5h-5" />
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+            <path d="M3 21v-5h5" />
           </svg>
         </button>
-        <button 
-          @click="toggleFullscreen" 
-          class="control-btn"
-          title="全屏模式"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+        <button @click="toggleFullscreen" class="control-btn" title="全屏模式">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+            />
           </svg>
         </button>
       </div>
     </div>
-    
-    <div 
-      ref="svgContainer" 
-      class="svg-container"
-      :class="{ 'fullscreen': isFullscreen }"
-    >
+
+    <div ref="svgContainer" class="svg-container" :class="{ fullscreen: isFullscreen }">
       <!-- SVG will be rendered here by D3.js -->
     </div>
-    
+
     <div class="renderer-footer">
       <div class="zoom-controls">
         <button @click="zoomIn" class="zoom-btn">+</button>
@@ -64,13 +68,20 @@
     </div>
 
     <!-- 动画控制按钮 -->
-    <button 
+    <button
       @click="toggleAnimationPanel"
       class="animation-toggle-btn"
       :class="{ active: showAnimationPanel }"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polygon points="5,3 19,12 5,21"/>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polygon points="5,3 19,12 5,21" />
       </svg>
       动画演示
     </button>
@@ -93,8 +104,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
-import * as d3 from 'd3'
-import type { StructuralEquationModel, StructuralEquationNode, StructuralEquationRelationship } from '@/types/structural-equation'
+import type { D3Node } from './StructuralEquationD3Renderer'
+import type {
+  StructuralEquationModel,
+  StructuralEquationNode,
+  StructuralEquationRelationship,
+} from '@/types/structural-equation'
 import { StructuralEquationD3Renderer } from './StructuralEquationD3Renderer'
 import { structuralEquationService } from '@/services/structural-equation-service'
 import NodeDetailModal from './NodeDetailModal.vue'
@@ -130,34 +145,31 @@ const nodeTypes = [
   { type: 'mediator', label: '中介变量', color: '#FEF3C7' },
   { type: 'outcome', label: '结果变量', color: '#ECFDF5' },
   { type: 'final-outcome', label: '最终结果', color: '#FDF2F8' },
-  { type: 'motivation', label: '激励因素', color: '#EFF6FF' }
+  { type: 'motivation', label: '激励因素', color: '#EFF6FF' },
 ]
 
 // Methods
 const initializeRenderer = async () => {
   if (!svgContainer.value) return
-  
-  renderer.value = new StructuralEquationD3Renderer(
-    svgContainer.value,
-    props.model
-  )
-  
+
+  renderer.value = new StructuralEquationD3Renderer(svgContainer.value, props.model)
+
   await renderer.value.initialize()
-  
+
   // Listen to zoom changes
   renderer.value.onZoomChange((zoom: number) => {
     currentZoom.value = zoom
   })
 
   // Listen to node clicks
-  renderer.value.onNodeClick((node: any) => {
+  renderer.value.onNodeClick((node: D3Node) => {
     handleNodeClick(node.id)
   })
 }
 
 const handleNodeClick = (nodeId: string) => {
   const nodeDetails = structuralEquationService.getNodeDetails(nodeId)
-  
+
   if (nodeDetails.node) {
     selectedNode.value = nodeDetails.node
     selectedNodeIncoming.value = nodeDetails.incomingRelationships
@@ -197,10 +209,10 @@ const toggleAnimationPanel = () => {
 // Animation handlers
 const handleAnimationPlay = async () => {
   if (!renderer.value || !currentAnimationSequence.value) return
-  
+
   isAnimationPlaying.value = true
   renderer.value.setAnimationState(true, 0, currentAnimationSequence.value)
-  
+
   // 执行动画序列
   await executeAnimationSequence(currentAnimationSequence.value)
 }
@@ -254,7 +266,7 @@ const executeAnimationSequence = async (sequenceId: string) => {
       await executeFeedbackLoopSequence()
       break
   }
-  
+
   isAnimationPlaying.value = false
   animationControllerRef.value?.setPlaying(false)
 }
@@ -267,7 +279,7 @@ const executeBasicActivationSequence = async () => {
   renderer.value.pulseNode('social-level', 1000)
   renderer.value.pulseNode('task-level', 1000)
   animationControllerRef.value?.nextStep()
-  await new Promise(resolve => setTimeout(resolve, 2000))
+  await new Promise((resolve) => setTimeout(resolve, 2000))
 
   // Step 2: 特质激发
   await renderer.value.startPathAnimation('task-level', 'personality-traits', 2500)
@@ -289,7 +301,7 @@ const executeMotivationPathwaySequence = async () => {
   // Step 1: 特质激发启动
   renderer.value.pulseNode('trait-activation', 2000)
   animationControllerRef.value?.nextStep()
-  await new Promise(resolve => setTimeout(resolve, 2000))
+  await new Promise((resolve) => setTimeout(resolve, 2000))
 
   // Step 2: 内在激励产生
   await renderer.value.startPathAnimation('trait-activation', 'intrinsic-motivation', 2500)
@@ -310,7 +322,7 @@ const executeFeedbackLoopSequence = async () => {
   // Step 1: 初始行为
   renderer.value.pulseNode('work-behavior', 2000)
   animationControllerRef.value?.nextStep()
-  await new Promise(resolve => setTimeout(resolve, 2000))
+  await new Promise((resolve) => setTimeout(resolve, 2000))
 
   // Step 2: 环境反馈
   await renderer.value.startPathAnimation('work-behavior', 'task-level', 2500)
@@ -319,7 +331,7 @@ const executeFeedbackLoopSequence = async () => {
   // Step 3: 环境调整
   renderer.value.pulseNode('task-level', 2000)
   animationControllerRef.value?.nextStep()
-  await new Promise(resolve => setTimeout(resolve, 2000))
+  await new Promise((resolve) => setTimeout(resolve, 2000))
 
   // Step 4: 循环强化
   await renderer.value.startPathAnimation('task-level', 'personality-traits', 1500)

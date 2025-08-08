@@ -4,10 +4,14 @@
     <div class="search-input-container">
       <div class="search-input-wrapper">
         <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
         </svg>
-        
+
         <input
           ref="searchInputRef"
           v-model="searchQuery"
@@ -19,15 +23,15 @@
           @blur="handleSearchBlur"
           @keydown="handleKeyDown"
         />
-        
-        <button 
-          v-if="searchQuery"
-          @click="clearSearch"
-          class="clear-button"
-          title="清除搜索"
-        >
+
+        <button v-if="searchQuery" @click="clearSearch" class="clear-button" title="清除搜索">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
@@ -67,7 +71,12 @@
         </span>
         <button @click="closeResults" class="close-results">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
@@ -83,34 +92,41 @@
           <div class="result-icon">
             {{ getCategoryIcon(result.node.category) }}
           </div>
-          
+
           <div class="result-content">
             <div class="result-title">
               <span v-html="highlightText(result.node.label, searchQuery)"></span>
               <span class="result-category">{{ getCategoryLabel(result.node.category) }}</span>
             </div>
-            
+
             <div class="result-description">
               <span v-html="highlightText(result.node.description, searchQuery)"></span>
             </div>
-            
+
             <div class="result-meta">
               <span class="match-type">{{ getMatchTypeLabel(result.matchType) }}</span>
-              <span class="relevance-score">相关度: {{ Math.round(result.relevanceScore * 100) }}%</span>
+              <span class="relevance-score"
+                >相关度: {{ Math.round(result.relevanceScore * 100) }}%</span
+              >
               <span class="difficulty">{{ getDifficultyLabel(result.node.difficulty) }}</span>
             </div>
           </div>
 
           <div class="result-actions">
-            <button 
-              @click.stop="focusNode(result.nodeId)"
-              class="action-btn"
-              title="定位节点"
-            >
+            <button @click.stop="focusNode(result.nodeId)" class="action-btn" title="定位节点">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
               </svg>
             </button>
           </div>
@@ -134,7 +150,7 @@
     </div>
 
     <!-- 搜索历史 -->
-    <div v-if="showHistory && searchHistory.length > 0" class="search-history">
+    <div v-if="isHistoryVisible && searchHistory.length > 0" class="search-history">
       <div class="history-header">
         <span>搜索历史</span>
         <button @click="clearHistory" class="clear-history">清除</button>
@@ -147,8 +163,12 @@
           class="history-item"
         >
           <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
           {{ item }}
         </button>
@@ -191,7 +211,7 @@ const props = withDefaults(defineProps<Props>(), {
   maxResults: 10,
   showHistory: true,
   showPopular: true,
-  autoFocus: false
+  autoFocus: false,
 })
 
 // Emits
@@ -211,13 +231,13 @@ const searchResults = ref<SearchResult[]>([])
 const selectedResultIndex = ref(-1)
 const isExpanded = ref(false)
 const showResults = ref(false)
-const showHistory = ref(false)
+const isHistoryVisible = ref(false)
 
 // 搜索过滤器
 const searchFilters = ref({
   category: '',
   difficulty: '',
-  maxResults: props.maxResults
+  maxResults: props.maxResults,
 })
 
 // 搜索历史和建议
@@ -231,7 +251,7 @@ const popularSearches = ref([
   '大五人格',
   '特质匹配',
   '激发过程',
-  '行为表达'
+  '行为表达',
 ])
 
 // 防抖定时器
@@ -248,7 +268,7 @@ onMounted(() => {
       searchInputRef.value?.focus()
     })
   }
-  
+
   // 添加全局键盘事件监听
   document.addEventListener('keydown', handleGlobalKeyDown)
 })
@@ -285,7 +305,7 @@ function handleSearchInput(): void {
 // 执行搜索
 function performSearch(): void {
   const query = searchQuery.value.trim()
-  
+
   if (!query) {
     searchResults.value = []
     showResults.value = false
@@ -297,13 +317,13 @@ function performSearch(): void {
     const results = mindMapService.search(query, {
       category: searchFilters.value.category || undefined,
       difficulty: searchFilters.value.difficulty || undefined,
-      maxResults: searchFilters.value.maxResults
+      maxResults: searchFilters.value.maxResults,
     })
 
     searchResults.value = results
     selectedResultIndex.value = results.length > 0 ? 0 : -1
     showResults.value = true
-    showHistory.value = false
+    isHistoryVisible.value = false
 
     // 添加到搜索历史
     addToSearchHistory(query)
@@ -319,9 +339,9 @@ function performSearch(): void {
 // 搜索焦点处理
 function handleSearchFocus(): void {
   isExpanded.value = true
-  
+
   if (!hasActiveSearch.value) {
-    showHistory.value = props.showHistory && searchHistory.value.length > 0
+    isHistoryVisible.value = props.showHistory && searchHistory.value.length > 0
     showResults.value = false
   }
 }
@@ -333,7 +353,7 @@ function handleSearchBlur(): void {
     if (!searchInputRef.value?.matches(':focus')) {
       isExpanded.value = false
       showResults.value = false
-      showHistory.value = false
+      isHistoryVisible.value = false
     }
   }, 200)
 }
@@ -346,7 +366,7 @@ function handleKeyDown(event: KeyboardEvent): void {
       if (searchResults.value.length > 0) {
         selectedResultIndex.value = Math.min(
           selectedResultIndex.value + 1,
-          searchResults.value.length - 1
+          searchResults.value.length - 1,
         )
       }
       break
@@ -387,8 +407,8 @@ function selectResult(result: SearchResult, index: number): void {
   selectedResultIndex.value = index
   searchQuery.value = result.node.label
   showResults.value = false
-  showHistory.value = false
-  
+  isHistoryVisible.value = false
+
   emit('select', result)
   emit('focus', result.nodeId)
 }
@@ -405,9 +425,9 @@ function clearSearch(): void {
   searchResults.value = []
   selectedResultIndex.value = -1
   showResults.value = false
-  showHistory.value = false
+  isHistoryVisible.value = false
   searchSuggestions.value = []
-  
+
   emit('clear')
 }
 
@@ -481,7 +501,7 @@ function saveSearchHistory(): void {
 function clearHistory(): void {
   searchHistory.value = []
   saveSearchHistory()
-  showHistory.value = false
+  isHistoryVisible.value = false
 }
 
 // 生成搜索建议
@@ -528,7 +548,7 @@ function getCategoryIcon(category: string): string {
     research: '■',
     method: '◇',
     theory: '○',
-    example: '◯'
+    example: '◯',
   }
   return icons[category] || '●'
 }
@@ -541,7 +561,7 @@ function getCategoryLabel(category: string): string {
     research: '研究',
     method: '方法',
     theory: '理论',
-    example: '示例'
+    example: '示例',
   }
   return labels[category] || category
 }
@@ -550,7 +570,7 @@ function getDifficultyLabel(difficulty: string): string {
   const labels: Record<string, string> = {
     beginner: '初级',
     intermediate: '中级',
-    advanced: '高级'
+    advanced: '高级',
   }
   return labels[difficulty] || difficulty
 }
@@ -560,7 +580,7 @@ function getMatchTypeLabel(matchType: string): string {
     exact: '精确匹配',
     partial: '部分匹配',
     related: '相关匹配',
-    concept: '概念匹配'
+    concept: '概念匹配',
   }
   return labels[matchType] || matchType
 }
@@ -572,7 +592,7 @@ defineExpose({
   search: (query: string) => {
     searchQuery.value = query
     performSearch()
-  }
+  },
 })
 </script>
 
@@ -1004,7 +1024,7 @@ defineExpose({
   .search-input-container {
     border: 2px solid #000;
   }
-  
+
   .result-item:hover,
   .result-selected {
     background: #000;

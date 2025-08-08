@@ -1,4 +1,4 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 
 export interface LearningProgress {
   userId: string
@@ -30,7 +30,7 @@ export function useLearningProgress(userId: string) {
     isOnline: navigator.onLine,
     lastSyncTime: null,
     pendingChanges: 0,
-    syncInProgress: false
+    syncInProgress: false,
   })
 
   const STORAGE_KEY = `tat_learning_progress_${userId}`
@@ -78,8 +78,8 @@ export function useLearningProgress(userId: string) {
           theme: 'auto',
           fontSize: 'medium',
           animationsEnabled: true,
-          autoSave: true
-        }
+          autoSave: true,
+        },
       }
     }
     return progressData.value[moduleId]
@@ -91,12 +91,12 @@ export function useLearningProgress(userId: string) {
     progressData.value[moduleId] = {
       ...current,
       ...updates,
-      lastAccessed: new Date()
+      lastAccessed: new Date(),
     }
-    
+
     syncStatus.value.pendingChanges++
     saveLocalProgress()
-    
+
     // 自动同步（如果在线且启用自动保存）
     if (current.preferences.autoSave && syncStatus.value.isOnline) {
       syncToServer(moduleId)
@@ -149,7 +149,7 @@ export function useLearningProgress(userId: string) {
   const calculateOverallProgress = computed(() => {
     const modules = Object.values(progressData.value)
     if (modules.length === 0) return 0
-    
+
     const totalProgress = modules.reduce((sum, module) => sum + module.progress, 0)
     return Math.round(totalProgress / modules.length)
   })
@@ -157,14 +157,14 @@ export function useLearningProgress(userId: string) {
   // 获取学习统计
   const getLearningStats = computed(() => {
     const modules = Object.values(progressData.value)
-    
+
     return {
       totalModules: modules.length,
-      completedModules: modules.filter(m => m.progress === 100).length,
+      completedModules: modules.filter((m) => m.progress === 100).length,
       totalTimeSpent: modules.reduce((sum, m) => sum + m.timeSpent, 0),
       totalBookmarks: modules.reduce((sum, m) => sum + m.bookmarks.length, 0),
       totalNotes: modules.reduce((sum, m) => sum + Object.keys(m.notes).length, 0),
-      averageProgress: calculateOverallProgress.value
+      averageProgress: calculateOverallProgress.value,
     }
   })
 
@@ -177,7 +177,7 @@ export function useLearningProgress(userId: string) {
     syncStatus.value.syncInProgress = true
 
     try {
-      const dataToSync = moduleId 
+      const dataToSync = moduleId
         ? { [moduleId]: progressData.value[moduleId] }
         : progressData.value
 
@@ -188,8 +188,8 @@ export function useLearningProgress(userId: string) {
         },
         body: JSON.stringify({
           userId,
-          data: dataToSync
-        })
+          data: dataToSync,
+        }),
       })
 
       if (response.ok) {
@@ -214,21 +214,23 @@ export function useLearningProgress(userId: string) {
       const response = await fetch(`${SYNC_ENDPOINT}/${userId}`)
       if (response.ok) {
         const serverData = await response.json()
-        
+
         // 合并服务器数据和本地数据（以最新时间为准）
-        Object.keys(serverData).forEach(moduleId => {
+        Object.keys(serverData).forEach((moduleId) => {
           const serverProgress = serverData[moduleId]
           const localProgress = progressData.value[moduleId]
-          
-          if (!localProgress || 
-              new Date(serverProgress.lastAccessed) > localProgress.lastAccessed) {
+
+          if (
+            !localProgress ||
+            new Date(serverProgress.lastAccessed) > localProgress.lastAccessed
+          ) {
             progressData.value[moduleId] = {
               ...serverProgress,
-              lastAccessed: new Date(serverProgress.lastAccessed)
+              lastAccessed: new Date(serverProgress.lastAccessed),
             }
           }
         })
-        
+
         saveLocalProgress()
         syncStatus.value.lastSyncTime = new Date()
       }
@@ -240,7 +242,7 @@ export function useLearningProgress(userId: string) {
   // 监听在线状态
   const handleOnlineStatus = () => {
     syncStatus.value.isOnline = navigator.onLine
-    
+
     if (syncStatus.value.isOnline && syncStatus.value.pendingChanges > 0) {
       // 重新上线时同步待处理的更改
       syncToServer()
@@ -253,13 +255,13 @@ export function useLearningProgress(userId: string) {
       userId,
       exportDate: new Date().toISOString(),
       progressData: progressData.value,
-      stats: getLearningStats.value
+      stats: getLearningStats.value,
     }
-    
+
     const blob = new Blob([JSON.stringify(dataToExport, null, 2)], {
-      type: 'application/json'
+      type: 'application/json',
     })
-    
+
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
@@ -272,7 +274,7 @@ export function useLearningProgress(userId: string) {
 
   // 初始化
   loadLocalProgress()
-  
+
   // 监听在线状态变化
   window.addEventListener('online', handleOnlineStatus)
   window.addEventListener('offline', handleOnlineStatus)
@@ -301,6 +303,6 @@ export function useLearningProgress(userId: string) {
     getLearningStats,
     syncToServer,
     loadFromServer,
-    exportLearningData
+    exportLearningData,
   }
 }

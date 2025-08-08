@@ -5,20 +5,20 @@
       <div class="hero-background">
         <canvas ref="canvasRef" class="hero-canvas"></canvas>
       </div>
-      
+
       <div class="hero-content">
         <div class="hero-text" :class="{ 'animate-in': isLoaded }">
           <h1 class="hero-title">
             <span class="title-line">特质激发理论</span>
             <span class="title-subtitle">Trait Activation Theory</span>
           </h1>
-          
+
           <p class="hero-description">
             探索人格特质如何在特定情境中被激发，
-            <br>
+            <br />
             理解个体行为背后的心理机制
           </p>
-          
+
           <div class="hero-stats">
             <div class="stat-item">
               <div class="stat-number">2000</div>
@@ -33,73 +33,81 @@
               <div class="stat-label">应用领域</div>
             </div>
           </div>
-          
+
           <div class="hero-actions">
             <button @click="startJourney" class="cta-button primary">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
               </svg>
               开始探索之旅
             </button>
-            
+
             <button @click="scrollToOverview" class="cta-button secondary">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
               </svg>
               了解更多
             </button>
           </div>
         </div>
-        
+
         <div class="hero-visual" :class="{ 'animate-in': isLoaded }">
           <div class="floating-elements">
             <div class="element trait-element" :style="{ animationDelay: '0s' }">
               <div class="element-icon">🧠</div>
               <div class="element-label">人格特质</div>
             </div>
-            
+
             <div class="element situation-element" :style="{ animationDelay: '0.5s' }">
               <div class="element-icon">🌍</div>
               <div class="element-label">情境线索</div>
             </div>
-            
+
             <div class="element activation-element" :style="{ animationDelay: '1s' }">
               <div class="element-icon">⚡</div>
               <div class="element-label">特质激发</div>
             </div>
-            
+
             <div class="element behavior-element" :style="{ animationDelay: '1.5s' }">
               <div class="element-icon">🎭</div>
               <div class="element-label">行为表达</div>
             </div>
           </div>
-          
+
           <div class="connection-lines">
             <svg class="connections-svg" viewBox="0 0 400 300">
               <defs>
                 <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0" />
-                  <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#10b981;stop-opacity:0" />
+                  <stop offset="0%" style="stop-color: #3b82f6; stop-opacity: 0" />
+                  <stop offset="50%" style="stop-color: #3b82f6; stop-opacity: 1" />
+                  <stop offset="100%" style="stop-color: #10b981; stop-opacity: 0" />
                 </linearGradient>
               </defs>
-              
-              <path 
-                class="connection-path" 
+
+              <path
+                class="connection-path"
                 d="M 80 80 Q 200 50 320 80"
                 :class="{ 'animate-path': isLoaded }"
                 :style="{ animationDelay: '2s' }"
               />
-              <path 
-                class="connection-path" 
+              <path
+                class="connection-path"
                 d="M 80 150 Q 200 120 320 150"
                 :class="{ 'animate-path': isLoaded }"
                 :style="{ animationDelay: '2.2s' }"
               />
-              <path 
-                class="connection-path" 
+              <path
+                class="connection-path"
                 d="M 80 220 Q 200 190 320 220"
                 :class="{ 'animate-path': isLoaded }"
                 :style="{ animationDelay: '2.4s' }"
@@ -108,7 +116,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="scroll-indicator" @click="scrollToOverview">
         <div class="scroll-arrow"></div>
       </div>
@@ -119,14 +127,12 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">理论核心概念</h2>
-          <p class="section-subtitle">
-            TAT理论的四个核心要素构成了完整的理论框架
-          </p>
+          <p class="section-subtitle">TAT理论的四个核心要素构成了完整的理论框架</p>
         </div>
 
         <div class="concept-grid">
-          <div 
-            v-for="(concept, index) in coreConcepts" 
+          <div
+            v-for="(concept, index) in coreConcepts"
             :key="concept.id"
             class="concept-card"
             :class="{ 'in-view': conceptsInView }"
@@ -136,25 +142,26 @@
             <div class="concept-icon">
               <component :is="concept.icon" class="w-8 h-8" />
             </div>
-            
+
             <div class="concept-content">
               <h3 class="concept-title">{{ concept.title }}</h3>
               <p class="concept-description">{{ concept.description }}</p>
-              
+
               <div class="concept-features">
-                <div 
-                  v-for="feature in concept.features" 
-                  :key="feature"
-                  class="feature-tag"
-                >
+                <div v-for="feature in concept.features" :key="feature" class="feature-tag">
                   {{ feature }}
                 </div>
               </div>
             </div>
-            
+
             <div class="concept-arrow">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </div>
           </div>
@@ -167,15 +174,13 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">理论发展背景</h2>
-          <p class="section-subtitle">
-            从传统特质理论到现代交互理论的演进历程
-          </p>
+          <p class="section-subtitle">从传统特质理论到现代交互理论的演进历程</p>
         </div>
 
         <div class="timeline-container">
           <div class="timeline">
-            <div 
-              v-for="(event, index) in timelineEvents" 
+            <div
+              v-for="(event, index) in timelineEvents"
               :key="event.id"
               class="timeline-item"
               :class="{ 'in-view': timelineInView }"
@@ -185,16 +190,16 @@
                 <div class="marker-dot"></div>
                 <div class="marker-year">{{ event.year }}</div>
               </div>
-              
+
               <div class="timeline-content">
                 <h3 class="timeline-title">{{ event.title }}</h3>
                 <p class="timeline-description">{{ event.description }}</p>
-                
+
                 <div v-if="event.contributors" class="timeline-contributors">
                   <div class="contributors-label">主要贡献者:</div>
                   <div class="contributors-list">
-                    <span 
-                      v-for="contributor in event.contributors" 
+                    <span
+                      v-for="contributor in event.contributors"
                       :key="contributor"
                       class="contributor-tag"
                     >
@@ -214,14 +219,12 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">理论优势与价值</h2>
-          <p class="section-subtitle">
-            TAT理论在心理学和管理学领域的独特贡献
-          </p>
+          <p class="section-subtitle">TAT理论在心理学和管理学领域的独特贡献</p>
         </div>
 
         <div class="advantages-grid">
-          <div 
-            v-for="(advantage, index) in theoryAdvantages" 
+          <div
+            v-for="(advantage, index) in theoryAdvantages"
             :key="advantage.id"
             class="advantage-card"
             :class="{ 'in-view': advantagesInView }"
@@ -233,9 +236,9 @@
               </div>
               <h3 class="advantage-title">{{ advantage.title }}</h3>
             </div>
-            
+
             <p class="advantage-description">{{ advantage.description }}</p>
-            
+
             <div class="advantage-metrics">
               <div class="metric-item">
                 <div class="metric-value">{{ advantage.metric.value }}</div>
@@ -254,20 +257,25 @@
           <h2 class="modal-title">{{ selectedConcept.title }}</h2>
           <button @click="closeConceptDetail" class="modal-close">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
-        
+
         <div class="modal-body">
           <div class="concept-detail">
             <div class="detail-icon">
               <component :is="selectedConcept.icon" class="w-12 h-12" />
             </div>
-            
+
             <div class="detail-content">
               <p class="detail-description">{{ selectedConcept.detailedDescription }}</p>
-              
+
               <div class="detail-examples">
                 <h4>具体示例:</h4>
                 <ul class="examples-list">
@@ -276,12 +284,12 @@
                   </li>
                 </ul>
               </div>
-              
+
               <div class="detail-research">
                 <h4>相关研究:</h4>
                 <div class="research-list">
-                  <div 
-                    v-for="research in selectedConcept.research" 
+                  <div
+                    v-for="research in selectedConcept.research"
                     :key="research.title"
                     class="research-item"
                   >
@@ -294,14 +302,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="modal-actions">
-          <button @click="exploreMore" class="action-btn primary">
-            深入探索
-          </button>
-          <button @click="closeConceptDetail" class="action-btn secondary">
-            关闭
-          </button>
+          <button @click="exploreMore" class="action-btn primary">深入探索</button>
+          <button @click="closeConceptDetail" class="action-btn secondary">关闭</button>
         </div>
       </div>
     </div>
@@ -314,19 +318,19 @@
           <p>让我们一起探索特质激发理论的奥秘</p>
           <button @click="nextGuidanceStep" class="guidance-btn">开始引导</button>
         </div>
-        
+
         <div class="guidance-step" v-if="currentGuidanceStep === 1">
           <h3>理解核心概念</h3>
           <p>点击概念卡片可以查看详细信息</p>
           <button @click="nextGuidanceStep" class="guidance-btn">下一步</button>
         </div>
-        
+
         <div class="guidance-step" v-if="currentGuidanceStep === 2">
           <h3>探索理论发展</h3>
           <p>时间轴展示了理论的发展历程</p>
           <button @click="nextGuidanceStep" class="guidance-btn">下一步</button>
         </div>
-        
+
         <div class="guidance-step" v-if="currentGuidanceStep === 3">
           <h3>开始深度学习</h3>
           <p>准备好深入探索TAT理论了吗？</p>
@@ -360,7 +364,7 @@ const currentGuidanceStep = ref(0)
 
 // 3D动画相关
 let animationId: number | null = null
-let scene: any = null
+const scene: any = null
 
 // 核心概念数据
 const coreConcepts = [
@@ -370,16 +374,21 @@ const coreConcepts = [
     description: '相对稳定的个体差异变量，代表个体的行为倾向',
     icon: 'BrainIcon',
     features: ['稳定性', '个体差异', '行为倾向'],
-    detailedDescription: '人格特质是指个体在认知、情感和行为方面相对稳定的特征模式。在TAT理论中，特质被视为潜在的行为倾向，只有在适当的情境线索存在时才会被激发并表现为具体行为。',
+    detailedDescription:
+      '人格特质是指个体在认知、情感和行为方面相对稳定的特征模式。在TAT理论中，特质被视为潜在的行为倾向，只有在适当的情境线索存在时才会被激发并表现为具体行为。',
     examples: [
       '外向性：在社交场合中表现出的活跃和健谈',
       '尽责性：在工作中表现出的认真和负责',
-      '开放性：对新经验和创新想法的接受程度'
+      '开放性：对新经验和创新想法的接受程度',
     ],
     research: [
-      { title: 'Big Five personality traits and job performance', authors: 'Barrick & Mount', year: '1991' },
-      { title: 'Personality and adaptive performance', authors: 'Huang et al.', year: '2014' }
-    ]
+      {
+        title: 'Big Five personality traits and job performance',
+        authors: 'Barrick & Mount',
+        year: '1991',
+      },
+      { title: 'Personality and adaptive performance', authors: 'Huang et al.', year: '2014' },
+    ],
   },
   {
     id: 'situations',
@@ -387,16 +396,13 @@ const coreConcepts = [
     description: '环境中能够激发特定特质的刺激因素',
     icon: 'WorldIcon',
     features: ['环境刺激', '激发条件', '情境特征'],
-    detailedDescription: '情境线索是指环境中那些能够触发或激发个体特定人格特质的各种因素。这些线索可能包括任务特征、社会环境、物理环境等多个方面。',
-    examples: [
-      '团队合作任务激发宜人性特质',
-      '创新项目激发开放性特质',
-      '紧急情况激发尽责性特质'
-    ],
+    detailedDescription:
+      '情境线索是指环境中那些能够触发或激发个体特定人格特质的各种因素。这些线索可能包括任务特征、社会环境、物理环境等多个方面。',
+    examples: ['团队合作任务激发宜人性特质', '创新项目激发开放性特质', '紧急情况激发尽责性特质'],
     research: [
       { title: 'Situational strength and trait activation', authors: 'Meyer et al.', year: '2010' },
-      { title: 'Context effects in personality research', authors: 'Funder', year: '2006' }
-    ]
+      { title: 'Context effects in personality research', authors: 'Funder', year: '2006' },
+    ],
   },
   {
     id: 'activation',
@@ -404,16 +410,21 @@ const coreConcepts = [
     description: '特质在特定情境下被唤醒并影响行为的过程',
     icon: 'LightningIcon',
     features: ['动态过程', '匹配机制', '激发强度'],
-    detailedDescription: '特质激发是TAT理论的核心机制，描述了个体特质如何在遇到相关情境线索时被唤醒的过程。这个过程涉及个体对情境的认知评估、特质与情境的匹配程度等多个环节。',
+    detailedDescription:
+      '特质激发是TAT理论的核心机制，描述了个体特质如何在遇到相关情境线索时被唤醒的过程。这个过程涉及个体对情境的认知评估、特质与情境的匹配程度等多个环节。',
     examples: [
       '在需要创新的工作环境中，开放性特质被激发',
       '在需要团队协作的项目中，宜人性特质被激发',
-      '在面临截止日期压力时，尽责性特质被激发'
+      '在面临截止日期压力时，尽责性特质被激发',
     ],
     research: [
       { title: 'Trait activation theory applications', authors: 'Tett et al.', year: '2013' },
-      { title: 'Personality trait activation in organizations', authors: 'Judge & Zapata', year: '2015' }
-    ]
+      {
+        title: 'Personality trait activation in organizations',
+        authors: 'Judge & Zapata',
+        year: '2015',
+      },
+    ],
   },
   {
     id: 'behavior',
@@ -421,17 +432,18 @@ const coreConcepts = [
     description: '激发的特质通过具体行为得以表现',
     icon: 'TheaterIcon',
     features: ['行为表现', '绩效结果', '可观测性'],
-    detailedDescription: '行为表达是特质激发过程的最终结果，指激发的特质通过个体的具体行为、态度和绩效表现出来。这些行为表达是可观测和可测量的，为验证TAT理论提供了实证基础。',
+    detailedDescription:
+      '行为表达是特质激发过程的最终结果，指激发的特质通过个体的具体行为、态度和绩效表现出来。这些行为表达是可观测和可测量的，为验证TAT理论提供了实证基础。',
     examples: [
       '激发的外向性表现为积极的人际互动',
       '激发的尽责性表现为高质量的工作完成',
-      '激发的开放性表现为创新性的解决方案'
+      '激发的开放性表现为创新性的解决方案',
     ],
     research: [
       { title: 'Personality and job performance', authors: 'Tett & Burnett', year: '2003' },
-      { title: 'Behavioral expressions of personality', authors: 'Fleeson', year: '2001' }
-    ]
-  }
+      { title: 'Behavioral expressions of personality', authors: 'Fleeson', year: '2001' },
+    ],
+  },
 ]
 
 // 时间轴事件数据
@@ -441,36 +453,36 @@ const timelineEvents = [
     year: '1990s',
     title: '理论起源',
     description: 'Walter Mischel的情境主义观点挑战了传统特质理论，为TAT的产生奠定了基础',
-    contributors: ['Walter Mischel']
+    contributors: ['Walter Mischel'],
   },
   {
     id: 'foundation',
     year: '2000',
     title: 'TAT理论正式提出',
     description: 'Tett和Guterman正式提出特质激发理论，整合了特质论和情境论的观点',
-    contributors: ['Robert P. Tett', 'Hal A. Guterman']
+    contributors: ['Robert P. Tett', 'Hal A. Guterman'],
   },
   {
     id: 'development',
     year: '2003',
     title: '理论框架完善',
     description: 'Tett和Burnett进一步完善了TAT的理论框架，提出了基于特质激发的工作绩效预测模型',
-    contributors: ['Robert P. Tett', 'Dawn D. Burnett']
+    contributors: ['Robert P. Tett', 'Dawn D. Burnett'],
   },
   {
     id: 'expansion',
     year: '2010s',
     title: '应用领域扩展',
     description: '理论应用领域逐步扩展至组织行为、教育心理、临床心理等多个领域',
-    contributors: ['多位学者']
+    contributors: ['多位学者'],
   },
   {
     id: 'integration',
     year: '2020s',
     title: '跨学科整合',
     description: '与神经科学、人工智能等领域结合，探索特质激发的生理机制和智能应用',
-    contributors: ['新一代研究者']
-  }
+    contributors: ['新一代研究者'],
+  },
 ]
 
 // 理论优势数据
@@ -480,46 +492,46 @@ const theoryAdvantages = [
     title: '理论整合性',
     description: '成功整合了特质论和情境论，提供了个体-情境交互的动态模型',
     icon: 'IntegrationIcon',
-    metric: { value: '85%', label: '理论整合度' }
+    metric: { value: '85%', label: '理论整合度' },
   },
   {
     id: 'prediction',
     title: '预测精度提升',
     description: '相比传统特质理论，TAT将行为预测准确性提高了一倍',
     icon: 'TargetIcon',
-    metric: { value: '2x', label: '预测精度提升' }
+    metric: { value: '2x', label: '预测精度提升' },
   },
   {
     id: 'application',
     title: '实用价值',
     description: '为人力资源管理、教育设计、临床干预提供科学依据',
     icon: 'ApplicationIcon',
-    metric: { value: '15+', label: '应用领域' }
+    metric: { value: '15+', label: '应用领域' },
   },
   {
     id: 'research',
     title: '研究价值',
     description: '提供了研究个体-情境交互的新范式，促进了相关测量工具的发展',
     icon: 'ResearchIcon',
-    metric: { value: '500+', label: '相关研究' }
-  }
+    metric: { value: '500+', label: '相关研究' },
+  },
 ]
 
 // 生命周期
 onMounted(async () => {
   await nextTick()
-  
+
   // 初始化3D动画
   initializeAnimation()
-  
+
   // 设置交叉观察器
   setupIntersectionObservers()
-  
+
   // 延迟显示加载动画
   setTimeout(() => {
     isLoaded.value = true
   }, 500)
-  
+
   // 检查是否需要显示引导
   const hasSeenGuidance = localStorage.getItem('tat-theory-guidance-seen')
   if (!hasSeenGuidance) {
@@ -536,21 +548,21 @@ onUnmounted(() => {
 // 初始化3D动画
 function initializeAnimation(): void {
   if (!canvasRef.value) return
-  
+
   const canvas = canvasRef.value
   const ctx = canvas.getContext('2d')
   if (!ctx) return
-  
+
   // 设置画布大小
   const resizeCanvas = () => {
     canvas.width = canvas.offsetWidth * window.devicePixelRatio
     canvas.height = canvas.offsetHeight * window.devicePixelRatio
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
   }
-  
+
   resizeCanvas()
   window.addEventListener('resize', resizeCanvas)
-  
+
   // 粒子系统
   const particles: Array<{
     x: number
@@ -561,7 +573,7 @@ function initializeAnimation(): void {
     opacity: number
     color: string
   }> = []
-  
+
   // 创建粒子
   for (let i = 0; i < 50; i++) {
     particles.push({
@@ -571,23 +583,23 @@ function initializeAnimation(): void {
       vy: (Math.random() - 0.5) * 0.5,
       size: Math.random() * 3 + 1,
       opacity: Math.random() * 0.5 + 0.2,
-      color: ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b'][Math.floor(Math.random() * 4)]
+      color: ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b'][Math.floor(Math.random() * 4)],
     })
   }
-  
+
   // 动画循环
   const animate = () => {
     ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
-    
+
     // 更新和绘制粒子
-    particles.forEach(particle => {
+    particles.forEach((particle) => {
       particle.x += particle.vx
       particle.y += particle.vy
-      
+
       // 边界检测
       if (particle.x < 0 || particle.x > canvas.offsetWidth) particle.vx *= -1
       if (particle.y < 0 || particle.y > canvas.offsetHeight) particle.vy *= -1
-      
+
       // 绘制粒子
       ctx.beginPath()
       ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
@@ -595,18 +607,18 @@ function initializeAnimation(): void {
       ctx.globalAlpha = particle.opacity
       ctx.fill()
     })
-    
+
     // 绘制连接线
     ctx.globalAlpha = 0.1
     ctx.strokeStyle = '#3b82f6'
     ctx.lineWidth = 1
-    
+
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x
         const dy = particles[i].y - particles[j].y
         const distance = Math.sqrt(dx * dx + dy * dy)
-        
+
         if (distance < 100) {
           ctx.beginPath()
           ctx.moveTo(particles[i].x, particles[i].y)
@@ -615,11 +627,11 @@ function initializeAnimation(): void {
         }
       }
     }
-    
+
     ctx.globalAlpha = 1
     animationId = requestAnimationFrame(animate)
   }
-  
+
   animate()
 }
 
@@ -627,11 +639,11 @@ function initializeAnimation(): void {
 function setupIntersectionObservers(): void {
   const options = {
     threshold: 0.3,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -100px 0px',
   }
-  
+
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         if (entry.target.classList.contains('concept-grid')) {
           conceptsInView.value = true
@@ -643,12 +655,12 @@ function setupIntersectionObservers(): void {
       }
     })
   }, options)
-  
+
   // 观察目标元素
   const conceptGrid = document.querySelector('.concept-grid')
   const timelineContainer = document.querySelector('.timeline-container')
   const advantagesGrid = document.querySelector('.advantages-grid')
-  
+
   if (conceptGrid) observer.observe(conceptGrid)
   if (timelineContainer) observer.observe(timelineContainer)
   if (advantagesGrid) observer.observe(advantagesGrid)
@@ -1519,7 +1531,11 @@ const ResearchIcon = { template: '<div class="icon-research">🔬</div>' }
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateX(-50%) translateY(0) rotate(45deg);
   }
   40% {
@@ -1559,36 +1575,36 @@ const ResearchIcon = { template: '<div class="icon-research">🔬</div>' }
     gap: 40px;
     text-align: center;
   }
-  
+
   .title-line {
     font-size: 2.5rem;
   }
-  
+
   .hero-stats {
     justify-content: center;
   }
-  
+
   .floating-elements {
     width: 300px;
     height: 250px;
   }
-  
+
   .container {
     padding: 0 20px;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .concept-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .timeline-item {
     padding-left: 60px;
   }
-  
+
   .advantages-grid {
     grid-template-columns: 1fr;
   }

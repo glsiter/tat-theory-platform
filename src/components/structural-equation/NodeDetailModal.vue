@@ -9,10 +9,18 @@
                 {{ node.pathNumber }}
               </text>
             </svg>
-            <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
-              <path d="M12,17h0"/>
+            <svg
+              v-else
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3" />
+              <path d="M12,17h0" />
             </svg>
           </div>
           <div class="header-text">
@@ -21,17 +29,24 @@
           </div>
         </div>
         <button @click="closeModal" class="close-btn">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
       </div>
 
       <div class="modal-body">
         <div class="content-tabs">
-          <button 
-            v-for="tab in tabs" 
+          <button
+            v-for="tab in tabs"
             :key="tab.id"
             @click="activeTab = tab.id"
             class="tab-btn"
@@ -53,11 +68,7 @@
             <div class="info-section" v-if="node.examples.length > 0">
               <h3>典型例子</h3>
               <div class="examples-grid">
-                <div 
-                  v-for="example in node.examples" 
-                  :key="example"
-                  class="example-item"
-                >
+                <div v-for="example in node.examples" :key="example" class="example-item">
                   {{ example }}
                 </div>
               </div>
@@ -66,11 +77,7 @@
             <div class="info-section" v-if="node.relatedConcepts.length > 0">
               <h3>相关概念</h3>
               <div class="concepts-list">
-                <span 
-                  v-for="concept in node.relatedConcepts" 
-                  :key="concept"
-                  class="concept-tag"
-                >
+                <span v-for="concept in node.relatedConcepts" :key="concept" class="concept-tag">
                   {{ concept }}
                 </span>
               </div>
@@ -94,19 +101,26 @@
           <!-- 研究证据标签页 -->
           <div v-if="activeTab === 'evidence'" class="tab-panel">
             <div v-if="node.researchEvidence.length === 0" class="empty-state">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14,2 14,8 20,8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-                <polyline points="10,9 9,9 8,9"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+              >
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14,2 14,8 20,8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10,9 9,9 8,9" />
               </svg>
               <p>暂无研究证据</p>
             </div>
-            
+
             <div v-else class="evidence-list">
-              <div 
-                v-for="evidence in node.researchEvidence" 
+              <div
+                v-for="evidence in node.researchEvidence"
                 :key="evidence.id"
                 class="evidence-item"
               >
@@ -117,10 +131,10 @@
                     <span class="evidence-journal">{{ evidence.journal }}</span>
                   </div>
                 </div>
-                
+
                 <div class="evidence-content">
                   <p class="evidence-findings">{{ evidence.keyFindings }}</p>
-                  
+
                   <div class="evidence-details">
                     <div class="detail-item">
                       <span class="detail-label">研究方法:</span>
@@ -153,20 +167,25 @@
           <!-- 案例研究标签页 -->
           <div v-if="activeTab === 'cases'" class="tab-panel">
             <div v-if="node.caseStudies.length === 0" class="empty-state">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
-                <line x1="12" y1="22.08" x2="12" y2="12"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+              >
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                />
+                <polyline points="3.27,6.96 12,12.01 20.73,6.96" />
+                <line x1="12" y1="22.08" x2="12" y2="12" />
               </svg>
               <p>暂无案例研究</p>
             </div>
-            
+
             <div v-else class="cases-list">
-              <div 
-                v-for="caseStudy in node.caseStudies" 
-                :key="caseStudy.id"
-                class="case-item"
-              >
+              <div v-for="caseStudy in node.caseStudies" :key="caseStudy.id" class="case-item">
                 <div class="case-header">
                   <h4 class="case-title">{{ caseStudy.title }}</h4>
                   <div class="case-meta">
@@ -174,23 +193,23 @@
                     <span class="case-participants">{{ caseStudy.participants }}人</span>
                   </div>
                 </div>
-                
+
                 <div class="case-content">
                   <div class="case-section">
                     <h5>研究背景</h5>
                     <p>{{ caseStudy.context }}</p>
                   </div>
-                  
+
                   <div class="case-section">
                     <h5>研究场景</h5>
                     <p>{{ caseStudy.scenario }}</p>
                   </div>
-                  
+
                   <div class="case-section">
                     <h5>TAT理论应用</h5>
                     <p>{{ caseStudy.tatApplication }}</p>
                   </div>
-                  
+
                   <div class="case-section">
                     <h5>研究结果</h5>
                     <ul class="outcomes-list">
@@ -199,7 +218,7 @@
                       </li>
                     </ul>
                   </div>
-                  
+
                   <div class="case-section">
                     <h5>经验教训</h5>
                     <ul class="lessons-list">
@@ -221,8 +240,8 @@
                 <p>无输入关系</p>
               </div>
               <div v-else class="relationships-list">
-                <div 
-                  v-for="rel in incomingRelationships" 
+                <div
+                  v-for="rel in incomingRelationships"
                   :key="rel.id"
                   class="relationship-item incoming"
                 >
@@ -232,7 +251,9 @@
                     <div class="relationship-description">{{ rel.description }}</div>
                     <div class="relationship-meta">
                       <span class="relationship-strength">强度: {{ rel.strength }}</span>
-                      <span class="relationship-type">{{ getRelationshipTypeLabel(rel.type) }}</span>
+                      <span class="relationship-type">{{
+                        getRelationshipTypeLabel(rel.type)
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -245,8 +266,8 @@
                 <p>无输出关系</p>
               </div>
               <div v-else class="relationships-list">
-                <div 
-                  v-for="rel in outgoingRelationships" 
+                <div
+                  v-for="rel in outgoingRelationships"
                   :key="rel.id"
                   class="relationship-item outgoing"
                 >
@@ -255,7 +276,9 @@
                     <div class="relationship-description">{{ rel.description }}</div>
                     <div class="relationship-meta">
                       <span class="relationship-strength">强度: {{ rel.strength }}</span>
-                      <span class="relationship-type">{{ getRelationshipTypeLabel(rel.type) }}</span>
+                      <span class="relationship-type">{{
+                        getRelationshipTypeLabel(rel.type)
+                      }}</span>
                     </div>
                   </div>
                   <div class="relationship-arrow">→</div>
@@ -269,25 +292,46 @@
       <div class="modal-footer">
         <div class="footer-actions">
           <button @click="toggleBookmark" class="action-btn" :class="{ active: isBookmarked }">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
             </svg>
             {{ isBookmarked ? '已收藏' : '收藏' }}
           </button>
           <button @click="openNoteEditor" class="action-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
             </svg>
             笔记
           </button>
           <button @click="shareNode" class="action-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="18" cy="5" r="3"/>
-              <circle cx="6" cy="12" r="3"/>
-              <circle cx="18" cy="19" r="3"/>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
             </svg>
             分享
           </button>
@@ -298,8 +342,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import type { StructuralEquationNode, StructuralEquationRelationship } from '@/types/structural-equation'
+import { ref } from 'vue'
+import type {
+  StructuralEquationNode,
+  StructuralEquationRelationship,
+} from '@/types/structural-equation'
 
 interface Props {
   isVisible: boolean
@@ -327,7 +374,7 @@ const tabs = [
   { id: 'basic', label: '基本信息', icon: 'InfoIcon' },
   { id: 'evidence', label: '研究证据', icon: 'DocumentIcon' },
   { id: 'cases', label: '案例研究', icon: 'CaseIcon' },
-  { id: 'relationships', label: '关系网络', icon: 'NetworkIcon' }
+  { id: 'relationships', label: '关系网络', icon: 'NetworkIcon' },
 ]
 
 // Methods
@@ -353,37 +400,37 @@ const getNodeTypeLabel = (type: string): string => {
     'context-group': '情境组',
     'situational-cue': '情境线索',
     'core-construct': '核心构念',
-    'mediator': '中介变量',
-    'outcome': '结果变量',
+    mediator: '中介变量',
+    outcome: '结果变量',
     'final-outcome': '最终结果',
     'outcome-group': '结果组',
-    'motivation': '激励因素'
+    motivation: '激励因素',
   }
   return typeLabels[type] || type
 }
 
 const getValidityLabel = (validity: string): string => {
   const validityLabels: Record<string, string> = {
-    'high': '高',
-    'medium': '中',
-    'low': '低'
+    high: '高',
+    medium: '中',
+    low: '低',
   }
   return validityLabels[validity] || validity
 }
 
 const getRelationshipTypeLabel = (type: string): string => {
   const typeLabels: Record<string, string> = {
-    'activation': '激活',
+    activation: '激活',
     'direct-effect': '直接效应',
-    'mediation': '中介',
-    'moderation': '调节',
-    'feedback': '反馈'
+    mediation: '中介',
+    moderation: '调节',
+    feedback: '反馈',
   }
   return typeLabels[type] || type
 }
 
 const getNodeLabel = (nodeId: string): string => {
-  const relatedNode = props.relatedNodes.find(n => n.id === nodeId)
+  const relatedNode = props.relatedNodes.find((n) => n.id === nodeId)
   return relatedNode?.label || nodeId
 }
 
@@ -391,7 +438,7 @@ const formatDate = (date: Date): string => {
   return new Intl.DateTimeFormat('zh-CN', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   }).format(date)
 }
 </script>

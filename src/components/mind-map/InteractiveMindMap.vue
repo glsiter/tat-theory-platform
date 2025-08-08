@@ -3,14 +3,18 @@
     <!-- 控制面板 -->
     <div class="mind-map-controls" :class="{ 'controls-hidden': !showControls }">
       <div class="control-group">
-        <button 
+        <button
           @click="toggleControls"
           class="control-toggle"
           :title="showControls ? '隐藏控制面板' : '显示控制面板'"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  :d="showControls ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              :d="showControls ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'"
+            />
           </svg>
         </button>
       </div>
@@ -20,8 +24,8 @@
         <div class="control-panel">
           <h4>主题</h4>
           <div class="theme-buttons">
-            <button 
-              v-for="theme in themes" 
+            <button
+              v-for="theme in themes"
               :key="theme.value"
               @click="setTheme(theme.value)"
               :class="['theme-btn', { active: currentTheme === theme.value }]"
@@ -39,22 +43,34 @@
           <div class="view-controls">
             <button @click="resetView" class="control-btn" title="重置视图">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
               </svg>
               重置
             </button>
             <button @click="centerView" class="control-btn" title="居中显示">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                />
               </svg>
               居中
             </button>
             <button @click="fitToScreen" class="control-btn" title="适应屏幕">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                />
               </svg>
               适应
             </button>
@@ -66,19 +82,11 @@
           <h4>显示</h4>
           <div class="display-options">
             <label class="option-item">
-              <input 
-                type="checkbox" 
-                v-model="showLabels" 
-                @change="updateDisplayOptions"
-              />
+              <input type="checkbox" v-model="showLabels" @change="updateDisplayOptions" />
               <span>显示标签</span>
             </label>
             <label class="option-item">
-              <input 
-                type="checkbox" 
-                v-model="enableAnimation" 
-                @change="updateDisplayOptions"
-              />
+              <input type="checkbox" v-model="enableAnimation" @change="updateDisplayOptions" />
               <span>启用动画</span>
             </label>
           </div>
@@ -88,8 +96,8 @@
         <div class="control-panel">
           <h4>节点大小</h4>
           <div class="size-controls">
-            <button 
-              v-for="size in nodeSizes" 
+            <button
+              v-for="size in nodeSizes"
               :key="size.value"
               @click="setNodeSize(size.value)"
               :class="['size-btn', { active: currentNodeSize === size.value }]"
@@ -103,30 +111,35 @@
     </div>
 
     <!-- SVG 画布 -->
-    <svg 
-      ref="svgRef" 
+    <svg
+      ref="svgRef"
       class="mind-map-svg"
       :class="[`theme-${currentTheme}`, { 'labels-hidden': !showLabels }]"
     ></svg>
 
     <!-- 节点详情面板 -->
-    <div 
-      v-if="selectedNode" 
+    <div
+      v-if="selectedNode"
       class="node-details-panel"
-      :style="{ 
-        left: nodeDetailsPosition.x + 'px', 
-        top: nodeDetailsPosition.y + 'px' 
+      :style="{
+        left: nodeDetailsPosition.x + 'px',
+        top: nodeDetailsPosition.y + 'px',
       }"
     >
       <div class="panel-header">
         <h3>{{ selectedNode.data.label }}</h3>
         <button @click="closeNodeDetails" class="close-btn">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
-      
+
       <div class="panel-content">
         <div class="node-info">
           <div class="info-item">
@@ -140,11 +153,12 @@
           <div class="info-item">
             <span class="label">重要性:</span>
             <div class="importance-stars">
-              <span 
-                v-for="i in 10" 
+              <span
+                v-for="i in 10"
                 :key="i"
                 :class="['star', { filled: i <= selectedNode.data.importance }]"
-              >★</span>
+                >★</span
+              >
             </div>
           </div>
         </div>
@@ -156,11 +170,7 @@
         <div v-if="selectedNode.data.keywords.length > 0" class="node-keywords">
           <h4>关键词</h4>
           <div class="keywords-list">
-            <span 
-              v-for="keyword in selectedNode.data.keywords" 
-              :key="keyword"
-              class="keyword-tag"
-            >
+            <span v-for="keyword in selectedNode.data.keywords" :key="keyword" class="keyword-tag">
               {{ keyword }}
             </span>
           </div>
@@ -169,8 +179,8 @@
         <div v-if="selectedNode.data.relatedConcepts.length > 0" class="related-concepts">
           <h4>相关概念</h4>
           <div class="concepts-list">
-            <span 
-              v-for="concept in selectedNode.data.relatedConcepts" 
+            <span
+              v-for="concept in selectedNode.data.relatedConcepts"
               :key="concept"
               class="concept-tag"
             >
@@ -182,8 +192,8 @@
         <div v-if="selectedNode.data.resources.length > 0" class="node-resources">
           <h4>学习资源</h4>
           <div class="resources-list">
-            <div 
-              v-for="resource in selectedNode.data.resources" 
+            <div
+              v-for="resource in selectedNode.data.resources"
               :key="resource.id"
               class="resource-item"
             >
@@ -226,8 +236,12 @@
     <div v-if="error" class="error-overlay">
       <div class="error-message">
         <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
         </svg>
         <h3>加载失败</h3>
         <p>{{ error }}</p>
@@ -239,7 +253,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick, computed, watch } from 'vue'
-import { MindMapD3Renderer, type D3Node, type RenderOptions, type InteractionCallbacks } from './MindMapD3Renderer'
+import type { ZoomTransform } from 'd3'
+import {
+  MindMapD3Renderer,
+  type D3Node,
+  type RenderOptions,
+  type InteractionCallbacks,
+} from './MindMapD3Renderer'
 import { mindMapService } from '@/services/mind-map-service'
 import type { MindMapNode, MindMapStructure } from '@/types/mind-map'
 
@@ -257,7 +277,7 @@ const props = withDefaults(defineProps<Props>(), {
   width: 1200,
   height: 800,
   theme: 'light',
-  readonly: false
+  readonly: false,
 })
 
 // Emits
@@ -291,14 +311,14 @@ const currentNodeSize = ref<'small' | 'medium' | 'large'>('medium')
 const themes = [
   { value: 'light', label: '明亮' },
   { value: 'dark', label: '深色' },
-  { value: 'colorful', label: '彩色' }
+  { value: 'colorful', label: '彩色' },
 ] as const
 
 // 节点大小选项
 const nodeSizes = [
   { value: 'small', label: '小' },
   { value: 'medium', label: '中' },
-  { value: 'large', label: '大' }
+  { value: 'large', label: '大' },
 ] as const
 
 // Computed
@@ -321,19 +341,25 @@ onUnmounted(() => {
 })
 
 // 监听焦点节点变化
-watch(() => props.focusNodeId, (newFocusId) => {
-  if (newFocusId && renderer.value && structure.value) {
-    renderer.value.render(structure.value, newFocusId)
-  }
-})
+watch(
+  () => props.focusNodeId,
+  (newFocusId) => {
+    if (newFocusId && renderer.value && structure.value) {
+      renderer.value.render(structure.value, newFocusId)
+    }
+  },
+)
 
 // 监听主题变化
-watch(() => props.theme, (newTheme) => {
-  currentTheme.value = newTheme
-  if (renderer.value) {
-    renderer.value.setTheme(newTheme)
-  }
-})
+watch(
+  () => props.theme,
+  (newTheme) => {
+    currentTheme.value = newTheme
+    if (renderer.value) {
+      renderer.value.setTheme(newTheme)
+    }
+  },
+)
 
 // 初始化思维导图
 async function initializeMindMap(): Promise<void> {
@@ -358,7 +384,7 @@ async function initializeMindMap(): Promise<void> {
       theme: currentTheme.value,
       showLabels: showLabels.value,
       enableAnimation: enableAnimation.value,
-      nodeSize: currentNodeSize.value
+      nodeSize: currentNodeSize.value,
     }
 
     // 创建交互回调
@@ -367,7 +393,7 @@ async function initializeMindMap(): Promise<void> {
       onNodeDoubleClick: handleNodeDoubleClick,
       onNodeHover: handleNodeHover,
       onBackgroundClick: handleBackgroundClick,
-      onZoom: handleZoom
+      onZoom: handleZoom,
     }
 
     // 创建渲染器
@@ -385,15 +411,15 @@ async function initializeMindMap(): Promise<void> {
 }
 
 // 节点点击处理
-function handleNodeClick(node: D3Node, event: MouseEvent): void {
+function handleNodeClick(node: D3Node, _event: MouseEvent): void {
   selectedNode.value = node
-  
+
   // 计算详情面板位置
   const rect = svgRef.value?.getBoundingClientRect()
   if (rect) {
     nodeDetailsPosition.value = {
-      x: Math.min(event.clientX - rect.left + 20, props.width - 320),
-      y: Math.max(event.clientY - rect.top - 100, 20)
+      x: Math.min(_event.clientX - rect.left + 20, props.width - 320),
+      y: Math.max(_event.clientY - rect.top - 100, 20),
     }
   }
 
@@ -405,7 +431,7 @@ function handleNodeClick(node: D3Node, event: MouseEvent): void {
 }
 
 // 节点双击处理
-function handleNodeDoubleClick(node: D3Node, event: MouseEvent): void {
+function handleNodeDoubleClick(node: D3Node, _event: MouseEvent): void {
   // 展开/折叠节点
   if (renderer.value) {
     renderer.value.toggleNode(node.id)
@@ -415,17 +441,17 @@ function handleNodeDoubleClick(node: D3Node, event: MouseEvent): void {
 }
 
 // 节点悬停处理
-function handleNodeHover(node: D3Node | null, event: MouseEvent): void {
+function handleNodeHover(node: D3Node | null, _event: MouseEvent): void {
   emit('nodeHover', node?.data || null)
 }
 
 // 背景点击处理
-function handleBackgroundClick(event: MouseEvent): void {
+function handleBackgroundClick(_event: MouseEvent): void {
   selectedNode.value = null
 }
 
 // 缩放处理
-function handleZoom(transform: d3.ZoomTransform): void {
+function handleZoom(_transform: ZoomTransform): void {
   // 可以在这里处理缩放相关的逻辑
 }
 
@@ -522,7 +548,7 @@ function getCategoryLabel(category: string): string {
     application: '应用',
     research: '研究',
     method: '方法',
-    theory: '理论'
+    theory: '理论',
   }
   return labels[category as keyof typeof labels] || category
 }
@@ -531,7 +557,7 @@ function getDifficultyLabel(difficulty: string): string {
   const labels = {
     beginner: '初级',
     intermediate: '中级',
-    advanced: '高级'
+    advanced: '高级',
   }
   return labels[difficulty as keyof typeof labels] || difficulty
 }
@@ -544,7 +570,7 @@ function getResourceIcon(type: string): string {
     data: '📊',
     book: '📚',
     paper: '📑',
-    website: '🌐'
+    website: '🌐',
   }
   return icons[type as keyof typeof icons] || '📄'
 }
@@ -557,7 +583,7 @@ function getResourceTypeLabel(type: string): string {
     data: '数据',
     book: '书籍',
     paper: '论文',
-    website: '网站'
+    website: '网站',
   }
   return labels[type as keyof typeof labels] || type
 }
@@ -566,7 +592,7 @@ function getQualityLabel(quality: string): string {
   const labels = {
     high: '高质量',
     medium: '中等',
-    low: '一般'
+    low: '一般',
   }
   return labels[quality as keyof typeof labels] || quality
 }
@@ -688,7 +714,15 @@ function getQualityLabel(quality: string): string {
 }
 
 .theme-preview.colorful {
-  background: linear-gradient(45deg, #3b82f6 25%, #10b981 25%, #10b981 50%, #f59e0b 50%, #f59e0b 75%, #ef4444 75%);
+  background: linear-gradient(
+    45deg,
+    #3b82f6 25%,
+    #10b981 25%,
+    #10b981 50%,
+    #f59e0b 50%,
+    #f59e0b 75%,
+    #ef4444 75%
+  );
 }
 
 /* 视图控制 */
@@ -730,7 +764,7 @@ function getQualityLabel(quality: string): string {
   cursor: pointer;
 }
 
-.option-item input[type="checkbox"] {
+.option-item input[type='checkbox'] {
   width: 14px;
   height: 14px;
 }
@@ -768,7 +802,9 @@ function getQualityLabel(quality: string): string {
   max-height: 500px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   z-index: 20;
   overflow: hidden;
 }
@@ -1008,8 +1044,12 @@ function getQualityLabel(quality: string): string {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .error-message {
